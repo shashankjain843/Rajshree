@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -20,6 +22,21 @@ body {
   font-family: var(--font-body);
   background-color: #F8FAFC; /* slate-50 */
   color: #1E293B; /* slate-800 */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #020617; /* slate-955 */
+  color: #F8FAFC; /* slate-50 */
+}
+
+/* 360 Viewer Grid Background */
+.bg-grid-pattern {
+  background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+.dark .bg-grid-pattern {
+  background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px);
 }
 
 h1, h2, h3, h4, h5, h6 {

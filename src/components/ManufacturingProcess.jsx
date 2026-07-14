@@ -1,71 +1,76 @@
 import { motion } from 'framer-motion';
 import { Layers, Settings, Compass, Sliders, Scissors, Ruler } from 'lucide-react';
+import { useTranslation } from '../context/LanguageContext';
 
 export default function ManufacturingProcess() {
+  const { lang, t } = useTranslation();
+
   const stages = [
     {
       num: '01',
-      title: 'Raw Material Feeding',
+      title: t('step1Title'),
       icon: <Layers className="w-5 h-5" />,
       image: '/images/manufacturing-production-line.jpg',
       alt: 'Raw polymer resins loaded in hopper feed',
-      caption: 'High-density polyethylene (PE 100/PE 80) virgin granules are audited for purity, blended with UV-resistant carbon black masterbatch, and fed into the extruder hopper.'
+      caption: t('step1Desc')
     },
     {
       num: '02',
-      title: 'Precision Extrusion',
+      title: t('step2Title'),
       icon: <Settings className="w-5 h-5" />,
       image: '/images/manufacturing-extrusion-machine.jpg',
       alt: 'HDPE pipe extrusion machine die head close-up',
-      caption: 'The polymer blend is melted under strict thermodynamic controls and forced through a precision die head to form uniform pipe walls.'
+      caption: t('step2Desc')
     },
     {
       num: '03',
-      title: 'Process Control',
+      title: t('step3Title'),
       icon: <Sliders className="w-5 h-5" />,
       image: '/images/manufacturing-process.jpg',
       alt: 'Operator control panel for extrusion line parameters',
-      caption: 'Technicians utilize the centralized control panel to monitor extrusion speed, vacuum calibration pressure, and water cooling temperatures to eliminate dimensional drift.'
+      caption: t('step3Desc')
     },
     {
       num: '04',
-      title: 'Vacuum Cooling & Shaping',
+      title: t('step4Title'),
       icon: <Compass className="w-5 h-5" />,
       image: '/images/manufacturing-production-line.jpg',
       alt: 'Full automated cooling line tanks',
-      caption: 'The pipe passes through automated vacuum sizing sleeves and progressive water spray cooling chambers to solidify its perfect circular shape.'
+      caption: t('step4Desc')
     },
     {
       num: '05',
-      title: 'Cutting & Handling',
+      title: t('step5Title'),
       icon: <Scissors className="w-5 h-5" />,
       image: '/images/manufacturing-workers-handling-pipe.jpg',
       alt: 'Workers handling finished HDPE pipes on sorting rack',
-      caption: 'Fully automated planetary cutting units slice the pipe to required standard lengths. Plant workers stack and sort them in specialized handling racks.'
+      caption: t('step5Desc')
     },
     {
       num: '06',
-      title: 'Measurement & Marking',
+      title: t('step6Title'),
       icon: <Ruler className="w-5 h-5" />,
       image: '/images/manufacturing-production-line.jpg',
       alt: 'Finished HDPE pipes dimension audit and quality marking',
-      caption: 'Quality control inspectors audit wall thickness tolerances and outer diameters, applying indelible laser marking showing BIS codes, batch numbers, and the RAJSHREE trademark.'
+      caption: t('step6Desc')
     }
   ];
 
   return (
-    <section id="manufacturing" className="py-20 bg-slate-50 overflow-hidden border-t border-slate-200">
+    <section id="manufacturing" className="py-20 bg-slate-50 dark:bg-slate-950 overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-base text-brand-blue font-bold tracking-wide uppercase">Manufacturing Process</h2>
-          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            How We Manufacture RAJSHREE Pipes
+          <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('navMfg')}</h2>
+          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            {lang === 'HI' ? 'हम राजश्री पाइप्स का निर्माण कैसे करते हैं' : 'How We Manufacture RAJSHREE Pipes'}
           </p>
           <div className="mt-4 h-1.5 w-24 bg-brand-orange mx-auto rounded-full"></div>
-          <p className="mt-4 text-slate-500 font-light text-sm sm:text-base">
-            From polymer resin grains to finished high-pressure conduits — our fully integrated machinery ensures zero dimensional deviation and maximum impact resilience.
+          <p className="mt-4 text-slate-500 dark:text-slate-400 font-light text-sm sm:text-base">
+            {lang === 'HI' 
+              ? 'कच्चे पॉलीमर दानों से लेकर तैयार पाइपों तक - हमारी एकीकृत मशीनरी शून्य आयामी विचलन और अधिकतम मजबूती सुनिश्चित करती है।'
+              : 'From polymer resin grains to finished high-pressure conduits — our fully integrated machinery ensures zero dimensional deviation and maximum impact resilience.'}
           </p>
         </div>
 
@@ -78,11 +83,11 @@ export default function ManufacturingProcess() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-150 shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group"
+              className="bg-white dark:bg-slate-900 rounded-3xl overflow-hidden border border-slate-150 dark:border-slate-800 shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group"
             >
               <div>
                 {/* Image container */}
-                <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+                <div className="relative h-56 w-full overflow-hidden bg-slate-105">
                   <img
                     src={stage.image}
                     alt={stage.alt}
@@ -98,21 +103,16 @@ export default function ManufacturingProcess() {
                 {/* Content */}
                 <div className="p-6 text-left space-y-3">
                   <div className="flex items-center gap-2">
-                    <div className="p-1.5 bg-brand-blue/10 text-brand-blue rounded-lg">
+                    <div className="p-2 bg-brand-orange/10 text-brand-orange rounded-lg">
                       {stage.icon}
                     </div>
-                    <h3 className="text-lg font-bold text-slate-800 tracking-tight">
-                      {stage.title}
-                    </h3>
+                    <h3 className="text-lg font-bold text-slate-850 dark:text-white tracking-tight">{stage.title}</h3>
                   </div>
-                  <p className="text-slate-500 font-light text-xs sm:text-sm leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light leading-relaxed">
                     {stage.caption}
                   </p>
                 </div>
               </div>
-
-              {/* Bottom tag decoration */}
-              <div className="h-1 bg-brand-blue/10 group-hover:bg-brand-orange transition-colors duration-300"></div>
             </motion.div>
           ))}
         </div>

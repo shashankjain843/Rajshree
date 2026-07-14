@@ -1,32 +1,35 @@
 import { motion } from 'framer-motion';
 import { ShieldAlert, Cpu, Settings, Ruler } from 'lucide-react';
+import { useTranslation } from '../context/LanguageContext';
 
 export default function QualityControl() {
+  const { t } = useTranslation();
+
   const labTests = [
     {
       icon: <Cpu className="w-5 h-5 text-brand-orange" />,
-      title: 'Oxidation Induction Test',
-      desc: 'Conducted in our lab to test thermodynamic stability and polymer aging characteristics, ensuring a 50+ year lifespan.'
+      title: t('qcTest1Title'),
+      desc: t('qcTest1Desc')
     },
     {
       icon: <Settings className="w-5 h-5 text-brand-orange" />,
-      title: 'Tensile & Elongation Audits',
-      desc: 'Verifies the physical yield stress, elasticity, and elongation break points under high-pressure conditions.'
+      title: t('qcTest2Title'),
+      desc: t('qcTest2Desc')
     },
     {
       icon: <ShieldAlert className="w-5 h-5 text-brand-orange" />,
-      title: 'Hydrostatic Pressure Test',
-      desc: 'Pipes are subjected to high internal pressures for extended durations to verify hoop stress resistance.'
+      title: t('qcTest3Title'),
+      desc: t('qcTest3Desc')
     },
     {
       icon: <Ruler className="w-5 h-5 text-brand-orange" />,
-      title: 'Dimensional & Ovality Check',
-      desc: 'Continuous caliper audits on wall thickness, concentricity, and outer diameter metrics at regular extrusion intervals.'
+      title: t('qcTest4Title'),
+      desc: t('qcTest4Desc')
     }
   ];
 
   return (
-    <section id="quality" className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-950">
+    <section id="quality" className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-950 transition-colors duration-300">
       {/* Background Graphic Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black z-0"></div>
       
@@ -34,13 +37,13 @@ export default function QualityControl() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-base text-brand-lightblue font-bold tracking-wide uppercase">Quality Control</h2>
+          <h2 className="text-base text-brand-lightblue font-bold tracking-wide uppercase">{t('qcTitle')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            NABL-Accredited Lab &amp; Multi-Stage Auditing
+            {t('qcSubtitle')}
           </p>
           <div className="mt-4 h-1.5 w-24 bg-brand-orange mx-auto rounded-full"></div>
           <p className="mt-4 text-slate-400 font-light text-sm sm:text-base">
-            We enforce strict quality control at every phase — from auditing raw polymer resins to conducting hydrostatic stress tests on finished pipes.
+            {t('qcDesc')}
           </p>
         </div>
 
@@ -57,13 +60,13 @@ export default function QualityControl() {
           >
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-white tracking-tight leading-snug">
-                Third-Party Approved In-House Quality Assurance
+                {t('qcHeading')}
               </h3>
               <p className="text-slate-400 font-light text-sm sm:text-base leading-relaxed">
-                Rajshree Group / Technoplast operates a fully equipped, modern testing laboratory complying with National Accreditation Board for Testing and Calibration Laboratories (NABL) guidelines.
+                {t('qcPara1')}
               </p>
               <p className="text-slate-400 font-light text-sm sm:text-base leading-relaxed">
-                Our pipes are regularly audited and cleared by leading third-party inspection agencies including <strong className="text-white font-semibold">RITES, SHRI RAM Institute, and CIPET</strong>, satisfying strict government project mandates.
+                {t('qcPara2')}
               </p>
             </div>
 
@@ -102,10 +105,10 @@ export default function QualityControl() {
               {/* Overlay label */}
               <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/90 to-transparent p-6 text-left">
                 <span className="text-white text-xs font-bold uppercase tracking-wider bg-brand-blue/90 px-3 py-1.5 rounded-lg border border-brand-blue/35">
-                  In-House Testing Facility Unit I
+                  {t('qcLabLabel')}
                 </span>
                 <p className="text-slate-300 text-xs font-light mt-2">
-                  Oxidation Induction Tester verifying thermal endurance.
+                  {t('qcLabCaption')}
                 </p>
               </div>
             </div>
