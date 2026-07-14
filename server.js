@@ -180,9 +180,8 @@ app.get('/api/test-email', async (req, res) => {
   }
 });
 
-// Serve Frontend Static build in production
-if (process.env.NODE_ENV === 'production' || true) {
-  // We serve the client production build statically. Since Vite compiles into a dist/ directory, we expose it.
+// Serve Frontend Static build in production (only when running locally, Vercel serves static files via its CDN)
+if (!process.env.VERCEL) {
   app.use(express.static(path.join(__dirname, 'dist')));
 
   app.get(/.*/, (req, res) => {
@@ -191,7 +190,12 @@ if (process.env.NODE_ENV === 'production' || true) {
   });
 }
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`[Full-Stack Server Running]: Express server active on http://localhost:${PORT}`);
-});
+// Start Server (only if not running as a Vercel Serverless Function)
+if (!process.env.VERCEL) {
+  app.use(express.static(path.join(__dirname, 'dist')));
+  app.listen(PORT, () => {
+    console.log(`[Full-Stack Server Running]: Express server active on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
