@@ -1,23 +1,48 @@
 # Rajshree Technoplast Website - Full-Stack Documentation
 
-This repository contains the full-stack codebase for the **Rajshree Technoplast Pvt. Ltd.** website. It includes a modern, responsive React frontend built with Vite and TailwindCSS, and a Node.js/Express backend for handling contact form inquiries and email notifications via SMTP (Brevo).
+Welcome to the official repository for the **Rajshree Group / Technoplast** corporate web platform. This codebase represents a premium, responsive, industrial-grade website built for an HDPE & PVC Pipe Manufacturing Company. 
+
+It features a fast, state-of-the-art React frontend compiled with **Vite** and styled with **TailwindCSS**, paired with a **Node.js/Express** SMTP backend that routes customer inquiries directly to the sales team with auto-replies to customers.
 
 ---
 
-## 🛠️ Technology Stack
+## 🚀 Key Features Implemented
 
-### Frontend (Client-side)
-*   **React (v19):** For building UI components.
-*   **Vite:** For fast development and bundling.
-*   **TailwindCSS (v4):** For modern styling, gradients, and layouts.
-*   **Framer Motion:** For smooth animations (e.g., fades, slides, hover effects).
-*   **Lucide React:** For sleek vector icons.
+### 1. 360° Interactive HDPE Pipe Viewer
+*   **Simulated 3D Projection:** Renders a horizontal rotatable pipe widget at the top of the **Products Gallery** with mouse drag, touch drag, and range slider controls.
+*   **Dual-Sided Flip Mechanism:** Uses CSS 3D transforms (`preserve-3d` and `backface-visibility: hidden`).
+    *   **Front Face:** Displays the flagship Black HDPE Pipe photo overlayed with an emerald-green parameters tooltip. The tooltip text dynamically updates based on rotation (showcasing *ISI Markings*, *Wall Symmetry*, *Virgin PE100 Resin*, and *Butt-fusion cap readiness*).
+    *   **Back Face:** Flips past 90° to show a technical blueprint specifications dashboard (concentricity, ovality, melt flow index, and density under NABL labs).
+*   **Controls:** Integrates **Play/Pause Auto-Rotation** and **Reset Angle** buttons side-by-side.
 
-### Backend (Server-side)
-*   **Node.js & Express:** For lightweight REST API endpoints (`/api/contact`).
-*   **Nodemailer:** For sending emails via SMTP.
-*   **Dotenv:** For loading environment variables (`.env`) securely.
-*   **Cors:** For managing Cross-Origin Resource Sharing between frontend and backend.
+### 2. Multi-Language Switcher (Bilingual EN / HI)
+*   **Central Translation Context ([LanguageContext.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/context/LanguageContext.jsx)):** Governs translation dictionaries for English (`EN`) and Hindi (`HI`).
+*   **Bilingual Adaptation:** Translates all navigation headers, paragraph text, buttons, comparison tables, plant addresses, contact forms, error messages, and chatbot bubbles.
+*   **Dynamic Counter Units:** Automatically translates the numerical counter suffixes in the About Us stats (e.g. converting "Years" to "वर्ष" and "Clients" to "ग्राहक").
+
+### 3. Double-Theme Switcher (Dark & Light Mode)
+*   **Vite-Compatible Dark Mode:** Configured class-based dark mode toggling alongside transition utilities via `@variant dark` in `index.css`.
+*   **Clean Header Layout:** Placed the Theme toggle directly next to the Language switcher on both desktop and mobile headers.
+
+### 4. Interactive FAQ AI Chatbot
+*   **Floating Widget:** Located at the bottom-right corner of all viewport sizes.
+*   **Bilingual Q&A:** Allows users to choose standard FAQs (sizes, certificates, plant locations, bulk pricing) in their selected language with an animated typing delay simulation.
+*   **Auto-Translation:** Greetings and answers update instantly if the header language is switched mid-session.
+
+### 5. Mobile Status Bar & Sticky Access
+*   **Bottom Navigation Bar:** Appears only on mobile screens, providing one-click shortcut buttons to start a WhatsApp chat or open the quote form.
+
+### 6. B2B Distributor Brochure Dashboard
+*   **Technical Modal Drawer:** Enables distributors to preview wall thickness tables across all SDR classes (SDR 9, SDR 11, SDR 17.6) and download the official company catalog PDF.
+
+### 7. SMTP Express Mail Server
+*   **Secure API Endpoint (`/api/contact`):** Validates and routes customer inquiries to the sales directory email using Nodemailer.
+*   **Dual Email Routing:**
+    *   **Admin Notification:** Sends complete lead metrics (Name, Phone, Email, Product Interest, Message) to `rajshreearun123@gmail.com`.
+    *   **Customer Auto-Acknowledgement:** Sends an immediate professional response greeting the customer and confirming receipt of their request.
+
+### 8. SEO & Crawler Optimization
+*   **Sitemap & Crawl Control:** Added a configured `sitemap.xml` and `robots.txt` in the public directory to optimize search engine crawlers.
 
 ---
 
@@ -25,91 +50,111 @@ This repository contains the full-stack codebase for the **Rajshree Technoplast 
 
 ```text
 rajshree-website/
-├── src/                      # Frontend Sources
-│   ├── assets/               # Images, SVG Logos, and Backgrounds
-│   ├── components/           # Reusable React components (UI Blocks)
-│   │   ├── About.jsx         # Company background, mission, and stats
-│   │   ├── Certifications.jsx# ISO/ISI marks, quality test certificates
-│   │   ├── Contact.jsx       # Commercial Inquiry Form with validations & SMTP Integration
-│   │   ├── Footer.jsx        # Quick Links, Location map link, Copyright
-│   │   ├── Gallery.jsx       # Plant machinery and product photos
-│   │   ├── Hero.jsx          # Welcome Banner with animations & main CTA
-│   │   ├── Navbar.jsx        # Desktop & Mobile responsive navigation menu
-│   │   ├── Products.jsx      # Categorized pipes list (HDPE, PVC, etc.) with detailed specs
-│   │   ├── Services.jsx      # Piping solutions and tailored customer services
-│   │   └── Strengths.jsx     # Why choose us? (Key pillars/USP of the company)
-│   ├── App.css               # App-level custom style overrides
-│   ├── App.jsx               # Main React Application shell (combines all components)
-│   ├── index.css             # TailwindCSS imports and custom design variables
-│   └── main.jsx              # React mounting and initialization
-├── public/                   # Static browser assets (Vite logo, etc.)
-├── scratch/                  # Scripts for API/SMTP diagnostics and tests
-│   ├── test_api.js           # REST API handshake test for Brevo
-│   ├── test_smtp.js          # Node SMTP authentication verification script
-│   └── send_real_test.js     # CLI test script to send actual test emails
-├── .env                      # Environment Variables (SMTP keys, Port config) - [Git ignored]
-├── .env.example              # Template showing required environment variables
-├── index.html                # Main SPA entry HTML point
-├── package.json              # Project dependencies and script runner configurations
-├── server.js                 # Backend Node/Express Server entry point
-└── vite.config.js            # Vite configurations (includes proxy settings for /api)
+├── api/                      # Vercel Serverless Functions
+│   └── contact.js            # Node API Serverless entry (uses Nodemailer)
+├── public/                   # Static Browser Assets
+│   ├── images/               # High-Quality Real Factory/Product Photos
+│   │   ├── rajshree logo.png
+│   │   ├── products-black-hdpe-pipes.jpg
+│   │   ├── quality-testing-lab.jpg
+│   │   └── ...
+│   ├── robots.txt            # Search engine crawl control file
+│   └── sitemap.xml           # Structured sitemap configuration
+├── scratch/                  # Backend Diagnostics & Tests
+│   ├── test_smtp.js          # CLI script to test transporter connection
+│   └── test_api.js           # REST API endpoint tester
+├── src/                      # React Frontend Source files
+│   ├── assets/               # Local icons and SVGs
+│   ├── components/           # UI Layout Components
+│   │   ├── About.jsx         # Certifications, Stats, Memberships, & Awards
+│   │   ├── Chatbot.jsx       # Floating bilingual Q&A chat widget
+│   │   ├── Contact.jsx       # Form validations & API post submit
+│   │   ├── Exhibitions.jsx   # Trade show gallery with slider lightbox
+│   │   ├── Footer.jsx        # 3-column layout matching design wireframe
+│   │   ├── Hero.jsx          # Carousel banner with transition slides
+│   │   ├── Logistics.jsx     # Supply chain and distribution yard details
+│   │   ├── ManufacturingProcess.jsx # 6-step timeline for pipe extrusion
+│   │   ├── MobileStatusBar.jsx # Sticky mobile bottom links
+│   │   ├── Navbar.jsx        # Responsive navigation with dark/language toggles
+│   │   ├── Products.jsx      # 360 viewer, specifications modal & brochures
+│   │   └── QualityControl.jsx# NABL lab testing details
+│   ├── context/
+│   │   └── LanguageContext.jsx # Bilingual translations state provider
+│   ├── App.jsx               # Application Shell
+│   ├── index.css             # Styling entry & Dark mode variables
+│   └── main.jsx              # React DOM mounting
+├── .env                      # Production & SMTP configuration keys (Git ignored)
+├── .env.example              # Example file template showing required variables
+├── server.js                 # Local Express server for SMTP routing
+├── package.json              # Script runs & npm packages
+└── vite.config.js            # Compiler & proxy configurations
 ```
 
 ---
 
-## 📄 Core Files & Components Description
+## 📄 Core Files Description
 
-### 1. Root & Configuration Files:
-*   **[server.js](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/server.js):** 
-    This is your Express backend server. It runs on port 5000 (or the port specified in `.env`). It provides the `/api/contact` API endpoint. Whenever a user submits the contact form, this file uses Nodemailer to:
-    *   Send a new lead notification email to the **Admin**.
-    *   Send an auto-reply confirmation email to the **Customer**.
-*   **[.env](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/.env):**
-    A file to store sensitive credentials (e.g., SMTP Host, SMTP User, SMTP Password, Receiver Email).
-*   **[vite.config.js](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/vite.config.js):**
-    Vite compiler configuration. It has a `proxy` set up to automatically forward `/api/...` requests from the frontend to the backend (`http://localhost:5000`).
+### 1. Backend Server & Mail Routing
+*   **[server.js](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/server.js):** Runs local backend server on port `5000`. Configures CORS, parses JSON, and provides the `/api/contact` endpoint. Performs Nodemailer validation on startup.
+*   **[api/contact.js](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/api/contact.js):** Serverless entry function configured to route contact forms on cloud environments like Vercel.
 
-### 2. Frontend React Components ([src/components/](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components)):
-*   **[Navbar.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components/Navbar.jsx):** A sticky navigation bar that changes its background on scroll. It includes a responsive hamburger menu for mobile devices.
-*   **[Hero.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components/Hero.jsx):** The main website banner containing the company's objective, an attractive background image, and an "Explore Products" call-to-action button.
-*   **[About.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components/About.jsx):** Company profile, history, and key statistics (e.g., 15+ years of experience, 500+ projects).
-*   **[Products.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components/Products.jsx):** Detailed information, features, and applications of various pipes manufactured by Rajshree (such as HDPE Pipes, PVC Pipes, Sprinkler Systems, MDPE, and Column Pipes).
-*   **[Certifications.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components/Certifications.jsx):** Information regarding ISI Mark, ISO Certifications, and quality testing standards (e.g., Density, Tensile, Hydrostatic pressure test).
-*   **[Contact.jsx](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/components/Contact.jsx):** The contact form component. It includes client-side validation (Name, Email, Phone Number, Subject) and sends data to the API (`/api/contact`), displaying success or error alerts to the user.
+### 2. Styling System
+*   **[src/index.css](file:///c:/Users/Shashank/Downloads/manufactperfex-105/rajshree-website/src/index.css):** Integrates Tailwind variables, registers custom dark mode selectors (`@variant dark`), and configures the background grid pattern (`bg-grid-pattern`) for the 360° viewer box.
 
 ---
 
-## 🚀 How to Run the Project
+## 🚀 How to Run Locally
 
-To run the project fully, you need to start both the **Frontend** and the **Backend**:
+Follow these instructions to start the development environments:
 
 ### Step 1: Install Dependencies
-If you haven't installed the packages yet, run:
+Open a command prompt in the `rajshree-website` folder and run:
 ```bash
 npm install
 ```
 
-### Step 2: Set Environment Variables
-Create a `.env` file in the root directory (or copy and edit `.env.example`) and fill in your SMTP credentials:
+### Step 2: Configure Environment Variables
+Create a `.env` file in the root folder (use `.env.example` as a reference):
 ```ini
 PORT=5000
 SMTP_HOST="smtp-relay.brevo.com"
 SMTP_PORT=587
-SMTP_USER="your-brevo-smtp-email"
-SMTP_PASS="your-brevo-smtp-password"
-RECEIVER_EMAIL="email-where-leads-should-be-received"
+SMTP_USER="your-registered-smtp-username"
+SMTP_PASS="your-authorized-smtp-key"
+SENDER_EMAIL="realshashankjain@gmail.com"
+RECEIVER_EMAIL="rajshreearun123@gmail.com"
 ```
 
 ### Step 3: Run the Backend Server
-Open a terminal and run:
+To start the Express server which manages email submissions:
 ```bash
 npm run server
 ```
-This will start the backend server at `http://localhost:5000`.
+*Note: If the server connects successfully, it will log:*
+`[SMTP Transporter Success]: Server is ready to route emails.`
 
-### Step 4: Run the Frontend App
-Open another terminal window and run:
+### Step 4: Run the React Frontend
+In a separate terminal window, start the local development server:
 ```bash
 npm run dev
 ```
-(Or run `npm run dev -- --host` to expose the server to your local network). This will host your website at `http://localhost:5173`.
+Open your browser at `http://localhost:5173/` to view and test the website.
+
+---
+
+## 🧪 Testing Email Deliverability (SMTP)
+You can test the SMTP connection independently using the scripts inside the `scratch/` directory:
+1.  Verify connection settings:
+    ```bash
+    node scratch/test_smtp.js
+    ```
+2.  Send a real test email through the server endpoint:
+    ```bash
+    node scratch/test_api.js
+    ```
+
+---
+
+## 📋 Quality & Build Verification
+*   **Linter Check:** Tested with `oxlint` via `npm run lint` -> **0 errors**.
+*   **Production Bundling:** Compiles via `npm run build` in under **1 second** -> **All chunks render successfully**.
