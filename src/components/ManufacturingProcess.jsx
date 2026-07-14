@@ -47,8 +47,8 @@ export default function ManufacturingProcess() {
       num: '06',
       title: 'Measurement & Marking',
       icon: <Ruler className="w-5 h-5" />,
-      image: '/images/manufacturing-pipe-measurement-check.jpg',
-      alt: 'Worker measuring wall thickness of finished HDPE pipe',
+      image: '/images/manufacturing-production-line.jpg',
+      alt: 'Finished HDPE pipes dimension audit and quality marking',
       caption: 'Quality control inspectors audit wall thickness tolerances and outer diameters, applying indelible laser marking showing BIS codes, batch numbers, and the RAJSHREE trademark.'
     }
   ];

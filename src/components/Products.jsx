@@ -123,36 +123,6 @@ export default function Products() {
         jointing: 'Inter-compatible compression and fusion systems.',
         durability: 'Certified polymer molding ensuring long life and reliable thread tolerances.'
       }
-    },
-    {
-      id: 'flanged-pipes',
-      name: 'Flanged HDPE Joint Pipes',
-      image: '/images/products-flanged-pipes.jpg',
-      categories: ['Flanged HDPE Pipe', 'HDPE Pipe (IS:4984:2018)'],
-      standards: 'IS:4984 | IS:14333',
-      sizes: '90mm to 630mm OD',
-      pressure: 'PN 4 to PN 16',
-      desc: 'Pre-fabricated HDPE pipes complete with welded stub-ends and backup backing metallic rings (MS/GI flanges) for bolt-together installation.',
-      details: {
-        applications: 'Submersible pump riser pipes, temporary pipeline lines, river crossings, industrial waste lines, and connections to metal valves.',
-        jointing: 'Bolted flange assembly utilizing rubber gaskets.',
-        durability: 'Enables quick assembly and disassembly in mining, dewatering, and temporary site operations.'
-      }
-    },
-    {
-      id: 'black-stacked-2',
-      name: 'Large-Diameter Warehouse Stacked Pipes',
-      image: '/images/products-black-pipes-stacked-2.jpg',
-      categories: ['HDPE Pipe (IS:4984:2018)', 'HDPE Sewage Pipe (IS:14333)'],
-      standards: 'IS:4984:2018 | IS:14333',
-      sizes: '315mm to 1200mm OD',
-      pressure: 'PN 6 to PN 16 (SDR 26 to SDR 9)',
-      desc: 'Neatly organized bulk stockpile of large-diameter high-pressure HDPE sewage and water conduit lines ready for immediate logistics shipment.',
-      details: {
-        applications: 'Cross-country water pipelines, gravity sewer outfalls, industrial wastewater transport, and highway culvert systems.',
-        jointing: 'Butt fusion welding with automatic hydraulic machinery.',
-        durability: 'Handles heavy external soil loads and high internal hydraulic pressure spikes.'
-      }
     }
   ];
 

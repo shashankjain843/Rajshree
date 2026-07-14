@@ -48,8 +48,8 @@ export default function Team() {
             
             <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-white bg-slate-50">
               <img
-                src="/images/team-staff-photo.jpg"
-                alt="Rajshree Technoplast team and staff in company uniform standing together at the plant"
+                src="/images/exhibition-stall-team-1.jpg"
+                alt="Rajshree Technoplast team and staff standing together"
                 className="w-full h-auto object-cover aspect-[16/10] hover:scale-[1.02] transition-transform duration-500"
               />
               {/* Image Caption overlay */}
