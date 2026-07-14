@@ -13,7 +13,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOptions = {
-  from: `"Rajshree Inquiry Portal" <${process.env.SMTP_USER}>`,
+  from: `"Rajshree Inquiry Portal" <${process.env.SENDER_EMAIL || 'realshashankjain@gmail.com'}>`,
   to: process.env.RECEIVER_EMAIL || 'realshashankjain@gmail.com',
   subject: 'Test email from Antigravity Agent',
   text: 'Hello, this is a test email to verify that mail delivery is working.',

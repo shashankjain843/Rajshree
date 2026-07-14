@@ -49,8 +49,8 @@ app.post('/api/contact', async (req, res) => {
     return res.status(400).json({ success: false, message: 'Please fill out all required fields.' });
   }
 
-  const receiverEmail = process.env.RECEIVER_EMAIL || 'rajshreearun123@gmail.com';
-  const senderEmail = process.env.SMTP_USER || 'realshashankjain@gmail.com';
+  const receiverEmail = process.env.RECEIVER_EMAIL || 'realshashankjain@gmail.com';
+  const senderEmail = process.env.SENDER_EMAIL || 'realshashankjain@gmail.com';
 
   // Email template for Rajshree Admin
   const adminMailOptions = {
@@ -147,8 +147,8 @@ app.post('/api/contact', async (req, res) => {
 
 // 2. GET API: Test SMTP connection and send a test email on demand
 app.get('/api/test-email', async (req, res) => {
-  const senderEmail = process.env.SMTP_USER || 'realshashankjain@gmail.com';
-  const receiverEmail = process.env.RECEIVER_EMAIL || 'rajshreearun123@gmail.com';
+  const senderEmail = process.env.SENDER_EMAIL || 'realshashankjain@gmail.com';
+  const receiverEmail = process.env.RECEIVER_EMAIL || 'realshashankjain@gmail.com';
 
   const testMailOptions = {
     from: `"SMTP Test Handshake" <${senderEmail}>`,
