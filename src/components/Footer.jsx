@@ -1,5 +1,4 @@
-import logo from '../assets/logo.svg';
-import { Phone, Mail, ArrowUp, MessageCircle } from 'lucide-react';
+import { Phone, Mail, ArrowUp, MessageCircle, MapPin } from 'lucide-react';
 
 export default function Footer() {
   const handleScrollToTop = () => {
@@ -15,12 +14,16 @@ export default function Footer() {
           
           {/* Brand Info (4cols) */}
           <div className="lg:col-span-5 space-y-4">
-            <img src={logo} alt="Rajshree Technoplast Logo" className="h-12 w-auto brightness-0 invert" />
+            <img 
+              src="/images/rajshree logo.png" 
+              alt="Rajshree Technoplast Logo" 
+              className="h-12 w-auto object-contain rounded-lg p-1 bg-white" 
+            />
             <p className="text-slate-350 text-sm font-semibold italic mt-2">
               "Empowering Progress Through Liquid Network"
             </p>
             <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-sm">
-              Established in 2012, Rajshree Technoplast is a leading manufacturer of premium HDPE and PVC piping systems. We power municipalities, industrial networks, and agricultural layouts across India.
+              Established in 2012, Rajshree Technoplast (Rajshree Group) is a leading manufacturer of premium HDPE and PVC piping systems. We power municipalities, industrial networks, and agricultural layouts across India.
             </p>
             
             {/* Social Icons */}
@@ -54,19 +57,25 @@ export default function Footer() {
                 <a href="#home" className="hover:text-white transition-colors block">Home Overview</a>
               </li>
               <li>
-                <a href="#about" className="hover:text-white transition-colors block">About Rajshree Group</a>
+                <a href="#about" className="hover:text-white transition-colors block">About Us</a>
               </li>
               <li>
-                <a href="#products" className="hover:text-white transition-colors block">Products Specification</a>
+                <a href="#team" className="hover:text-white transition-colors block">Meet Our Team</a>
               </li>
               <li>
-                <a href="#manufacturing" className="hover:text-white transition-colors block">Manufacturing Facilities</a>
+                <a href="#manufacturing" className="hover:text-white transition-colors block">Manufacturing Process</a>
               </li>
               <li>
-                <a href="#certifications" className="hover:text-white transition-colors block">Certifications &amp; BIS Code</a>
+                <a href="#products" className="hover:text-white transition-colors block">Products Catalog</a>
               </li>
               <li>
-                <a href="#contact" className="hover:text-white transition-colors block">Corporate Directory</a>
+                <a href="#quality" className="hover:text-white transition-colors block">Quality &amp; Testing</a>
+              </li>
+              <li>
+                <a href="#exhibitions" className="hover:text-white transition-colors block">Exhibitions &amp; Events</a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-white transition-colors block">Contact Directory</a>
               </li>
             </ul>
           </div>
@@ -84,16 +93,34 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <Phone className="w-4.5 h-4.5 text-brand-lightblue shrink-0 mt-0.5" />
                 <div className="flex flex-col space-y-1">
-                  <a href="tel:+919829050790" className="hover:text-white transition-colors">+91-9829050790</a>
+                  <a href="tel:+919829050790" className="hover:text-white transition-colors">+91-9829050790 (Direct)</a>
                   <a href="tel:+919829054690" className="hover:text-white transition-colors">+91-9829054690</a>
+                  <a href="tel:+919460004801" className="hover:text-white transition-colors">+91-9460004801</a>
                 </div>
               </div>
-              <div className="text-xs text-slate-500 border-t border-slate-900 pt-3">
-                <span className="font-bold text-slate-400 uppercase tracking-wide block">Regd Office</span>
-                <span className="block mt-1 font-light leading-normal">
-                  Hanuman Vatika-I, Near 200FT Chauraha, Ajmer Road, Jaipur-302021, Rajasthan
-                </span>
+              
+              <div className="text-xs text-slate-500 border-t border-slate-900 pt-3 space-y-2">
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-slate-400 uppercase tracking-wide block">Regd Office</span>
+                    <span className="block mt-0.5 font-light leading-normal">
+                      Ajmer Road, Jaipur-302021, Rajasthan
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2">
+                  <MapPin className="w-4 h-4 text-brand-blue shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold text-slate-400 uppercase tracking-wide block">Plant Location</span>
+                    <span className="block mt-0.5 font-light leading-normal">
+                      Unit I: C-151, RIICO Industrial Area, Bagru Extn, Bagru, Jaipur, Rajasthan
+                    </span>
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
@@ -108,7 +135,7 @@ export default function Footer() {
             <a href="#contact" className="hover:text-white transition-colors">Terms of Service</a>
             <button 
               onClick={handleScrollToTop}
-              className="p-2.5 rounded-full bg-slate-900 hover:bg-brand-blue text-white shadow-md transition-all duration-200"
+              className="p-2.5 rounded-full bg-slate-900 hover:bg-brand-blue text-white shadow-md transition-all duration-200 cursor-pointer"
               title="Scroll to Top"
             >
               <ArrowUp className="w-4.5 h-4.5" />

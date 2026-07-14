@@ -1,11 +1,12 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Services from './components/Services';
+import Team from './components/Team';
+import ManufacturingProcess from './components/ManufacturingProcess';
 import Products from './components/Products';
-import Strengths from './components/Strengths';
-import Certifications from './components/Certifications';
-import Gallery from './components/Gallery';
+import QualityControl from './components/QualityControl';
+import Logistics from './components/Logistics';
+import Exhibitions from './components/Exhibitions';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -16,11 +17,12 @@ export default function App() {
       <main>
         <Hero />
         <About />
-        <Services />
+        <Team />
+        <ManufacturingProcess />
         <Products />
-        <Strengths />
-        <Certifications />
-        <Gallery />
+        <QualityControl />
+        <Logistics />
+        <Exhibitions />
         <Contact />
       </main>
       <Footer />

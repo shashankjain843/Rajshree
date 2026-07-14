@@ -1,161 +1,277 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, ArrowRight, ShieldCheck, Check, Info, X } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Info, X } from 'lucide-react';
 
 export default function Products() {
+  const [selectedFilter, setSelectedFilter] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const categories = [
+    'All',
+    'HDPE Pipe (IS:4984:2018)',
+    'HDPE Sewage Pipe (IS:14333)',
+    'MDPE Pipe',
+    'DWC Pipe SN4',
+    'Agriculture Pipe',
+    'HDPE Coil Pipe',
+    'Flanged HDPE Pipe',
+    'Fittings & Couplers'
+  ];
 
   const productsList = [
     {
-      id: 'hdpe',
-      name: 'HDPE Pipes',
-      standards: 'IS:4984 | IS:14333 | IS:14151',
-      sizeRange: '20mm OD to 1200mm OD',
-      pressureRating: 'PN 2.5 to PN 16 (SDR 41 to SDR 9)',
-      features: ['High tensile strength', 'Flexible and crack-resistant', 'Lifespan up to 50+ years', 'Corrosion & chemical proof'],
-      description: 'Our High-Density Polyethylene (HDPE) pipes are engineered for high-pressure water mains, sewer disposal systems, industrial effluents, and dredging pipelines. Made from prime virgin PE 100 or PE 80 grade raw materials.',
+      id: 'black-hdpe',
+      name: 'High-Density Polyethylene (HDPE) Pipes',
+      image: '/images/products-black-hdpe-pipes.jpg',
+      categories: ['HDPE Pipe (IS:4984:2018)', 'Agriculture Pipe'],
+      standards: 'IS:4984:2018 | ISO 4427',
+      sizes: '20mm to 1200mm OD',
+      pressure: 'PN 2.5 to PN 16 (SDR 41 to SDR 9)',
+      desc: 'Engineered from premium PE 100/PE 80 resin, ideal for high-pressure water mains, industrial fluid transport, and agricultural mainlines.',
       details: {
-        applications: 'Drinking water networks, irrigation mains, industrial slurry disposal, river crossing pipelines, submarine outfalls.',
+        applications: 'Potable water supply, micro-irrigation, sewer force mains, industrial effluent disposal, and fly ash slurry transport.',
         jointing: 'Butt fusion welding, electrofusion jointing, and mechanical compression fittings.',
-        durability: 'High resistance to weathering, UV radiation, and ground movements (seismic resilience).'
+        durability: 'Highly resistant to weathering, chemical attack, UV radiation, and seismic ground movements.'
       }
     },
     {
-      id: 'pvc',
-      name: 'PVC Pipes',
-      standards: 'IS:4985 | IS:13592 | IS:12818',
-      sizeRange: '50mm OD to 315mm OD',
-      pressureRating: 'PN 2.5 to PN 10 (Class 1 to Class 6)',
-      features: ['SDR34, SN8 Ring fit', 'Self fit & Cement solvent', 'Type B Cement solvent', 'Smooth inner bore'],
-      description: 'Our Polyvinyl Chloride (PVC) piping systems are designed for high-efficiency fluid flows, irrigation channels, and ventilation ducting. Available in various fittings including Ring Fit, Self Fit, and Solvent Cement types.',
+      id: 'blue-mdpe',
+      name: 'Blue MDPE / Agricultural Coil Pipes',
+      image: '/images/products-blue-pipes.jpg',
+      categories: ['MDPE Pipe', 'Agriculture Pipe', 'HDPE Coil Pipe'],
+      standards: 'IS:14885 | IS:4984',
+      sizes: '20mm to 110mm OD',
+      pressure: 'SDR 11 & SDR 17.6',
+      desc: 'Medium-density blue polyethylene pipes with outstanding flexibility and stress-crack resistance. Ideal for drinking water connection lines and farms.',
       details: {
-        applications: 'Agriculture irrigation, tube-well casings, soil-waste-rainwater (SWR) systems, building drainage, chemical vent systems.',
-        jointing: 'Elastomeric ring joints (Ring-fit) and cold-solvent weld jointing (Self-fit).',
-        durability: 'Excellent hydraulic characteristics, scale-proof, fire retardant, and high mechanical impact resistance.'
+        applications: 'House service connections, farm sprinkler lines, micro-irrigation distribution, borewell pump delivery lines.',
+        jointing: 'Compression fittings, socket fusion, and electrofusion couplers.',
+        durability: 'High flexibility allows layout around obstacles; resistant to soil chemistry and freezing temperatures.'
       }
     },
     {
-      id: 'hdpe-coil',
-      name: 'HDPE Coil Pipes',
-      standards: 'IS:4984',
-      sizeRange: '20mm OD to 110mm OD',
-      pressureRating: 'PN 4.0 to PN 16',
-      features: ['Jointless long lengths', 'Easy to transport & layout', 'Highly flexible coils', 'Saves installation joints'],
-      description: 'Designed for quick installation in long-span piping projects, agricultural irrigation, and electrical ducting. Coils reduce the number of jointing steps, minimizing leakage failure points.',
+      id: 'grey-dwc',
+      name: 'Structured Wall Grey PVC Pipes',
+      image: '/images/products-grey-pipes-stacked.jpg',
+      categories: ['DWC Pipe SN4', 'HDPE Sewage Pipe (IS:14333)'],
+      standards: 'IS:13592 | IS:4985',
+      sizes: '75mm to 315mm OD',
+      pressure: 'Ring-fit Class 1 & 2 (SN4 / SN8)',
+      desc: 'Robust grey structured wall pipes designed for low-pressure gravity sewers, building drainage, and underground telecommunication cable protection.',
       details: {
-        applications: 'Drip irrigation connections, borewell pump pipelines, telecommunication optical fiber ducting, sub-surface drainage.',
-        jointing: 'Compression jointing, male/female couplers, and electrofusion fittings.',
-        durability: 'Flexible enough to bend around obstacles without cracking; handles freezing/heaving conditions.'
+        applications: 'Gravity storm sewers, industrial wastewater drainage, soil/waste venting, underground high-voltage cable protection ducts.',
+        jointing: 'Elastomeric rubber ring joints (Ring-fit) and cold solvent cement welding.',
+        durability: 'Excellent hydraulic capacity due to smooth internal bore; immune to internal scale and chemical decay.'
       }
     },
     {
-      id: 'mdpe',
-      name: 'MDPE Pipes',
-      standards: 'IS:14885',
-      sizeRange: '20mm OD to 110mm OD',
-      pressureRating: 'SDR 11 & SDR 17.6',
-      features: ['Excellent stress crack resistance', 'High impact strength', 'Color coded (Blue/Yellow)', 'Fusion-compatible'],
-      description: 'Medium-Density Polyethylene (MDPE) pipes are specifically manufactured for natural gas grid networks and drinking water service lines, maintaining supreme ductility in all temperature ranges.',
+      id: 'bulk-couplers',
+      name: 'HDPE Compression Couplers & Fittings',
+      image: '/images/products-pipe-couplers-bulk.jpg',
+      categories: ['Fittings & Couplers'],
+      standards: 'IS:7328 | ISO 14236',
+      sizes: '20mm to 110mm OD',
+      pressure: 'Up to PN 16 (16 Bar)',
+      desc: 'Bulk-manufactured high-precision compression couplers, elbows, and tees ensuring watertight joints in agricultural or pipeline connection runs.',
       details: {
-        applications: 'LPG/PNG gas distribution pipelines, city gas grids, service connection pipes for drinking water mains.',
-        jointing: 'Electrofusion fittings and socket fusion welding.',
-        durability: 'Very high slow-crack growth resistance, high squeeze-off recovery, and electrical insulation properties.'
+        applications: 'Quick-release jointing for agricultural headers, service connections, and temporary supply piping lines.',
+        jointing: 'Hand-tightened mechanical compression nuts with elastomeric O-rings and split-ring grips.',
+        durability: 'Molded from virgin PP/HDPE for high impact strength and UV resistance under heavy sunlight.'
+      }
+    },
+    {
+      id: 'endcap-fitting',
+      name: 'Premium Molded Endcap Joint Fittings',
+      image: '/images/pipe-fittings-endcap.jpg',
+      categories: ['Fittings & Couplers'],
+      standards: 'IS:4984 | IS:7328',
+      sizes: '50mm to 250mm OD',
+      pressure: 'PN 6 to PN 16',
+      desc: 'High-strength butt-fusion end caps designed to safely cap off pressurized HDPE lines in industrial and municipal supply runs.',
+      details: {
+        applications: 'Dead-end capping in water distribution lines, testing pressure lines, and sealing empty conduits.',
+        jointing: 'Thermal butt-fusion welding or electrofusion coupling.',
+        durability: 'Engineered to withstand the same pressure spikes and surge loads as the main HDPE pipeline.'
+      }
+    },
+    {
+      id: 'endcap-fitting-2',
+      name: 'Heavy-Duty Threaded Fitting End Caps',
+      image: '/images/pipe-fitting-endcap-2.jpg',
+      categories: ['Fittings & Couplers'],
+      standards: 'ISO 4427 | IS:4984',
+      sizes: '32mm to 160mm OD',
+      pressure: 'PN 10 to PN 16',
+      desc: 'Secondary molded threaded termination caps providing a secure, leak-proof seal with high mechanical resistance against tensile loads.',
+      details: {
+        applications: 'Service termination points in agricultural spray setups, plumbing branches, and main terminal caps.',
+        jointing: 'Female/Male BSP threads or compression lock mechanism.',
+        durability: 'Constructed to resist abrasive soils, fertilizer chemicals, and mechanical vibration.'
+      }
+    },
+    {
+      id: 'display-board',
+      name: 'Full Range Showcase Display Board',
+      image: '/images/products-display-board.jpg',
+      categories: ['HDPE Pipe (IS:4984:2018)', 'Fittings & Couplers'],
+      standards: 'Full RAJSHREE Product Range',
+      sizes: 'Comprehensive size showcase',
+      pressure: 'Variegated Class Ratings',
+      desc: 'A demonstration display board showcasing our wide catalog of PE, MDPE, PVC, end caps, tees, reducers, and custom couplers.',
+      details: {
+        applications: 'Comprehensive specification review for distribution agencies, trade exhibits, and contractor presentations.',
+        jointing: 'Inter-compatible compression and fusion systems.',
+        durability: 'Certified polymer molding ensuring long life and reliable thread tolerances.'
+      }
+    },
+    {
+      id: 'flanged-pipes',
+      name: 'Flanged HDPE Joint Pipes',
+      image: '/images/products-flanged-pipes.jpg',
+      categories: ['Flanged HDPE Pipe', 'HDPE Pipe (IS:4984:2018)'],
+      standards: 'IS:4984 | IS:14333',
+      sizes: '90mm to 630mm OD',
+      pressure: 'PN 4 to PN 16',
+      desc: 'Pre-fabricated HDPE pipes complete with welded stub-ends and backup backing metallic rings (MS/GI flanges) for bolt-together installation.',
+      details: {
+        applications: 'Submersible pump riser pipes, temporary pipeline lines, river crossings, industrial waste lines, and connections to metal valves.',
+        jointing: 'Bolted flange assembly utilizing rubber gaskets.',
+        durability: 'Enables quick assembly and disassembly in mining, dewatering, and temporary site operations.'
+      }
+    },
+    {
+      id: 'black-stacked-2',
+      name: 'Large-Diameter Warehouse Stacked Pipes',
+      image: '/images/products-black-pipes-stacked-2.jpg',
+      categories: ['HDPE Pipe (IS:4984:2018)', 'HDPE Sewage Pipe (IS:14333)'],
+      standards: 'IS:4984:2018 | IS:14333',
+      sizes: '315mm to 1200mm OD',
+      pressure: 'PN 6 to PN 16 (SDR 26 to SDR 9)',
+      desc: 'Neatly organized bulk stockpile of large-diameter high-pressure HDPE sewage and water conduit lines ready for immediate logistics shipment.',
+      details: {
+        applications: 'Cross-country water pipelines, gravity sewer outfalls, industrial wastewater transport, and highway culvert systems.',
+        jointing: 'Butt fusion welding with automatic hydraulic machinery.',
+        durability: 'Handles heavy external soil loads and high internal hydraulic pressure spikes.'
       }
     }
   ];
 
+  // Filter products based on selected tab
+  const filteredProducts = selectedFilter === 'All'
+    ? productsList
+    : productsList.filter(p => p.categories.includes(selectedFilter));
+
   return (
-    <section id="products" className="py-20 bg-slate-50 relative">
+    <section id="products" className="py-20 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-base text-brand-blue font-bold tracking-wide uppercase">Product Catalog</h2>
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h2 className="text-base text-brand-blue font-bold tracking-wide uppercase">Our Products</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            High-Performance Piping Systems
+            High-Performance Piping &amp; Fittings
           </p>
           <div className="mt-4 h-1.5 w-24 bg-brand-orange mx-auto rounded-full"></div>
           <p className="mt-4 text-slate-500 font-light text-sm sm:text-base">
-            Manufactured using state-of-the-art extrusion machinery and virgin raw materials. Fully compliant with Bureau of Indian Standards (BIS) specifications.
+            Manufactured from high-grade polymer resins under strict dimensional checks. Fully compliant with Bureau of Indian Standards (BIS) specifications.
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {productsList.map((product, idx) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden flex flex-col justify-between group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative"
+        {/* Filter Navigation */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedFilter(cat)}
+              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold border transition-all duration-200 cursor-pointer ${
+                selectedFilter === cat
+                  ? 'bg-brand-blue border-brand-blue text-white shadow-md'
+                  : 'bg-slate-50 border-slate-200 text-slate-655 hover:bg-slate-100 hover:border-slate-300'
+              }`}
             >
-              {/* Product Card Header */}
-              <div className="p-8">
-                <div className="flex justify-between items-start mb-6">
-                  <span className="text-xs uppercase font-extrabold text-brand-blue bg-brand-blue/10 px-3 py-1.5 rounded-lg border border-brand-blue/20">
-                    {product.standards}
-                  </span>
-                  {product.id === 'hdpe' || product.id === 'hdpe-coil' ? (
-                    <span className="w-4 h-4 rounded-full bg-slate-900 ring-4 ring-slate-200" title="Color: Black"></span>
-                  ) : product.id === 'pvc' ? (
-                    <span className="w-4 h-4 rounded-full bg-orange-600 ring-4 ring-orange-100" title="Color: Orange/Gray"></span>
-                  ) : (
-                    <span className="w-4 h-4 rounded-full bg-yellow-400 ring-4 ring-yellow-100" title="Color: Blue/Yellow"></span>
-                  )}
-                </div>
-
-                <h3 className="text-2xl font-extrabold text-slate-800 tracking-tight group-hover:text-brand-blue transition-colors">
-                  {product.name}
-                </h3>
-                
-                <p className="text-slate-500 font-light text-sm mt-3 leading-relaxed line-clamp-3">
-                  {product.description}
-                </p>
-
-                {/* Specs highlights */}
-                <div className="mt-6 space-y-3 bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                  <div className="flex justify-between text-xs sm:text-sm">
-                    <span className="text-slate-500 font-medium">Sizes:</span>
-                    <span className="text-slate-800 font-bold">{product.sizeRange}</span>
-                  </div>
-                  <div className="flex justify-between text-xs sm:text-sm">
-                    <span className="text-slate-500 font-medium">Rating:</span>
-                    <span className="text-slate-800 font-bold">{product.pressureRating}</span>
-                  </div>
-                </div>
-
-                {/* Quick Bullet List */}
-                <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-2 text-left">
-                  {product.features.slice(0, 4).map((f, fIdx) => (
-                    <li key={fIdx} className="flex items-center gap-2 text-xs sm:text-sm text-slate-600 font-light">
-                      <Check className="w-4 h-4 text-brand-orange shrink-0" />
-                      <span className="truncate">{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Action Strip */}
-              <div className="p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
-                <button
-                  onClick={() => setSelectedProduct(product)}
-                  className="flex items-center gap-1.5 text-brand-blue font-bold text-xs sm:text-sm hover:text-brand-darkblue transition-colors"
-                >
-                  <Info className="w-4 h-4" />
-                  <span>View Specifications</span>
-                </button>
-                <a
-                  href="#contact"
-                  className="group flex items-center gap-1.5 text-brand-orange font-bold text-xs sm:text-sm hover:text-brand-orange/80 transition-colors"
-                >
-                  <span>Request Quote</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </div>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
+
+        {/* Product Cards Grid with Animations */}
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredProducts.map((product) => (
+              <motion.div
+                layout
+                key={product.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                className="bg-slate-50 rounded-3xl border border-slate-150 overflow-hidden flex flex-col justify-between hover:shadow-xl transition-all duration-300 hover:-translate-y-1 relative"
+              >
+                <div>
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
+                    />
+                    {/* Category Label Overlay */}
+                    <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm border border-slate-200 text-brand-blue font-extrabold text-[10px] sm:text-xs px-2.5 py-1 rounded-lg">
+                      {product.categories[0]}
+                    </div>
+                  </div>
+
+                  {/* Body Info */}
+                  <div className="p-6 text-left space-y-3">
+                    <span className="text-[10px] sm:text-xs uppercase font-extrabold text-brand-orange bg-brand-orange/10 px-2.5 py-1 rounded-md border border-brand-orange/20">
+                      {product.standards}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-800 tracking-tight leading-snug">
+                      {product.name}
+                    </h3>
+                    <p className="text-slate-500 font-light text-xs sm:text-sm leading-relaxed">
+                      {product.desc}
+                    </p>
+
+                    {/* Specs strip */}
+                    <div className="bg-white border border-slate-100 p-3.5 rounded-xl space-y-1.5">
+                      <div className="flex justify-between text-xs font-light">
+                        <span className="text-slate-400 font-medium">Size Range:</span>
+                        <span className="text-slate-800 font-bold">{product.sizes}</span>
+                      </div>
+                      <div className="flex justify-between text-xs font-light">
+                        <span className="text-slate-400 font-medium">Pressure Class:</span>
+                        <span className="text-slate-800 font-bold">{product.pressure}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer Action Strip */}
+                <div className="p-5 bg-slate-100/50 border-t border-slate-200 flex items-center justify-between">
+                  <button
+                    onClick={() => setSelectedProduct(product)}
+                    className="flex items-center gap-1 text-brand-blue font-bold text-xs hover:text-brand-darkblue transition-colors cursor-pointer"
+                  >
+                    <Info className="w-4 h-4" />
+                    <span>View Specifications</span>
+                  </button>
+                  <a
+                    href="#contact"
+                    className="group flex items-center gap-1 text-brand-orange font-bold text-xs hover:text-brand-orange/80 transition-colors"
+                  >
+                    <span>Request Quote</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {/* Specification Detail Modal */}
         <AnimatePresence>
@@ -164,7 +280,7 @@ export default function Products() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+              className="fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
               onClick={() => setSelectedProduct(null)}
             >
               <motion.div
@@ -177,8 +293,8 @@ export default function Products() {
               >
                 {/* Modal Header */}
                 <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 sticky top-0 z-10">
-                  <div>
-                    <h3 className="text-2xl font-extrabold text-slate-800 tracking-tight">
+                  <div className="text-left">
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
                       {selectedProduct.name}
                     </h3>
                     <p className="text-xs uppercase font-extrabold text-brand-blue tracking-wide mt-1">
@@ -187,22 +303,21 @@ export default function Products() {
                   </div>
                   <button
                     onClick={() => setSelectedProduct(null)}
-                    className="p-2 rounded-full hover:bg-slate-200 text-slate-500 hover:text-slate-700 transition-colors"
+                    className="p-2 rounded-full hover:bg-slate-200 text-slate-500 hover:text-slate-700 transition-colors cursor-pointer"
                   >
                     <X className="w-6 h-6" />
                   </button>
                 </div>
 
                 {/* Modal Body */}
-                <div className="p-8 space-y-6">
-                  {/* Summary */}
+                <div className="p-8 space-y-6 text-left">
                   <div>
-                    <p className="text-slate-600 font-light text-base leading-relaxed">
-                      {selectedProduct.description}
+                    <p className="text-slate-650 font-light text-sm sm:text-base leading-relaxed">
+                      {selectedProduct.desc}
                     </p>
                   </div>
 
-                  {/* Quick specs grid */}
+                  {/* Specs Table */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 border border-slate-200 p-6 rounded-2xl bg-slate-50">
                     <div>
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Applicable Standards</p>
@@ -210,55 +325,50 @@ export default function Products() {
                     </div>
                     <div>
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Size Range (Outer Diameter)</p>
-                      <p className="text-sm font-extrabold text-slate-800 mt-1">{selectedProduct.sizeRange}</p>
+                      <p className="text-sm font-extrabold text-slate-800 mt-1">{selectedProduct.sizes}</p>
                     </div>
                     <div className="sm:col-span-2 pt-2 border-t border-slate-200">
                       <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Pressure / Class Rating</p>
-                      <p className="text-sm font-extrabold text-slate-800 mt-1">{selectedProduct.pressureRating}</p>
+                      <p className="text-sm font-extrabold text-slate-800 mt-1">{selectedProduct.pressure}</p>
                     </div>
                   </div>
 
-                  {/* Extended Details */}
+                  {/* Extended Technical Details */}
                   <div className="space-y-4">
-                    <h4 className="text-lg font-bold text-slate-800 border-b border-slate-100 pb-2">Technical Parameters</h4>
+                    <h4 className="text-lg font-bold text-slate-850 border-b border-slate-100 pb-2">Technical Parameters</h4>
                     
                     <div className="space-y-3">
                       <div>
-                        <span className="font-bold text-slate-700 text-sm block">Core Applications:</span>
-                        <span className="text-slate-600 font-light text-sm mt-0.5 block">{selectedProduct.details.applications}</span>
+                        <span className="font-bold text-slate-700 text-xs sm:text-sm block">Core Applications:</span>
+                        <span className="text-slate-550 font-light text-xs sm:text-sm mt-0.5 block">{selectedProduct.details.applications}</span>
                       </div>
                       <div>
-                        <span className="font-bold text-slate-700 text-sm block">Jointing Methodologies:</span>
-                        <span className="text-slate-600 font-light text-sm mt-0.5 block">{selectedProduct.details.jointing}</span>
+                        <span className="font-bold text-slate-700 text-xs sm:text-sm block">Jointing Methodologies:</span>
+                        <span className="text-slate-550 font-light text-xs sm:text-sm mt-0.5 block">{selectedProduct.details.jointing}</span>
                       </div>
                       <div>
-                        <span className="font-bold text-slate-700 text-sm block">Durability &amp; Safety:</span>
-                        <span className="text-slate-600 font-light text-sm mt-0.5 block">{selectedProduct.details.durability}</span>
+                        <span className="font-bold text-slate-700 text-xs sm:text-sm block">Durability &amp; Safety:</span>
+                        <span className="text-slate-550 font-light text-xs sm:text-sm mt-0.5 block">{selectedProduct.details.durability}</span>
                       </div>
                     </div>
                   </div>
 
-                  {/* Bullet list of advantages */}
-                  <div>
-                    <h4 className="text-lg font-bold text-slate-800 border-b border-slate-100 pb-2 mb-3">Key Advantages</h4>
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {selectedProduct.features.map((f, fIdx) => (
-                        <li key={fIdx} className="flex items-center gap-2 text-slate-600 font-light text-sm">
-                          <Check className="w-4 h-4 text-brand-orange" />
-                          <span>{f}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Quality Seal */}
+                  <div className="flex items-center gap-3 p-4 bg-brand-blue/5 rounded-2xl border border-brand-blue/10">
+                    <ShieldCheck className="w-6 h-6 text-brand-blue shrink-0" />
+                    <p className="text-xs text-slate-500 leading-normal font-light">
+                      Every production run is calibrated and tested in-house. Meets strict BIS code conformity benchmarks before being stocked.
+                    </p>
                   </div>
                 </div>
 
                 {/* Modal Footer */}
                 <div className="p-6 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row justify-between items-center gap-4">
-                  <span className="text-xs text-slate-400 font-medium">Rajshree Technoplast Pvt Ltd © 2026</span>
+                  <span className="text-xs text-slate-400 font-medium">Rajshree Technoplast Pvt Ltd</span>
                   <a
                     href="#contact"
                     onClick={() => setSelectedProduct(null)}
-                    className="w-full sm:w-auto bg-brand-blue hover:bg-brand-darkblue text-white font-bold text-center px-6 py-3 rounded-xl transition-all duration-200"
+                    className="w-full sm:w-auto bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-center px-6 py-3 rounded-xl transition-all duration-200"
                   >
                     Request Callback for this Product
                   </a>

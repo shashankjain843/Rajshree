@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, MessageSquare } from 'lucide-react';
-import logo from '../assets/logo.svg';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,9 +20,11 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
-    { name: 'Products', href: '#products' },
+    { name: 'Team', href: '#team' },
     { name: 'Manufacturing', href: '#manufacturing' },
-    { name: 'Certifications', href: '#certifications' },
+    { name: 'Products', href: '#products' },
+    { name: 'Quality', href: '#quality' },
+    { name: 'Exhibitions', href: '#exhibitions' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -31,7 +32,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-md py-2 border-b border-slate-200'
+          ? 'bg-white/95 backdrop-blur-md shadow-md py-2 border-b border-slate-200'
           : 'bg-transparent py-4'
       }`}
     >
@@ -40,10 +41,10 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#home" className="flex items-center shrink-0">
             <img
-              src={logo}
+              src="/images/rajshree logo.png"
               alt="Rajshree Technoplast Logo"
-              className={`transition-all duration-300 ${
-                isScrolled ? 'h-10' : 'h-12'
+              className={`transition-all duration-300 object-contain rounded-lg p-1 bg-white shadow-sm ${
+                isScrolled ? 'h-11' : 'h-14'
               } w-auto`}
             />
           </a>
