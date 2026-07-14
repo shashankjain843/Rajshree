@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 100" width="100%" height="100%">
+  <!-- Icon: Modern Swoosh R -->
+  <g transform="translate(10, 10)">
+    <!-- Blue swoosh background / arc -->
+    <path d="M 10,80 Q 25,10 65,10 Q 55,50 15,80 Z" fill="#3b82f6" opacity="0.3"/>
+    <!-- Bold R shape with swoosh elements -->
+    <path d="M 20,80 L 20,20 L 50,20 C 65,20 75,30 75,42 C 75,52 68,60 55,62 L 75,80 L 55,80 L 38,62 L 35,62 L 35,80 Z" fill="#0F52BA"/>
+    <path d="M 35,32 L 48,32 C 55,32 60,36 60,42 C 60,48 55,52 48,52 L 35,52 Z" fill="#0F52BA"/>
+    <!-- Orange swoosh highlight crossing the R -->
+    <path d="M 15,50 Q 40,55 75,40 Q 55,70 15,50 Z" fill="#EA580C"/>
+  </g>
+  <!-- Text: RAJSHREE -->
+  <text x="110" y="52" font-family="'Outfit', 'Inter', sans-serif" font-size="38" font-weight="800" fill="#0F52BA" letter-spacing="1">RAJSHREE</text>
+  <!-- Subtext: TECHNOPLAST -->
+  <text x="112" y="78" font-family="'Inter', sans-serif" font-size="14" font-weight="600" fill="#64748B" letter-spacing="4">TECHNOPLAST PVT LTD</text>
+</svg>
