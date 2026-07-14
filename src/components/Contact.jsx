@@ -6,12 +6,23 @@ import { useTranslation } from '../context/LanguageContext';
 export default function Contact() {
   const { lang, t } = useTranslation();
 
+  const [activeFormTab, setActiveFormTab] = useState('quote');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     product: 'hdpe',
     message: '',
+  });
+
+  const [warrantyData, setWarrantyData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    invoiceNum: '',
+    purchaseDate: '',
+    product: 'hdpe',
+    invoiceFile: null
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -44,9 +55,29 @@ export default function Contact() {
     return errors;
   };
 
+  const validateWarranty = () => {
+    const errors = {};
+    if (!warrantyData.name.trim()) {
+      errors.name = lang === 'HI' ? 'नाम लिखना आवश्यक है' : 'Name is required';
+    }
+    if (!warrantyData.phone.trim()) {
+      errors.phone = lang === 'HI' ? 'फ़ोन नंबर लिखना आवश्यक है' : 'Phone number is required';
+    }
+    if (!warrantyData.email.trim()) {
+      errors.email = lang === 'HI' ? 'ईमेल लिखना आवश्यक है' : 'Email is required';
+    }
+    if (!warrantyData.invoiceNum.trim()) {
+      errors.invoiceNum = lang === 'HI' ? 'चालान संख्या आवश्यक है' : 'Invoice number is required';
+    }
+    if (!warrantyData.purchaseDate.trim()) {
+      errors.purchaseDate = lang === 'HI' ? 'खरीद की तारीख आवश्यक है' : 'Purchase date is required';
+    }
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const errors = validate();
+    const errors = activeFormTab === 'quote' ? validate() : validateWarranty();
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
       return;
@@ -56,12 +87,18 @@ export default function Contact() {
     setSubmitError(null);
     setIsSubmitting(true);
 
-    const payload = {
+    const payload = activeFormTab === 'quote' ? {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
       product: formData.product,
       message: formData.message
+    } : {
+      name: warrantyData.name,
+      email: warrantyData.email,
+      phone: warrantyData.phone,
+      product: warrantyData.product,
+      message: `PRODUCT WARRANTY REGISTRATION:\nInvoice Number: ${warrantyData.invoiceNum}\nPurchase Date: ${warrantyData.purchaseDate}\nInvoice file: [VERIFIED_MOCK_UPLOAD]`
     };
 
     console.log("[SMTP Submit Payload]:", payload);
@@ -81,17 +118,29 @@ export default function Contact() {
 
       if (result.success) {
         setIsSubmitted(true);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          product: 'hdpe',
-          message: '',
-        });
+        if (activeFormTab === 'quote') {
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            product: 'hdpe',
+            message: '',
+          });
+        } else {
+          setWarrantyData({
+            name: '',
+            email: '',
+            phone: '',
+            invoiceNum: '',
+            purchaseDate: '',
+            product: 'hdpe',
+            invoiceFile: null
+          });
+        }
         // Reset success message after 5 seconds
         setTimeout(() => setIsSubmitted(false), 5000);
       } else {
-        setSubmitError(result.message || "Failed to submit inquiry. Please verify your SMTP credentials.");
+        setSubmitError(result.message || "Failed to submit request.");
       }
     } catch (err) {
       console.error("[SMTP Error]:", err);
@@ -102,10 +151,17 @@ export default function Contact() {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if (activeFormTab === 'quote') {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setWarrantyData({
+        ...warrantyData,
+        [e.target.name]: e.target.value,
+      });
+    }
     if (formErrors[e.target.name]) {
       setFormErrors({
         ...formErrors,
@@ -115,7 +171,7 @@ export default function Contact() {
   };
 
   const whatsappNumber = '919829050790';
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Rajshree%20Technoplast,%20I%20am%20interested%20in%20your%20pipes.`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Rajshree%2520Technoplast,%2520I%2520am%2520interested%2520in%252520your%252520pipes.`;
 
   return (
     <section id="contact" className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
@@ -161,121 +217,299 @@ export default function Contact() {
                 </p>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Name */}
-                  <div className="text-left">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formName')}</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder={lang === 'HI' ? 'उदा. शशांक जैन' : 'e.g. Shashank Jain'}
-                      className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-200 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                        formErrors.name ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-slate-200 dark:border-slate-800'
-                      }`}
-                    />
-                    {formErrors.name && (
-                      <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.name}</span>
-                    )}
-                  </div>
-
-                  {/* Phone */}
-                  <div className="text-left">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formPhone')}</label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder={lang === 'HI' ? 'उदा. +91 98290 50790' : 'e.g. +91 98290 50790'}
-                      className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-200 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                        formErrors.phone ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-slate-200 dark:border-slate-800'
-                      }`}
-                    />
-                    {formErrors.phone && (
-                      <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.phone}</span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  {/* Email */}
-                  <div className="text-left">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formEmail')}</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="e.g. client@website.com"
-                      className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-200 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                        formErrors.email ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-slate-200 dark:border-slate-800'
-                      }`}
-                    />
-                    {formErrors.email && (
-                      <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.email}</span>
-                    )}
-                  </div>
-
-                  {/* Product Interest */}
-                  <div className="text-left">
-                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{lang === 'HI' ? 'उत्पाद श्रेणी' : 'Product Category'}</label>
-                    <select
-                      name="product"
-                      value={formData.product}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 dark:bg-slate-955 font-light text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all"
-                    >
-                      <option value="hdpe">{lang === 'HI' ? 'एचडीपीई पाइप्स' : 'HDPE Pipes'}</option>
-                      <option value="pvc">{lang === 'HI' ? 'पीवीसी पाइप्स' : 'PVC Pipes'}</option>
-                      <option value="hdpe-coil">{lang === 'HI' ? 'एचडीपीई कॉइल पाइप्स' : 'HDPE Coil Pipes'}</option>
-                      <option value="mdpe">{lang === 'HI' ? 'एमडीपीई पाइप्स' : 'MDPE Pipes'}</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div className="text-left">
-                  <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formMsg')}</label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="4"
-                    placeholder={lang === 'HI' ? 'पाइप का आकार, दबाव क्षमता और कुल मात्रा दर्ज करें...' : 'Enter pipe sizes, pressure ratings, total quantity, and project location...'}
-                    className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
-                      formErrors.message ? 'border-red-500 bg-red-55 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+              <div className="space-y-6">
+                {/* Form Tabs */}
+                <div className="flex bg-slate-50 dark:bg-slate-950 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800">
+                  <button
+                    type="button"
+                    onClick={() => { setActiveFormTab('quote'); setFormErrors({}); setSubmitError(null); }}
+                    className={`flex-1 text-center py-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
+                      activeFormTab === 'quote'
+                        ? 'bg-brand-blue text-white shadow-md'
+                        : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
                     }`}
-                  ></textarea>
-                  {formErrors.message && (
-                    <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.message}</span>
-                  )}
+                  >
+                    {t('warrantyTabQuote')}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setActiveFormTab('warranty'); setFormErrors({}); setSubmitError(null); }}
+                    className={`flex-1 text-center py-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
+                      activeFormTab === 'warranty'
+                        ? 'bg-brand-blue text-white shadow-md'
+                        : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300'
+                    }`}
+                  >
+                    {t('warrantyTabReg')}
+                  </button>
                 </div>
 
-                {submitError && (
-                  <div className="bg-red-50 dark:bg-red-955/20 border-l-4 border-red-500 p-4 rounded-xl text-left">
-                    <p className="text-sm text-red-700 dark:text-red-400 font-medium">{submitError}</p>
-                  </div>
-                )}
+                {activeFormTab === 'quote' ? (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Name */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formName')}</label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder={lang === 'HI' ? 'उदा. शशांक जैन' : 'e.g. Shashank Jain'}
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-200 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.name ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.name && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.name}</span>
+                        )}
+                      </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-darkblue text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-brand-blue/20 transition-all duration-300 disabled:opacity-50 cursor-pointer"
-                >
-                  {isSubmitting ? (
-                    <span>{t('btnSending')}</span>
-                  ) : (
-                    <>
-                      <span>{t('btnSendMsg')}</span>
-                      <Send className="w-4.5 h-4.5" />
-                    </>
-                  )}
-                </button>
-              </form>
+                      {/* Phone */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formPhone')}</label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          placeholder={lang === 'HI' ? 'उदा. +91 98290 50790' : 'e.g. +91 98290 50790'}
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-205 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.phone ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.phone && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.phone}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Email */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formEmail')}</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="e.g. client@website.com"
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-200 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.email ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.email && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.email}</span>
+                        )}
+                      </div>
+
+                      {/* Product Interest */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{lang === 'HI' ? 'उत्पाद श्रेणी' : 'Product Category'}</label>
+                        <select
+                          name="product"
+                          value={formData.product}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 dark:bg-slate-955 font-light text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all"
+                        >
+                          <option value="hdpe">{lang === 'HI' ? 'एचडीपीई पाइप्स' : 'HDPE Pipes'}</option>
+                          <option value="pvc">{lang === 'HI' ? 'पीवीसी पाइप्स' : 'PVC Pipes'}</option>
+                          <option value="hdpe-coil">{lang === 'HI' ? 'एचडीपीई कॉइल पाइप्स' : 'HDPE Coil Pipes'}</option>
+                          <option value="mdpe">{lang === 'HI' ? 'एमडीपीई पाइप्स' : 'MDPE Pipes'}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Message */}
+                    <div className="text-left">
+                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formMsg')}</label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        rows="4"
+                        placeholder={lang === 'HI' ? 'पाइप का आकार, दबाव क्षमता और कुल मात्रा दर्ज करें...' : 'Enter pipe sizes, pressure ratings, total quantity, and project location...'}
+                        className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                          formErrors.message ? 'border-red-500 bg-red-55 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+                        }`}
+                      ></textarea>
+                      {formErrors.message && (
+                        <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.message}</span>
+                      )}
+                    </div>
+
+                    {submitError && (
+                      <div className="bg-red-50 dark:bg-red-955/20 border-l-4 border-red-500 p-4 rounded-xl text-left">
+                        <p className="text-sm text-red-700 dark:text-red-400 font-medium">{submitError}</p>
+                      </div>
+                    )}
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-darkblue text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-brand-blue/20 transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                    >
+                      {isSubmitting ? (
+                        <span>{t('btnSending')}</span>
+                      ) : (
+                        <>
+                          <span>{t('btnSendMsg')}</span>
+                          <Send className="w-4.5 h-4.5" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Name */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formName')}</label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={warrantyData.name}
+                          onChange={handleChange}
+                          placeholder={lang === 'HI' ? 'उदा. शशांक जैन' : 'e.g. Shashank Jain'}
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.name ? 'border-red-500 bg-red-50 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.name && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.name}</span>
+                        )}
+                      </div>
+
+                      {/* Phone */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formPhone')}</label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={warrantyData.phone}
+                          onChange={handleChange}
+                          placeholder={lang === 'HI' ? 'उदा. +91 98290 50790' : 'e.g. +91 98290 50790'}
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.phone ? 'border-red-500 bg-red-50 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.phone && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.phone}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Email */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('formEmail')}</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={warrantyData.email}
+                          onChange={handleChange}
+                          placeholder="e.g. client@website.com"
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-955 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.email ? 'border-red-500 bg-red-50 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.email && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.email}</span>
+                        )}
+                      </div>
+
+                      {/* Category */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('warrantyProductPurchased')}</label>
+                        <select
+                          name="product"
+                          value={warrantyData.product}
+                          onChange={handleChange}
+                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 dark:bg-slate-955 font-light text-slate-700 dark:text-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all"
+                        >
+                          <option value="hdpe">{lang === 'HI' ? 'एचडीपीई पाइप्स' : 'HDPE Pipes'}</option>
+                          <option value="pvc">{lang === 'HI' ? 'पीवीसी पाइप्स' : 'PVC Pipes'}</option>
+                          <option value="mdpe">{lang === 'HI' ? 'एमडीपीई पाइप्स' : 'MDPE Pipes'}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {/* Invoice Number */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('warrantyInvoiceNum')}</label>
+                        <input
+                          type="text"
+                          name="invoiceNum"
+                          value={warrantyData.invoiceNum}
+                          onChange={handleChange}
+                          placeholder="e.g. RT-2026-9811"
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.invoiceNum ? 'border-red-500 bg-red-50 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.invoiceNum && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.invoiceNum}</span>
+                        )}
+                      </div>
+
+                      {/* Purchase Date */}
+                      <div className="text-left">
+                        <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('warrantyPurchaseDate')}</label>
+                        <input
+                          type="date"
+                          name="purchaseDate"
+                          value={warrantyData.purchaseDate}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 dark:text-slate-202 dark:bg-slate-950 focus:outline-none focus:ring-2 focus:ring-brand-blue/30 focus:border-brand-blue transition-all ${
+                            formErrors.purchaseDate ? 'border-red-500 bg-red-50 dark:bg-red-955/20' : 'border-slate-200 dark:border-slate-800'
+                          }`}
+                        />
+                        {formErrors.purchaseDate && (
+                          <span className="text-xs text-red-500 font-semibold mt-1 block">{formErrors.purchaseDate}</span>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Invoice Upload Mockup */}
+                    <div className="text-left">
+                      <label className="text-sm font-bold text-slate-700 dark:text-slate-300 block mb-2">{t('warrantyDocUpload')}</label>
+                      <div className="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl p-6 text-center cursor-pointer hover:border-brand-blue hover:bg-slate-50 dark:hover:bg-slate-950/40 transition-colors">
+                        <Send className="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto mb-2 rotate-90" />
+                        <span className="text-xs font-bold text-slate-500 dark:text-slate-400 block">
+                          {lang === 'HI' ? 'अटैच चालान पीडीएफ / पीएनजी फ़ाइल' : 'Attach invoice PDF or PNG receipt'}
+                        </span>
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-light mt-1 block">
+                          (Max file size 5MB)
+                        </span>
+                      </div>
+                    </div>
+
+                    {submitError && (
+                      <div className="bg-red-50 dark:bg-red-955/20 border-l-4 border-red-500 p-4 rounded-xl text-left">
+                        <p className="text-sm text-red-700 dark:text-red-400 font-medium">{submitError}</p>
+                      </div>
+                    )}
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center gap-2 bg-brand-blue hover:bg-brand-darkblue text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-brand-blue/20 transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                    >
+                      {isSubmitting ? (
+                        <span>{t('btnSending')}</span>
+                      ) : (
+                        <>
+                          <span>{t('warrantyBtn')}</span>
+                          <Send className="w-4.5 h-4.5" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
             )}
           </motion.div>
 

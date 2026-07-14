@@ -116,6 +116,124 @@ export default function Team() {
           </motion.div>
 
         </div>
+
+        {/* Life at Rajshree Behind-the-Scenes Gallery */}
+        <div className="mt-24 border-t border-slate-100 dark:border-slate-800 pt-16">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h3 className="text-xs font-extrabold uppercase text-brand-orange tracking-widest">
+              {lang === 'HI' ? 'राजश्री में कार्य संस्कृति' : 'LIFE AT RAJSHREE'}
+            </h3>
+            <h4 className="text-2xl font-black text-slate-850 dark:text-white mt-1.5 leading-snug">
+              {lang === 'HI' ? 'हमारा कार्यस्थल, सुरक्षा और प्रशिक्षण' : 'Behind-the-Scenes & Work Culture'}
+            </h4>
+            <p className="text-slate-500 dark:text-slate-400 text-xs sm:text-sm font-light mt-2 max-w-md mx-auto">
+              {lang === 'HI' 
+                ? 'हमारे विनिर्माण संयत्रों में काम करने वाले कर्मचारियों की सुरक्षा, सहयोग और उच्च तकनीकी प्रशिक्षण की एक झलक।' 
+                : 'A glimpse into our collaborative workplace, safety-first procedures, and regular plant technical training.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Tile 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col text-left group"
+            >
+              <div className="relative overflow-hidden aspect-[4/3] bg-slate-900">
+                <img 
+                  src="/images/manufacturing-workers-handling-pipe.jpg" 
+                  alt="Safety first in plant production" 
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                  loading="lazy"
+                  width="400"
+                  height="300"
+                />
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <span className="text-[10px] font-extrabold text-brand-orange uppercase tracking-wider bg-brand-orange/5 px-2 py-0.5 rounded w-fit mb-2">
+                  {lang === 'HI' ? 'सुरक्षा नियम' : 'Safety Compliance'}
+                </span>
+                <h5 className="font-extrabold text-slate-800 dark:text-white text-sm mb-1">
+                  {lang === 'HI' ? 'संयंत्र सुरक्षा एवं पीपीई किट' : 'Strict PPE Enforcement'}
+                </h5>
+                <p className="text-slate-400 dark:text-slate-500 text-xs font-light leading-relaxed mt-1">
+                  {lang === 'HI' 
+                    ? 'सभी विनिर्माण इकाइयों में सभी ऑपरेटरों के लिए हेलमेट, जैकेट और सुरक्षा जूते पहनना अनिवार्य है।' 
+                    : 'Helmet, safety jackets, and protective footwear are mandatory for all plant floor operators.'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Tile 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col text-left group"
+            >
+              <div className="relative overflow-hidden aspect-[4/3] bg-slate-900">
+                <img 
+                  src="/images/exhibition-stall-team-1.jpg" 
+                  alt="Company teamwork and group photo" 
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                  loading="lazy"
+                  width="400"
+                  height="300"
+                />
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <span className="text-[10px] font-extrabold text-brand-blue uppercase tracking-wider bg-brand-blue/5 dark:bg-brand-blue/15 px-2 py-0.5 rounded w-fit mb-2">
+                  {lang === 'HI' ? 'एकजुट कार्यबल' : 'Unified Team'}
+                </span>
+                <h5 className="font-extrabold text-slate-800 dark:text-white text-sm mb-1">
+                  {lang === 'HI' ? 'राष्ट्रीय प्रदर्शनी में हमारी टीम' : 'National Exhibition Showcase'}
+                </h5>
+                <p className="text-slate-400 dark:text-slate-500 text-xs font-light leading-relaxed mt-1">
+                  {lang === 'HI' 
+                    ? 'हमारे वाणिज्यिक एवं इंजीनियरिंग विशेषज्ञ ग्राहकों को पाइपिंग विशिष्टताओं पर परामर्श देते हैं।' 
+                    : 'Our customer support and engineering teams collaborating to present advanced polymer pipeline standards.'}
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Tile 3 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-slate-50 dark:bg-slate-950 border border-slate-150 dark:border-slate-850 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col text-left group"
+            >
+              <div className="relative overflow-hidden aspect-[4/3] bg-slate-900">
+                <img 
+                  src="/images/quality-testing-lab.jpg" 
+                  alt="Quality assurance verification" 
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-300"
+                  loading="lazy"
+                  width="400"
+                  height="300"
+                />
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <span className="text-[10px] font-extrabold text-[#00A86B] uppercase tracking-wider bg-[#00A86B]/5 px-2 py-0.5 rounded w-fit mb-2">
+                  {lang === 'HI' ? 'तकनीकी प्रशिक्षण' : 'Technical Training'}
+                </span>
+                <h5 className="font-extrabold text-slate-800 dark:text-white text-sm mb-1">
+                  {lang === 'HI' ? 'लैब परीक्षणों में नियमित अपग्रेड' : 'NABL Lab Standard Audits'}
+                </h5>
+                <p className="text-slate-400 dark:text-slate-500 text-xs font-light leading-relaxed mt-1">
+                  {lang === 'HI' 
+                    ? 'हमारे लैब तकनीशियन सटीक आयामी और घनत्व परीक्षण करने के लिए साप्ताहिक रिफ्रेशर ट्रेनिंग लेते हैं।' 
+                    : 'Technicians undergo weekly quality refresher training to operate density and hydrostatic auditing devices.'}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
       </div>
     </section>
   );

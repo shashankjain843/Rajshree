@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Landmark, ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
+import { Landmark, ChevronLeft, ChevronRight, X, Maximize2, Star, Play, Quote } from 'lucide-react';
 import { useTranslation } from '../context/LanguageContext';
 
 export default function Exhibitions() {
   const { lang, t } = useTranslation();
   const [activeImageIdx, setActiveImageIdx] = useState(null);
+  const [activeVideoTestimonial, setActiveVideoTestimonial] = useState(null);
 
   const images = [
     {
@@ -138,7 +139,196 @@ export default function Exhibitions() {
           ))}
         </div>
 
+        {/* Google Reviews & Video Testimonials */}
+        <div className="mt-24 border-t border-slate-200 dark:border-slate-800 pt-16 text-left">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <h3 className="text-xs font-extrabold uppercase text-brand-orange tracking-widest">
+              {lang === 'HI' ? 'साझेदारों की प्रतिक्रिया' : 'PARTNER FEEDBACK'}
+            </h3>
+            <h4 className="text-2xl font-black text-slate-855 dark:text-white mt-1.5">
+              {lang === 'HI' ? 'Google समीक्षाएं और वीडियो प्रशंसापत्र' : 'Google Reviews & Buyer Testimonials'}
+            </h4>
+            <div className="mt-4 h-1.5 w-16 bg-brand-orange mx-auto rounded-full"></div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
+            {/* Google Reviews Widget (4 cols) */}
+            <div className="lg:col-span-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-9 h-9 bg-slate-100 dark:bg-slate-950 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-center font-black text-slate-850 dark:text-white text-base select-none">
+                    G
+                  </div>
+                  <div>
+                    <h5 className="font-extrabold text-slate-805 dark:text-white text-sm">Google Reviews</h5>
+                    <p className="text-[10px] text-slate-400 font-medium">Verified Business Profile</p>
+                  </div>
+                </div>
+
+                <div className="flex items-baseline gap-2 mb-2">
+                  <span className="text-3xl font-black text-slate-800 dark:text-white">4.8</span>
+                  <div className="flex text-amber-500 gap-0.5">
+                    <Star className="w-4.5 h-4.5 fill-current" />
+                    <Star className="w-4.5 h-4.5 fill-current" />
+                    <Star className="w-4.5 h-4.5 fill-current" />
+                    <Star className="w-4.5 h-4.5 fill-current" />
+                    <Star className="w-4.5 h-4.5 fill-current" />
+                  </div>
+                </div>
+                <p className="text-slate-400 text-xs font-light mb-6">
+                  Based on 120+ verified evaluations.
+                </p>
+
+                {/* Star review quote */}
+                <div className="space-y-3.5 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <div className="text-xs">
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="font-bold text-slate-700 dark:text-slate-350">Shashank Jain</span>
+                      <span className="text-[10px] text-slate-400">1 week ago</span>
+                    </div>
+                    <p className="text-slate-500 dark:text-slate-400 font-light leading-relaxed">
+                      "Excellent dimensional accuracy in HDPE pipes. Delivered 20MT to our Ajmer site on time. Highly recommended manufacturer!"
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href="https://search.google.com/local/reviews"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 w-full text-center border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-white hover:bg-brand-blue font-bold py-3 rounded-xl text-xs transition-all block"
+              >
+                View All Google Reviews
+              </a>
+            </div>
+
+            {/* Video Testimonial 1 (4 cols) */}
+            <div className="lg:col-span-4 relative group overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 flex flex-col justify-end min-h-[300px]">
+              <img
+                src="/images/exhibition-client-meeting.jpg"
+                alt="Client meeting testimonial thumbnail"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-102 transition-transform duration-500"
+                loading="lazy"
+                width="360"
+                height="300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <button
+                  onClick={() => setActiveVideoTestimonial({
+                    title: lang === 'HI' ? 'अजय शर्मा (परियोजना प्रबंधक, जन स्वास्थ्य अभियांत्रिकी)' : 'Ajay Sharma (Project Manager, PHED)',
+                    desc: lang === 'HI' ? 'PHED पेयजल ग्रिड पर हमारे क्लास 4 पीएन10 एचडीपीई पाइपों की गुणवत्ता और दबाव प्रतिरोधात्मक क्षमता पर प्रतिक्रिया।' : 'Feedback on the reliability, durability, and standard compliance of our Class 4 PN10 HDPE pipes installed in PHED water supply lines.'
+                  })}
+                  className="w-12 h-12 rounded-full bg-white/20 hover:bg-white text-brand-orange hover:text-brand-blue flex items-center justify-center shadow-lg backdrop-blur-sm border border-white/20 transition-all cursor-pointer group-hover:scale-110"
+                >
+                  <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                </button>
+              </div>
+
+              <div className="relative p-6 z-10 text-left">
+                <Quote className="w-5 h-5 text-brand-orange mb-2" />
+                <h5 className="text-white font-extrabold text-sm sm:text-base">
+                  {lang === 'HI' ? 'अजय शर्मा (PHED)' : 'Ajay Sharma (PHED)'}
+                </h5>
+                <p className="text-slate-300 text-xs mt-1 font-light leading-relaxed">
+                  {lang === 'HI' ? '"दबाव परीक्षण के परिणाम शानदार रहे..."' : '"The pressure testing results were superb..."'}
+                </p>
+              </div>
+            </div>
+
+            {/* Video Testimonial 2 (4 cols) */}
+            <div className="lg:col-span-4 relative group overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-slate-900 flex flex-col justify-end min-h-[300px]">
+              <img
+                src="/images/exhibition-team-discussion.jpg"
+                alt="Team discussion testimonial thumbnail"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-102 transition-transform duration-500"
+                loading="lazy"
+                width="360"
+                height="300"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+
+              <div className="absolute inset-0 flex items-center justify-center">
+                <button
+                  onClick={() => setActiveVideoTestimonial({
+                    title: lang === 'HI' ? 'विक्रम सिंह (गुणवत्ता प्रमुख, बिल्डकॉन)' : 'Vikram Singh (Head of QA, Buildcon)',
+                    desc: lang === 'HI' ? 'एनएबीएल ऑडिट्स और सामग्री तुलना के संबंध में प्रतिक्रिया।' : 'Corporate buyer review sharing about RITES/CIPET inspector approvals and materials testing consistency.'
+                  })}
+                  className="w-12 h-12 rounded-full bg-white/20 hover:bg-white text-brand-orange hover:text-brand-blue flex items-center justify-center shadow-lg backdrop-blur-sm border border-white/20 transition-all cursor-pointer group-hover:scale-110"
+                >
+                  <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                </button>
+              </div>
+
+              <div className="relative p-6 z-10 text-left">
+                <Quote className="w-5 h-5 text-brand-orange mb-2" />
+                <h5 className="text-white font-extrabold text-sm sm:text-base">
+                  {lang === 'HI' ? 'विक्रम सिंह ( QA प्रमुख)' : 'Vikram Singh (Head of QA)'}
+                </h5>
+                <p className="text-slate-300 text-xs mt-1 font-light leading-relaxed">
+                  {lang === 'HI' ? '"गुणवत्ता प्रमाणीकरण पूरी तरह से सत्यापित है..."' : '"The quality certifications are fully verified..."'}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
+
+      {/* Testimonial Player Modal */}
+      <AnimatePresence>
+        {activeVideoTestimonial && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-slate-955/90 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setActiveVideoTestimonial(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 max-w-2xl w-full shadow-2xl relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close */}
+              <button
+                onClick={() => setActiveVideoTestimonial(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-slate-950/80 hover:bg-brand-orange text-white cursor-pointer transition-all z-20"
+                title="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+
+              {/* Viewscreen */}
+              <div className="aspect-video w-full relative flex flex-col items-center justify-center p-8 text-center bg-slate-950">
+                <div className="absolute inset-0 pointer-events-none opacity-40">
+                  <div className="w-full h-full bg-slate-950/80"></div>
+                </div>
+
+                <div className="z-10 max-w-md space-y-4">
+                  <div className="w-14 h-14 rounded-full bg-brand-orange/20 text-brand-orange flex items-center justify-center mx-auto border-2 border-brand-orange animate-pulse">
+                    <Play className="w-6 h-6 fill-current translate-x-0.5" />
+                  </div>
+                  <h3 className="text-white text-base sm:text-lg font-bold tracking-tight">
+                    {activeVideoTestimonial.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm font-light">
+                    {activeVideoTestimonial.desc}
+                  </p>
+                  <span className="text-[10px] text-brand-orange block font-bold mt-2 uppercase tracking-widest">
+                    [Video Testimonial Stream Placeholder]
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Lightbox Modal */}
       <AnimatePresence>

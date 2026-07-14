@@ -213,7 +213,74 @@ const translations = {
     footRegdOfficeAddr: 'Hanuman Vatika-I, Near 200FT Chauraha, Ajmer Road, Jaipur-302021, Rajasthan',
     footRights: 'All rights reserved.',
 
-    // Chatbot
+    // Leadership message & visual components
+    aboutLeadershipTitle: 'MESSAGE FROM OUR LEADERSHIP',
+    aboutLeadershipName: 'Mr. Arun Jain',
+    aboutLeadershipRole: 'Founder & Managing Director',
+    aboutLeadershipQuote: 'Our vision is to build piping networks that serve generations. Quality is not just a parameter for us; it is a promise that we seal into every millimeter of polymer.',
+    aboutVideoTitle: 'Take a Tour of Jaipur Extrusion Units',
+    aboutVideoDesc: 'Watch the live 60-second walkthrough of our automated production floors and NABL lab systems.',
+    aboutTimelineTitle: 'OUR JOURNEY',
+    aboutTimelineSubtitle: 'A Decade of Infrastructure Excellence',
+    aboutCapacityTitle: 'MONTHLY PRODUCTION CAPACITY',
+
+    // Sustainability & Safety
+    susTitle: 'Sustainability & Compliance',
+    susSubtitle: 'Responsible Manufacturing & HSE Protocols',
+    susDesc: 'We are committed to eco-friendly production under RSPCB approvals, operating with high water efficiency, safe handling of raw materials, and strict safety guidelines.',
+    susCompliance: 'RSPCB Compliance',
+    susComplianceDesc: 'Fully compliant with Rajasthan State Pollution Control Board guidelines for zero liquid discharge.',
+    susEfficiency: 'Energy & Water Efficiency',
+    susEfficiencyDesc: 'Closed-loop cooling towers recycle 98% of process water, reducing municipal load.',
+    susResin: 'Responsible Resin Handling',
+    susResinDesc: 'Zero-waste pellet recycling loops minimize polymer scrap footprint in the ecosystem.',
+    susSafetyTitle: 'Safety First (HSE)',
+    susSafetyDesc: 'Strict enforcement of Personal Protective Equipment (PPE), weekly safety drills, and continuous hazard inspection ensures a zero-incident workplace environment.',
+
+    // Calculators & Comparison
+    calcTitle: 'Interactive Piping Tools',
+    calcSubtitle: 'Flow Rate & Weight Calculators',
+    calcSizesTab: 'Pipe Size Calculator',
+    calcWeightTab: 'Pipe Weight Calculator',
+    calcFlowRate: 'Design Flow Rate (Liters/Sec)',
+    calcVelocity: 'Fluid Velocity (m/s) [Recommended: 1.0 - 2.0]',
+    calcLength: 'Pipe Length (meters)',
+    calcOD: 'Nominal Outer Diameter (mm)',
+    calcWT: 'Wall Thickness (mm)',
+    calcBtn: 'Calculate Recommendation',
+    calcBtnWeight: 'Calculate Estimated Weight',
+    calcResultOD: 'Recommended Outer Diameter:',
+    calcResultSDR: 'Recommended Wall Thickness:',
+    calcResultWeight: 'Estimated Weight:',
+    compareTitle: 'Compare Piping Specifications',
+    compareSubtitle: 'Select and Compare 2-3 Pipe Types Side-by-Side',
+
+    // Dealer Locator
+    dealerTitle: 'Find a Dealer Near You',
+    dealerSubtitle: 'Authorized Distributors & Sales Hubs',
+    dealerSearchPlaceholder: 'Search by city or state (e.g. Jaipur, Gujarat...)',
+    dealerPhone: 'Phone:',
+    dealerLocation: 'Location:',
+
+    // Warranty Form
+    warrantyTabQuote: 'Request Quote',
+    warrantyTabReg: 'Register Warranty',
+    warrantyInvoiceNum: 'Invoice Number',
+    warrantyPurchaseDate: 'Purchase Date',
+    warrantyProductPurchased: 'Product Category Purchased',
+    warrantyDocUpload: 'Invoice File Attachment (Mockup)',
+    warrantyBtn: 'Submit Warranty Registration',
+
+    // Contact form tabs
+    warrantyTabQuote: 'Get a Quote',
+    warrantyTabReg: 'Warranty Registration',
+
+    // Dealer Locator
+    dealerTitle: 'Authorized Dealer Network',
+    dealerSubtitle: 'Find a Rajshree Distributor Near You',
+    dealerSearchPlaceholder: 'Search by city, state or region…',
+    dealerPhone: 'Contact:',
+
     botGreeting: 'Namaste! Welcome to Rajshree Technoplast FAQ Portal. How can I help you today?',
     botOnline: 'Online • Responds Instantly',
     botAssistant: 'Rajshree FAQ Assistant',
@@ -436,6 +503,70 @@ const translations = {
     footRegdOffice: 'पंजीकृत कार्यालय',
     footRegdOfficeAddr: 'हनुमान वाटिका-I, 200 फीट चौराहे के पास, अजमेर रोड, जयपुर-302021, राजस्थान',
     footRights: 'सर्वाधिकार सुरक्षित।',
+
+    // Leadership message & visual components
+    aboutLeadershipTitle: 'हमारे नेतृत्व का संदेश',
+    aboutLeadershipName: 'श्री अरुण जैन',
+    aboutLeadershipRole: 'संस्थापक और प्रबंध निदेशक',
+    aboutLeadershipQuote: 'हमारा विजन ऐसी पाइपिंग प्रणाली का निर्माण करना है जो पीढ़ियों तक काम करे। गुणवत्ता हमारे लिए केवल एक पैमाना नहीं है; यह एक वादा है जो हम हर मिलीमीटर पाइप में सील करते हैं।',
+    aboutVideoTitle: 'जयपुर एक्सट्रूज़न इकाइयों का वीडियो टूर देखें',
+    aboutVideoDesc: 'हमारे स्वचालित उत्पादन फर्श और एनएबीएल लैब का लाइव 60-सेकंड का टूर देखें।',
+    aboutTimelineTitle: 'हमारी यात्रा',
+    aboutTimelineSubtitle: 'उत्कृष्ट बुनियादी ढांचे का एक दशक',
+    aboutCapacityTitle: 'मासिक उत्पादन क्षमता',
+
+    // Sustainability & Safety
+    susTitle: 'सस्टेनेबिलिटी और अनुपालन',
+    susSubtitle: 'जिम्मेदार विनिर्माण और एचएसई (HSE) प्रोटोकॉल',
+    susDesc: 'हम पर्यावरण के अनुकूल उत्पादन, शून्य अपशिष्ट जल निर्वहन, और सख्त सुरक्षा मानकों के अनुपालन के लिए प्रतिबद्ध हैं।',
+    susCompliance: 'RSPCB अनुपालन',
+    susComplianceDesc: 'राजस्थान राज्य प्रदूषण नियंत्रण बोर्ड के दिशानिर्देशों का पूर्ण अनुपालन।',
+    susEfficiency: 'ऊर्जा और जल दक्षता',
+    susEfficiencyDesc: 'बंद लूप कूलिंग टॉवर प्रक्रिया जल के 98% हिस्से को रीसायकल करते हैं।',
+    susResin: 'जिम्मेदार रीसायकल लूप',
+    susResinDesc: 'शून्य-अपशिष्ट पॉलिमर विनिर्माण प्रक्रिया स्क्रैप पैरों के निशान को कम करती है।',
+    susSafetyTitle: 'सुरक्षा सर्वोपरि (HSE)',
+    susSafetyDesc: 'कर्मचारियों की सुरक्षा के लिए सुरक्षा उपकरणों (PPE) का अनिवार्य उपयोग और नियमित अभ्यास सुरक्षा सुनिश्चित करता है।',
+
+    // Calculators & Comparison
+    calcTitle: 'इंटरएक्टिव पाइपिंग टूल्स',
+    calcSubtitle: 'प्रवाह दर और पाइप वजन कैलकुलेटर',
+    calcSizesTab: 'पाइप आकार कैलकुलेटर',
+    calcWeightTab: 'पाइप वजन कैलकुलेटर',
+    calcFlowRate: 'डिजाइन प्रवाह दर (लीटर/सेकंड)',
+    calcVelocity: 'तरल वेग (मीटर/सेकंड) [अनुशंसित: 1.0 - 2.0]',
+    calcLength: 'पाइप की लंबाई (मीटर)',
+    calcOD: 'बाहरी व्यास (mm)',
+    calcWT: 'दीवार की मोटाई (mm)',
+    calcBtn: 'अनुशंसित आकार की गणना करें',
+    calcBtnWeight: 'अनुमानित वजन की गणना करें',
+    calcResultOD: 'अनुशंसित बाहरी व्यास:',
+    calcResultSDR: 'अनुशंसित दीवार मोटाई:',
+    calcResultWeight: 'अनुमानित वजन:',
+    compareTitle: 'पाइपलाइनों की तुलना करें',
+    compareSubtitle: '2-3 पाइप प्रकारों का चयन करें और तुलना देखें',
+
+    // Dealer Locator
+    dealerTitle: 'अपने निकटतम डीलर को खोजें',
+    dealerSubtitle: 'अधिकृत वितरक और बिक्री केंद्र',
+    dealerSearchPlaceholder: 'शहर या राज्य द्वारा खोजें (जैसे जयपुर, गुजरात...)',
+    dealerPhone: 'फोन:',
+    dealerLocation: 'स्थान:',
+
+    // Warranty Form
+    warrantyTabQuote: 'कोटेशन अनुरोध',
+    warrantyTabReg: 'वारंटी पंजीकरण',
+    warrantyInvoiceNum: 'चालान संख्या (Invoice Number)',
+    warrantyPurchaseDate: 'खरीद की तारीख',
+    warrantyProductPurchased: 'खरीदे गए उत्पाद की श्रेणी',
+    warrantyDocUpload: 'चालान फ़ाइल अनुलग्नक (पंजीकरण मॉक)',
+    warrantyBtn: 'वारंटी पंजीकरण जमा करें',
+
+    // Dealer Locator
+    dealerTitle: 'अधिकृत डीलर नेटवर्क',
+    dealerSubtitle: 'अपने नजदीकी राजश्री वितरक खोजें',
+    dealerSearchPlaceholder: 'शहर, राज्य या क्षेत्र से खोजें…',
+    dealerPhone: 'संपर्क:',
 
     // Chatbot
     botGreeting: 'नमस्ते! राजश्री टेक्नोप्लास्ट FAQ पोर्टल में आपका स्वागत है। आज मैं आपकी क्या सहायता कर सकता हूँ?',

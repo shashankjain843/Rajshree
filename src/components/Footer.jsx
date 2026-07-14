@@ -8,8 +8,39 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const socialTiles = [
+    { label: 'Factory Tour', bg: 'bg-brand-blue/15', icon: '🏭' },
+    { label: 'Quality Lab', bg: 'bg-brand-orange/15', icon: '🔬' },
+    { label: 'Pipe Extrusion', bg: 'bg-emerald-500/15', icon: '⚙️' },
+    { label: 'Team Rajshree', bg: 'bg-purple-500/15', icon: '👷' },
+    { label: 'RAJPLASTE Expo', bg: 'bg-amber-500/15', icon: '🏆' },
+    { label: 'HDPE Delivery', bg: 'bg-brand-blue/15', icon: '🚛' },
+    { label: 'IS Certification', bg: 'bg-emerald-500/15', icon: '📋' },
+    { label: 'Water Projects', bg: 'bg-sky-500/15', icon: '💧' },
+  ];
+
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-16 pb-8 relative text-left transition-colors duration-300">
+    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-0 pb-8 relative text-left transition-colors duration-300">
+
+      {/* Social Feed Marquee Strip */}
+      <div className="w-full border-b border-slate-900 py-5 overflow-hidden">
+        <p className="text-center text-[10px] font-extrabold uppercase tracking-widest text-slate-600 mb-4">
+          {lang === 'HI' ? '📸 हमारी यात्रा को फॉलो करें' : '📸 FOLLOW OUR JOURNEY'}
+        </p>
+        <div className="flex gap-4 animate-marquee whitespace-nowrap">
+          {[...socialTiles, ...socialTiles].map((tile, i) => (
+            <div
+              key={i}
+              className={`inline-flex items-center gap-2 ${tile.bg} border border-slate-800 rounded-xl px-4 py-2 shrink-0 text-xs font-bold text-slate-300`}
+            >
+              <span className="text-base">{tile.icon}</span>
+              <span>{tile.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid: Match 3-Column Layout Exactly */}
@@ -161,12 +192,18 @@ export default function Footer() {
             &copy; 2026 Rajshree Technoplast Pvt Ltd. {t('footRights')}
           </p>
           <div className="flex items-center gap-6">
-            <a href="#about" className="hover:text-white text-slate-500 transition-colors">
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-privacy-modal'))}
+              className="hover:text-white text-slate-500 transition-colors cursor-pointer bg-transparent border-0 p-0 text-xs"
+            >
               {lang === 'HI' ? 'गोपनीयता नीति' : 'Privacy Policy'}
-            </a>
-            <a href="#contact" className="hover:text-white text-slate-500 transition-colors">
+            </button>
+            <button
+              onClick={() => window.dispatchEvent(new Event('open-terms-modal'))}
+              className="hover:text-white text-slate-500 transition-colors cursor-pointer bg-transparent border-0 p-0 text-xs"
+            >
               {lang === 'HI' ? 'सेवा की शर्तें' : 'Terms of Service'}
-            </a>
+            </button>
             <button 
               onClick={handleScrollToTop}
               className="p-2.5 rounded-full bg-slate-900 hover:bg-brand-blue text-white shadow-md transition-all duration-200 cursor-pointer"
@@ -177,6 +214,7 @@ export default function Footer() {
           </div>
         </div>
 
+      </div>
       </div>
     </footer>
   );

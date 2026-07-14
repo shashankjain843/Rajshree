@@ -5,12 +5,15 @@ import Team from './components/Team';
 import ManufacturingProcess from './components/ManufacturingProcess';
 import Products from './components/Products';
 import QualityControl from './components/QualityControl';
+import Sustainability from './components/Sustainability';
 import Logistics from './components/Logistics';
+import DealerLocator from './components/DealerLocator';
 import Exhibitions from './components/Exhibitions';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import MobileStatusBar from './components/MobileStatusBar';
+import PrivacyTerms from './components/PrivacyTerms';
 
 export default function App() {
   return (
@@ -23,13 +26,16 @@ export default function App() {
         <ManufacturingProcess />
         <Products />
         <QualityControl />
+        <Sustainability />
         <Logistics />
+        <DealerLocator />
         <Exhibitions />
         <Contact />
       </main>
       <Footer />
       <Chatbot />
       <MobileStatusBar />
+      <PrivacyTerms />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Info, X, Check, AlertTriangle, FileText, Download, Sparkles, Pause, Play, RotateCcw } from 'lucide-react';
+import { Calculator, Scale, ArrowRight, Info, X, Check, AlertTriangle, FileText, Download, Sparkles, Pause, Play, RotateCcw } from 'lucide-react';
 import { useTranslation } from '../context/LanguageContext';
 
 export default function Products() {
@@ -12,6 +12,54 @@ export default function Products() {
   const [isAutoRotating, setIsAutoRotating] = useState(true);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
+
+  // Calculator states
+  const [activeCalcTab, setActiveCalcTab] = useState('size');
+  const [flowRate, setFlowRate] = useState('15');
+  const [velocity, setVelocity] = useState('1.5');
+  const [calcResultOD, setCalcResultOD] = useState(null);
+  const [calcResultWT, setCalcResultWT] = useState(null);
+  
+  const [weightOD, setWeightOD] = useState('110');
+  const [weightWT, setWeightWT] = useState('10');
+  const [weightLength, setWeightLength] = useState('6');
+  const [calcResultWeight, setCalcResultWeight] = useState(null);
+
+  // Comparison states
+  const [comparePipe1, setComparePipe1] = useState('HDPE');
+  const [comparePipe2, setComparePipe2] = useState('PVC');
+
+  const standardODs = [20, 25, 32, 40, 50, 63, 75, 90, 110, 125, 140, 160, 180, 200, 225, 250, 280, 315, 355, 400, 450, 500, 560, 630, 710];
+
+  const handleCalculateSize = () => {
+    const q = parseFloat(flowRate);
+    const v = parseFloat(velocity);
+    if (isNaN(q) || isNaN(v) || q <= 0 || v <= 0) return;
+    
+    // d = sqrt( (4 * Q_m3/s) / (pi * v) )
+    const qM3 = q / 1000;
+    const innerD = Math.sqrt((4 * qM3) / (Math.PI * v)) * 1000; // in mm
+    
+    // Find closest outer diameter that is larger than innerD
+    // Assuming wall thickness is roughly 10% of OD (SDR 11)
+    const suggestedOD = standardODs.find(od => od > innerD * 1.15) || 710;
+    const suggestedWT = (suggestedOD / 11).toFixed(1); // SDR 11 estimate
+    
+    setCalcResultOD(suggestedOD);
+    setCalcResultWT(suggestedWT);
+  };
+
+  const handleCalculateWeight = () => {
+    const od = parseFloat(weightOD);
+    const wt = parseFloat(weightWT);
+    const len = parseFloat(weightLength);
+    if (isNaN(od) || isNaN(wt) || isNaN(len) || od <= 0 || wt <= 0 || len <= 0 || wt >= od/2) return;
+    
+    // PE100 Density = 0.955 g/cm3
+    // Weight (kg) = pi * (OD - WT) * WT * Length * Density_g_cm3 * 0.001
+    const weight = Math.PI * (od - wt) * wt * len * 0.955 * 0.001;
+    setCalcResultWeight(weight.toFixed(2));
+  };
 
   // Auto-rotation effect
   useEffect(() => {
@@ -724,6 +772,307 @@ export default function Products() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Interactive Piping Tools: Size & Weight Calculators */}
+      <div className="mt-24 border-t border-slate-100 dark:border-slate-800 pt-16 text-left">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h3 className="text-xs font-extrabold uppercase text-brand-orange tracking-widest">
+            {t('calcTitle')}
+          </h3>
+          <h4 className="text-2xl sm:text-3xl font-black text-slate-850 dark:text-white mt-1">
+            {t('calcSubtitle')}
+          </h4>
+          <div className="mt-4 h-1 w-16 bg-brand-orange mx-auto rounded-full"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-12">
+          {/* Sidebar Tabs */}
+          <div className="md:col-span-4 bg-slate-50 dark:bg-slate-950 p-6 border-r border-slate-200 dark:border-slate-800 flex md:flex-col gap-3">
+            <button
+              onClick={() => setActiveCalcTab('size')}
+              className={`flex-1 md:flex-initial text-left px-4 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2.5 cursor-pointer ${
+                activeCalcTab === 'size'
+                  ? 'bg-brand-blue text-white shadow-md'
+                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50'
+              }`}
+            >
+              <Calculator className="w-4.5 h-4.5" />
+              <span>{t('calcSizesTab')}</span>
+            </button>
+            <button
+              onClick={() => setActiveCalcTab('weight')}
+              className={`flex-1 md:flex-initial text-left px-4 py-3 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center gap-2.5 cursor-pointer ${
+                activeCalcTab === 'weight'
+                  ? 'bg-brand-blue text-white shadow-md'
+                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50'
+              }`}
+            >
+              <Scale className="w-4.5 h-4.5" />
+              <span>{t('calcWeightTab')}</span>
+            </button>
+          </div>
+
+          {/* Calculator Body */}
+          <div className="md:col-span-8 p-8 flex flex-col justify-between">
+            {activeCalcTab === 'size' ? (
+              <div className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                      {t('calcFlowRate')}
+                    </label>
+                    <input
+                      type="number"
+                      value={flowRate}
+                      onChange={(e) => setFlowRate(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold focus:outline-none focus:border-brand-blue text-slate-800 dark:text-white"
+                      placeholder="e.g. 15"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                      {t('calcVelocity')}
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={velocity}
+                      onChange={(e) => setVelocity(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold focus:outline-none focus:border-brand-blue text-slate-800 dark:text-white"
+                      placeholder="e.g. 1.5"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleCalculateSize}
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-6 py-3 rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer"
+                >
+                  {t('calcBtn')}
+                </button>
+
+                {calcResultOD && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-5 rounded-2xl bg-brand-blue/5 dark:bg-brand-blue/15 border border-brand-blue/30 mt-4 flex flex-col sm:flex-row justify-between gap-4"
+                  >
+                    <div>
+                      <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
+                        {t('calcResultOD')}
+                      </p>
+                      <p className="text-xl font-black text-slate-800 dark:text-white mt-1">
+                        {calcResultOD} mm OD
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-400 dark:text-slate-500 font-bold uppercase tracking-wider">
+                        {t('calcResultSDR')}
+                      </p>
+                      <p className="text-xl font-black text-[#00A86B] mt-1">
+                        {calcResultWT} mm (SDR 11 PN10)
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            ) : (
+              <div className="space-y-5">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                      {t('calcOD')}
+                    </label>
+                    <select
+                      value={weightOD}
+                      onChange={(e) => setWeightOD(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold focus:outline-none focus:border-brand-blue text-slate-800 dark:text-white cursor-pointer"
+                    >
+                      {standardODs.map(od => (
+                        <option key={od} value={od}>{od} mm</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                      {t('calcWT')}
+                    </label>
+                    <input
+                      type="number"
+                      value={weightWT}
+                      onChange={(e) => setWeightWT(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold focus:outline-none focus:border-brand-blue text-slate-800 dark:text-white"
+                      placeholder="e.g. 10"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">
+                      {t('calcLength')}
+                    </label>
+                    <input
+                      type="number"
+                      value={weightLength}
+                      onChange={(e) => setWeightLength(e.target.value)}
+                      className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold focus:outline-none focus:border-brand-blue text-slate-800 dark:text-white"
+                      placeholder="e.g. 6"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleCalculateWeight}
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-6 py-3 rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer"
+                >
+                  {t('calcBtnWeight')}
+                </button>
+
+                {calcResultWeight && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-5 rounded-2xl bg-brand-orange/5 dark:bg-brand-orange/15 border border-brand-orange/30 mt-4 flex items-center justify-between"
+                  >
+                    <div>
+                      <p className="text-xs text-slate-450 font-bold uppercase tracking-wider">
+                        {t('calcResultWeight')}
+                      </p>
+                      <p className="text-2xl font-black text-brand-orange mt-1">
+                        {calcResultWeight} kg
+                      </p>
+                    </div>
+                    <span className="text-[10px] text-slate-400 font-light max-w-xs text-right">
+                      *Estimated Weight calculated using standard HDPE polymer compound density (0.955 g/cm³).
+                    </span>
+                  </motion.div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* 8. Product Comparison Tool */}
+      <div className="mt-24 border-t border-slate-100 dark:border-slate-800 pt-16 text-left">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <h3 className="text-xs font-extrabold uppercase text-brand-blue dark:text-brand-lightblue tracking-widest">
+            {t('compareTitle')}
+          </h3>
+          <h4 className="text-2xl sm:text-3xl font-black text-slate-855 dark:text-white mt-1">
+            {t('compareSubtitle')}
+          </h4>
+          <div className="mt-4 h-1 w-16 bg-brand-blue mx-auto rounded-full"></div>
+        </div>
+
+        <div className="max-w-5xl mx-auto bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-md p-6 sm:p-8">
+          {/* Comparison Selector Dropdowns */}
+          <div className="flex flex-col sm:flex-row gap-6 mb-8 justify-center items-center">
+            <div className="w-full sm:w-64">
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Pipe 1 Category</label>
+              <select
+                value={comparePipe1}
+                onChange={(e) => setComparePipe1(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold text-slate-800 dark:text-white cursor-pointer focus:outline-none"
+              >
+                <option value="HDPE">HDPE Pipe (IS:4984)</option>
+                <option value="PVC">PVC Pipe (IS:4985)</option>
+                <option value="MDPE">MDPE Pipe (IS:14885)</option>
+                <option value="DWC">DWC Corrugated Pipe</option>
+              </select>
+            </div>
+            
+            <div className="text-slate-400 font-bold text-xs uppercase select-none shrink-0 py-2 sm:py-0">VS</div>
+
+            <div className="w-full sm:w-64">
+              <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Pipe 2 Category</label>
+              <select
+                value={comparePipe2}
+                onChange={(e) => setComparePipe2(e.target.value)}
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-250 dark:border-slate-800 rounded-xl px-4 py-3 text-sm font-extrabold text-slate-800 dark:text-white cursor-pointer focus:outline-none"
+              >
+                <option value="HDPE">HDPE Pipe (IS:4984)</option>
+                <option value="PVC">PVC Pipe (IS:4985)</option>
+                <option value="MDPE">MDPE Pipe (IS:14885)</option>
+                <option value="DWC">DWC Corrugated Pipe</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Comparison Side-by-side Table */}
+          <div className="overflow-x-auto border border-slate-200 dark:border-slate-805 rounded-2xl">
+            <table className="w-full text-xs sm:text-sm text-left border-collapse min-w-[600px]">
+              <thead>
+                <tr className="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 font-bold border-b border-slate-200 dark:border-slate-800">
+                  <th className="p-4 w-1/3">Feature Specification</th>
+                  <th className="p-4 w-1/3 text-brand-blue">{comparePipe1} Pipe</th>
+                  <th className="p-4 w-1/3 text-brand-orange">{comparePipe2} Pipe</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-150 dark:divide-slate-850">
+                {/* Size Range */}
+                <tr>
+                  <td className="p-4 font-bold text-slate-600 dark:text-slate-400">Size Range (Diameter)</td>
+                  <td className="p-4 font-medium text-slate-800 dark:text-white">
+                    {comparePipe1 === 'HDPE' ? '20 mm - 710 mm' : comparePipe1 === 'PVC' ? '20 mm - 315 mm' : comparePipe1 === 'MDPE' ? '20 mm - 110 mm' : '75 mm - 300 mm'}
+                  </td>
+                  <td className="p-4 font-medium text-slate-800 dark:text-white">
+                    {comparePipe2 === 'HDPE' ? '20 mm - 710 mm' : comparePipe2 === 'PVC' ? '20 mm - 315 mm' : comparePipe2 === 'MDPE' ? '20 mm - 110 mm' : '75 mm - 300 mm'}
+                  </td>
+                </tr>
+                {/* Standards */}
+                <tr className="bg-slate-50/20 dark:bg-slate-900/10">
+                  <td className="p-4 font-bold text-slate-600 dark:text-slate-400">Indian Standard Code</td>
+                  <td className="p-4 font-medium text-slate-800 dark:text-white">
+                    {comparePipe1 === 'HDPE' ? 'IS:4984:2018 / IS:14333' : comparePipe1 === 'PVC' ? 'IS:4985 / IS:13592' : comparePipe1 === 'MDPE' ? 'IS:14885' : 'IS:16098 (Part 2)'}
+                  </td>
+                  <td className="p-4 font-medium text-slate-800 dark:text-white">
+                    {comparePipe2 === 'HDPE' ? 'IS:4984:2018 / IS:14333' : comparePipe2 === 'PVC' ? 'IS:4985 / IS:13592' : comparePipe2 === 'MDPE' ? 'IS:14885' : 'IS:16098 (Part 2)'}
+                  </td>
+                </tr>
+                {/* Pressure Ratings */}
+                <tr>
+                  <td className="p-4 font-bold text-slate-600 dark:text-slate-400">Pressure / Stiffness Rating</td>
+                  <td className="p-4 font-medium text-slate-850 dark:text-white">
+                    {comparePipe1 === 'HDPE' ? 'PN 2.5 to PN 16' : comparePipe1 === 'PVC' ? 'Class 1 to Class 5' : comparePipe1 === 'MDPE' ? 'Up to 6 Bar' : 'Ring Stiffness SN 4 / SN 8'}
+                  </td>
+                  <td className="p-4 font-medium text-slate-850 dark:text-white">
+                    {comparePipe2 === 'HDPE' ? 'PN 2.5 to PN 16' : comparePipe2 === 'PVC' ? 'Class 1 to Class 5' : comparePipe2 === 'MDPE' ? 'Up to 6 Bar' : 'Ring Stiffness SN 4 / SN 8'}
+                  </td>
+                </tr>
+                {/* Jointing Mode */}
+                <tr className="bg-slate-50/20 dark:bg-slate-900/10">
+                  <td className="p-4 font-bold text-slate-600 dark:text-slate-400">Jointing System</td>
+                  <td className="p-4 text-slate-655 dark:text-slate-400">
+                    {comparePipe1 === 'HDPE' ? 'Butt Fusion welding, EF Jointing, Compression fittings' : comparePipe1 === 'PVC' ? 'Solvent Cement Jointing, Rubber Ring-fit' : comparePipe1 === 'MDPE' ? 'Electrofusion Jointing' : 'Slip-on Coupler with Rubber Ring seal'}
+                  </td>
+                  <td className="p-4 text-slate-655 dark:text-slate-400">
+                    {comparePipe2 === 'HDPE' ? 'Butt Fusion welding, EF Jointing, Compression fittings' : comparePipe2 === 'PVC' ? 'Solvent Cement Jointing, Rubber Ring-fit' : comparePipe2 === 'MDPE' ? 'Electrofusion Jointing' : 'Slip-on Coupler with Rubber Ring seal'}
+                  </td>
+                </tr>
+                {/* Working Temperature */}
+                <tr>
+                  <td className="p-4 font-bold text-slate-600 dark:text-slate-400">Optimal Temperature Limits</td>
+                  <td className="p-4 font-medium text-slate-800 dark:text-white">
+                    {comparePipe1 === 'HDPE' ? '-40°C to +45°C' : comparePipe1 === 'PVC' ? '0°C to +60°C' : comparePipe1 === 'MDPE' ? '-30°C to +50°C' : '-20°C to +60°C'}
+                  </td>
+                  <td className="p-4 font-medium text-slate-800 dark:text-white">
+                    {comparePipe2 === 'HDPE' ? '-40°C to +45°C' : comparePipe2 === 'PVC' ? '0°C to +60°C' : comparePipe2 === 'MDPE' ? '-30°C to +50°C' : '-20°C to +60°C'}
+                  </td>
+                </tr>
+                {/* Main Application */}
+                <tr className="bg-slate-50/20 dark:bg-slate-900/10">
+                  <td className="p-4 font-bold text-slate-600 dark:text-slate-400">Primary Applications</td>
+                  <td className="p-4 text-slate-500 dark:text-slate-400 font-light leading-relaxed">
+                    {comparePipe1 === 'HDPE' ? 'Potable water pipelines, industrial chemical flow, sewer/drain lines, irrigation grids' : comparePipe1 === 'PVC' ? 'Agricultural irrigation networks, borewell casing, electrical conduit, sanitary lines' : comparePipe1 === 'MDPE' ? 'PNG natural gas distribution mains, domestic service lines' : 'Highway sub-surface drainage, trenchless cable duct crossings, municipal sewer drains'}
+                  </td>
+                  <td className="p-4 text-slate-500 dark:text-slate-400 font-light leading-relaxed">
+                    {comparePipe2 === 'HDPE' ? 'Potable water pipelines, industrial chemical flow, sewer/drain lines, irrigation grids' : comparePipe2 === 'PVC' ? 'Agricultural irrigation networks, borewell casing, electrical conduit, sanitary lines' : comparePipe2 === 'MDPE' ? 'PNG natural gas distribution mains, domestic service lines' : 'Highway sub-surface drainage, trenchless cable duct crossings, municipal sewer drains'}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
       {/* Brochure / Profile Modal */}
       <AnimatePresence>

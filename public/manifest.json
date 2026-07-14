@@ -1,0 +1,43 @@
+{
+  "name": "Rajshree Technoplast - HDPE & PVC Pipes",
+  "short_name": "Rajshree Pipes",
+  "description": "ISO 9001:2015 certified HDPE, PVC & MDPE pipe manufacturer. Serving agriculture, sewer and industrial sectors across India since 2012.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/images/rajshree logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/rajshree logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "industrial", "shopping"],
+  "shortcuts": [
+    {
+      "name": "Get a Quote",
+      "short_name": "Quote",
+      "description": "Submit a product inquiry",
+      "url": "/#contact",
+      "icons": [{ "src": "/images/rajshree logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Product Catalog",
+      "short_name": "Products",
+      "description": "View HDPE and PVC pipe range",
+      "url": "/#products",
+      "icons": [{ "src": "/images/rajshree logo.png", "sizes": "96x96" }]
+    }
+  ]
+}

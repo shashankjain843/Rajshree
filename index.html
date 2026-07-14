@@ -3,11 +3,95 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/assets/logo.svg" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1d4ed8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Rajshree Technoplast Pvt Ltd is a leading manufacturer and supplier of high-quality HDPE & PVC piping systems in Northern India. Certified IS:4984 & IS:4985." />
+    <meta name="description" content="Rajshree Technoplast Pvt Ltd is a leading manufacturer and supplier of high-quality HDPE &amp; PVC piping systems in Northern India. Certified IS:4984 &amp; IS:4985." />
     <meta name="keywords" content="HDPE pipe manufacturer, PVC pipe, MDPE pipe, Rajshree Technoplast, Rajshree Group, Jaipur Rajasthan, piping system, ISI Certified, Northern India" />
     <meta name="author" content="Rajshree Technoplast Pvt Ltd" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rajshree Technoplast | HDPE &amp; PVC Pipe Manufacturer Jaipur" />
+    <meta property="og:description" content="ISO 9001:2015 certified HDPE, PVC &amp; MDPE pipe manufacturer in Jaipur, Rajasthan. BIS/ISI certified products for agriculture, water supply and sewerage." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_IN" />
     <title>Rajshree Technoplast Pvt Ltd | HDPE &amp; PVC Pipe Manufacturer, Jaipur</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://rajshreetechnoplast.com/#organization",
+          "name": "Rajshree Technoplast Pvt Ltd",
+          "alternateName": "Rajshree Group",
+          "url": "https://rajshreetechnoplast.com",
+          "logo": "https://rajshreetechnoplast.com/images/rajshree%20logo.png",
+          "foundingDate": "2012",
+          "description": "ISO 9001:2015 certified leading manufacturer of HDPE, MDPE, and PVC piping systems in Jaipur, Rajasthan.",
+          "email": "rajshreearun123@gmail.com",
+          "telephone": "+91-9829050790",
+          "sameAs": []
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://rajshreetechnoplast.com/#localbusiness",
+          "name": "Rajshree Technoplast Pvt Ltd",
+          "image": "https://rajshreetechnoplast.com/images/rajshree%20logo.png",
+          "priceRange": "₹₹",
+          "telephone": "+91-9829050790",
+          "email": "rajshreearun123@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Plot No. 51, Maliram Kheradi Marg, Hanuman Vatika-I, Near 200FT Chauraha, Ajmer Road",
+            "addressLocality": "Jaipur",
+            "addressRegion": "Rajasthan",
+            "postalCode": "302021",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 26.8505,
+            "longitude": 75.7374
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+              "opens": "09:00",
+              "closes": "18:00"
+            }
+          ]
+        },
+        {
+          "@type": "Product",
+          "@id": "https://rajshreetechnoplast.com/#hdpe-pipe",
+          "name": "HDPE Pipes (IS:4984)",
+          "description": "BIS/ISI certified HDPE pressure pipes from 20mm to 1200mm OD, PN 2.5 to PN 16 for water supply, agriculture and industrial use.",
+          "brand": {
+            "@type": "Brand",
+            "name": "Rajshree Technoplast"
+          },
+          "manufacturer": {
+            "@id": "https://rajshreetechnoplast.com/#organization"
+          },
+          "category": "Industrial Piping",
+          "material": "High-Density Polyethylene (HDPE)",
+          "offers": {
+            "@type": "Offer",
+            "availability": "https://schema.org/InStock",
+            "priceCurrency": "INR",
+            "seller": {
+              "@id": "https://rajshreetechnoplast.com/#organization"
+            }
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>
