@@ -24,10 +24,10 @@ export default function Team() {
   ];
 
   return (
-    <section id="team" className="py-20 bg-white dark:bg-slate-900 overflow-hidden border-t border-slate-100 dark:border-slate-950 transition-colors duration-300">
+    <section id="team" className="py-12 bg-white dark:bg-slate-900 overflow-hidden border-t border-slate-100 dark:border-slate-950 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('navTeam')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {lang === 'HI' ? 'हमारी गुणवत्ता के पीछे खड़ी कार्यशक्ति' : 'Meet the Force Behind Our Quality'}
@@ -118,7 +118,7 @@ export default function Team() {
         </div>
 
         {/* Life at Rajshree Behind-the-Scenes Gallery */}
-        <div className="mt-24 border-t border-slate-100 dark:border-slate-800 pt-16">
+        <div className="mt-12 border-t border-slate-100 dark:border-slate-800 pt-10">
           <div className="text-center max-w-2xl mx-auto mb-12">
             <h3 className="text-xs font-extrabold uppercase text-brand-orange tracking-widest">
               {lang === 'HI' ? 'राजश्री में कार्य संस्कृति' : 'LIFE AT RAJSHREE'}

@@ -174,11 +174,11 @@ export default function Contact() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Rajshree%2520Technoplast,%2520I%2520am%2520interested%2520in%252520your%252520pipes.`;
 
   return (
-    <section id="contact" className="py-20 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
+    <section id="contact" className="py-12 bg-slate-50 dark:bg-slate-950 transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('conTitle')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {t('conSubtitle')}

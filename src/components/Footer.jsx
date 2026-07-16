@@ -23,7 +23,7 @@ export default function Footer() {
     <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-0 pb-8 relative text-left transition-colors duration-300">
 
       {/* Social Feed Marquee Strip */}
-      <div className="w-full border-b border-slate-900 py-5 overflow-hidden">
+      <div className="w-full border-b border-slate-900 py-3 overflow-hidden">
         <p className="text-center text-[10px] font-extrabold uppercase tracking-widest text-slate-600 mb-4">
           {lang === 'HI' ? '📸 हमारी यात्रा को फॉलो करें' : '📸 FOLLOW OUR JOURNEY'}
         </p>
@@ -40,11 +40,11 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="pt-16">
+      <div className="pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Grid: Match 3-Column Layout Exactly */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-900">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-8 border-b border-slate-900">
           
           {/* Column 1: Brand Info (5 cols) */}
           <div className="lg:col-span-5 space-y-4">

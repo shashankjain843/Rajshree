@@ -57,11 +57,11 @@ export default function ManufacturingProcess() {
   ];
 
   return (
-    <section id="manufacturing" className="py-20 bg-slate-50 dark:bg-slate-950 overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
+    <section id="manufacturing" className="py-12 bg-slate-50 dark:bg-slate-950 overflow-hidden border-t border-slate-200 dark:border-slate-900 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('navMfg')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {lang === 'HI' ? 'हम राजश्री पाइप्स का निर्माण कैसे करते हैं' : 'How We Manufacture RAJSHREE Pipes'}
@@ -87,7 +87,7 @@ export default function ManufacturingProcess() {
             >
               <div>
                 {/* Image container */}
-                <div className="relative h-56 w-full overflow-hidden bg-slate-105">
+                <div className="relative h-44 w-full overflow-hidden bg-slate-105">
                   <img
                     src={stage.image}
                     alt={stage.alt}
@@ -101,7 +101,7 @@ export default function ManufacturingProcess() {
                 </div>
 
                 {/* Content */}
-                <div className="p-6 text-left space-y-3">
+                <div className="p-5 text-left space-y-2">
                   <div className="flex items-center gap-2">
                     <div className="p-2 bg-brand-orange/10 text-brand-orange rounded-lg">
                       {stage.icon}

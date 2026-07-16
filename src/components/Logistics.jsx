@@ -24,11 +24,11 @@ export default function Logistics() {
   ];
 
   return (
-    <section id="logistics" className="py-20 bg-white dark:bg-slate-900 overflow-hidden border-t border-slate-150 dark:border-slate-805 transition-colors duration-300">
+    <section id="logistics" className="py-12 bg-white dark:bg-slate-900 overflow-hidden border-t border-slate-150 dark:border-slate-805 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('logTitle')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {lang === 'HI' ? 'सुव्यवस्थित राष्ट्रव्यापी वितरण क्षमता' : 'Streamlined Nationwide Delivery Capability'}

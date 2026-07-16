@@ -26,14 +26,14 @@ export default function Strengths() {
   ];
 
   return (
-    <section id="manufacturing" className="py-20 bg-white relative overflow-hidden">
+    <section id="manufacturing" className="py-12 bg-white dark:bg-slate-50 relative overflow-hidden">
       {/* Decorative background shape */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-orange/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue font-bold tracking-wide uppercase">Manufacturing Might</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Built on Advanced Engineering &amp; Unmatched Capacity
@@ -53,7 +53,7 @@ export default function Strengths() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="group relative bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:border-brand-blue/20 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col sm:flex-row gap-6 text-left hover:-translate-y-1"
+              className="group relative bg-slate-50 p-6 rounded-3xl border border-slate-100 hover:border-brand-blue/20 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col sm:flex-row gap-5 text-left hover:-translate-y-1"
             >
               {/* Accent slider at the bottom */}
               <div className="absolute bottom-0 left-0 h-1.5 bg-gradient-to-r from-brand-blue to-brand-orange w-0 group-hover:w-full transition-all duration-500"></div>
@@ -84,7 +84,7 @@ export default function Strengths() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-16 bg-gradient-to-r from-brand-darkblue to-brand-blue p-8 sm:p-12 rounded-3xl text-white shadow-xl flex flex-col lg:flex-row justify-between items-center gap-8 relative overflow-hidden"
+          className="mt-10 bg-gradient-to-r from-brand-darkblue to-brand-blue p-6 sm:p-10 rounded-3xl text-white shadow-xl flex flex-col lg:flex-row justify-between items-center gap-6 relative overflow-hidden"
         >
           {/* Subtle logo background glow */}
           <div className="absolute right-0 bottom-0 translate-x-10 translate-y-10 w-96 h-96 bg-white/5 rounded-full pointer-events-none"></div>

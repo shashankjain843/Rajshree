@@ -141,11 +141,11 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300">
+    <section id="about" className="py-12 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('aboutTitle')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             {t('aboutSubtitle')}
@@ -257,14 +257,14 @@ export default function About() {
         </div>
 
         {/* 1. Founder Message & 10. Walkthrough Video Embed Layout */}
-        <div className="mt-24 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+        <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* Leadership Card (7 cols) */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-sm relative overflow-hidden text-left"
+            className="lg:col-span-7 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 flex flex-col justify-between shadow-sm relative overflow-hidden text-left"
           >
             <div className="absolute top-0 right-0 w-24 h-24 bg-brand-blue/5 dark:bg-brand-blue/10 rounded-bl-full flex items-center justify-center">
               <span className="text-4xl text-brand-blue/20 select-none">“</span>
@@ -341,7 +341,7 @@ export default function About() {
         </div>
 
         {/* Stats Grid with Animated Counters */}
-        <div className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
@@ -364,7 +364,7 @@ export default function About() {
         </div>
 
         {/* 2. Journey Timeline & 9. Donut Chart Section */}
-        <div className="mt-24 border-t border-slate-200 dark:border-slate-900 pt-20 grid grid-cols-1 lg:grid-cols-12 gap-12 text-left">
+        <div className="mt-12 border-t border-slate-200 dark:border-slate-900 pt-10 grid grid-cols-1 lg:grid-cols-12 gap-10 text-left">
           
           {/* Milestone Timeline (7 cols) */}
           <div className="lg:col-span-7 space-y-8">
@@ -496,7 +496,7 @@ export default function About() {
         </div>
 
         {/* Association/Membership Logos (Credibility Booster) */}
-        <div className="mt-24 border-t border-slate-200 dark:border-slate-900 pt-16">
+        <div className="mt-12 border-t border-slate-200 dark:border-slate-900 pt-10">
           <p className="text-center text-xs uppercase font-extrabold tracking-widest text-slate-400 dark:text-slate-500 mb-8">
             {t('membershipTitle')}
           </p>
@@ -557,7 +557,7 @@ export default function About() {
         </div>
 
         {/* Awards & Recognition Section */}
-        <div className="mt-16 border-t border-slate-200 dark:border-slate-900 pt-16">
+        <div className="mt-10 border-t border-slate-200 dark:border-slate-900 pt-10">
           <p className="text-center text-xs uppercase font-extrabold tracking-widest text-slate-400 dark:text-slate-500 mb-8">
             {t('awardsTitle')}
           </p>

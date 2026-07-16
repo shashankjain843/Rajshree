@@ -42,11 +42,11 @@ export default function Sustainability() {
   ];
 
   return (
-    <section id="sustainability" className="py-20 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300 text-left border-t border-slate-100 dark:border-slate-900">
+    <section id="sustainability" className="py-12 bg-slate-50 dark:bg-slate-950 overflow-hidden transition-colors duration-300 text-left border-t border-slate-100 dark:border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">
             {t('susTitle')}
           </h2>
@@ -108,7 +108,7 @@ export default function Sustainability() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-8 flex flex-col justify-between shadow-xl text-white relative overflow-hidden"
+            className="lg:col-span-5 bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 rounded-3xl p-6 flex flex-col justify-between shadow-xl text-white relative overflow-hidden"
           >
             {/* Background elements */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-brand-orange/5 rounded-bl-full pointer-events-none"></div>

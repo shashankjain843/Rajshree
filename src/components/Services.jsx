@@ -26,7 +26,7 @@ export default function Services() {
   ];
 
   return (
-    <section className="bg-slate-950 py-16 relative overflow-hidden border-y border-slate-900">
+    <section className="bg-slate-950 py-10 relative overflow-hidden border-y border-slate-900">
       {/* Dynamic line vector background */}
       <div className="absolute inset-0 z-0 opacity-10">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@ export default function Services() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-10">
+        <div className="text-center mb-7">
           <span className="text-xs uppercase font-extrabold tracking-widest text-brand-orange">
             Service Verticals
           </span>
@@ -54,7 +54,7 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="bg-slate-900/60 backdrop-blur-sm p-6 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all duration-300 flex flex-col text-left group hover:-translate-y-1"
+              className="bg-slate-900/60 backdrop-blur-sm p-5 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all duration-300 flex flex-col text-left group hover:-translate-y-1"
             >
               {/* Icon */}
               <div className="p-3 bg-slate-800/80 rounded-xl w-fit mb-4 group-hover:scale-110 transition-transform duration-300">

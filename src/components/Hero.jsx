@@ -20,7 +20,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 pt-20">
+    <section id="home" className="relative min-h-[75vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden bg-slate-950 pt-16">
       {/* Background Image Slider with Fade Transition */}
       <div className="absolute inset-0 z-0">
         <AnimatePresence mode="wait">
@@ -42,7 +42,7 @@ export default function Hero() {
       {/* Grid Pattern overlay for tech/industrial feel */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-25 z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full text-left py-12 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full text-left py-8 md:py-14">
         <div className="max-w-4xl">
           {/* Tag / Badge */}
           <motion.div 
@@ -103,7 +103,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 1 }}
-            className="mt-16 md:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-white/10 pt-8"
+            className="mt-10 md:mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-white/10 pt-6"
           >
             <div className="flex items-center gap-3">
               <div className="p-3 bg-brand-blue/10 rounded-xl text-brand-lightblue">

@@ -29,14 +29,14 @@ export default function QualityControl() {
   ];
 
   return (
-    <section id="quality" className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-950 transition-colors duration-300">
+    <section id="quality" className="py-12 bg-slate-900 text-white relative overflow-hidden border-t border-slate-950 transition-colors duration-300">
       {/* Background Graphic Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-black z-0"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-brand-lightblue font-bold tracking-wide uppercase">{t('qcTitle')}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             {t('qcSubtitle')}

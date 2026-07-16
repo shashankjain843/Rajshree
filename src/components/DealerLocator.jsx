@@ -49,11 +49,11 @@ export default function DealerLocator() {
   });
 
   return (
-    <section id="dealers" className="py-20 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-950 transition-colors duration-300 text-left">
+    <section id="dealers" className="py-12 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-950 transition-colors duration-300 text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">
             {t('dealerTitle')}
           </h2>
@@ -64,7 +64,7 @@ export default function DealerLocator() {
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-12 relative">
+        <div className="max-w-md mx-auto mb-8 relative">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
             <Search className="w-5 h-5 text-slate-400 dark:text-slate-500" />
           </div>
