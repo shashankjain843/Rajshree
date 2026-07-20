@@ -1,5 +1,7 @@
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import TrustBar from './components/TrustBar';
 import About from './components/About';
 import Team from './components/Team';
 import ManufacturingProcess from './components/ManufacturingProcess';
@@ -14,13 +16,32 @@ import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import MobileStatusBar from './components/MobileStatusBar';
 import PrivacyTerms from './components/PrivacyTerms';
+import RFQModal from './components/RFQModal';
 
 export default function App() {
+  const [isRfqOpen, setIsRfqOpen] = useState(false);
+  const [rfqProduct, setRfqProduct] = useState('');
+
+  useEffect(() => {
+    const handleOpenRfq = (e) => {
+      if (e.detail && e.detail.product) {
+        setRfqProduct(e.detail.product);
+      } else {
+        setRfqProduct('');
+      }
+      setIsRfqOpen(true);
+    };
+
+    window.addEventListener('open-rfq-modal', handleOpenRfq);
+    return () => window.removeEventListener('open-rfq-modal', handleOpenRfq);
+  }, []);
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-brand-blue selection:text-white overflow-x-hidden transition-colors duration-300">
       <Navbar />
       <main className="pb-16 lg:pb-0"> {/* padding-bottom to avoid sticky mobile bar overlapping footer on mobile */}
         <Hero />
+        <TrustBar />
         <About />
         <Team />
         <ManufacturingProcess />
@@ -36,6 +57,12 @@ export default function App() {
       <Chatbot />
       <MobileStatusBar />
       <PrivacyTerms />
+      <RFQModal
+        isOpen={isRfqOpen}
+        onClose={() => setIsRfqOpen(false)}
+        defaultProduct={rfqProduct}
+      />
     </div>
   );
 }
+

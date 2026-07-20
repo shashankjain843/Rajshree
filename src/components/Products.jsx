@@ -572,13 +572,13 @@ export default function Products() {
                     <Info className="w-4 h-4" />
                     <span>{t('viewSpecs')}</span>
                   </button>
-                  <a
-                    href="#contact"
-                    className="group flex items-center gap-1 text-brand-orange font-bold text-xs hover:text-brand-orange/80 transition-colors"
+                  <button
+                    onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal', { detail: { product: product.name } }))}
+                    className="group flex items-center gap-1 text-brand-orange font-bold text-xs hover:text-brand-orange/80 transition-colors cursor-pointer"
                   >
                     <span>{t('reqQuote')}</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             ))}

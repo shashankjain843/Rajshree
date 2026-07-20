@@ -124,12 +124,12 @@ export default function Navbar() {
               <Phone className="w-4 h-4 text-brand-orange animate-pulse" />
               <span>+91-9829050790</span>
             </a>
-            <a
-              href="#contact"
-              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 text-sm"
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal'))}
+              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 text-sm cursor-pointer"
             >
               {t('getQuote')}
-            </a>
+            </button>
           </div>
 
           {/* Mobile Menu Button */}

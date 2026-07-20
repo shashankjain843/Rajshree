@@ -28,15 +28,14 @@ export default function MobileStatusBar() {
         <span>{lang === 'HI' ? 'व्हाट्सएप' : 'WhatsApp'}</span>
       </a>
 
-      {/* Quote Scroll Action */}
-      <a
-        href="#contact"
-        onClick={handleScrollToContact}
+      {/* RFQ Quote Action */}
+      <button
+        onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal'))}
         className="flex-1 flex items-center justify-center gap-2 bg-brand-orange hover:bg-brand-orange/90 text-white font-bold py-3 px-4 rounded-xl text-sm shadow-md transition-all cursor-pointer"
       >
         <Mail className="w-4.5 h-4.5" />
         <span>{t('getQuote')}</span>
-      </a>
+      </button>
     </div>
   );
 }

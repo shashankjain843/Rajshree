@@ -535,6 +535,11 @@ export default function Contact() {
                   <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-light mt-1 leading-relaxed">
                     Plot No.51 Maliram Kheradi Marg, Hanuman Vatika-I, Near 200FT Chauraha, Ajmer Road, Jaipur-302021
                   </p>
+                  <div className="mt-2 inline-flex items-center gap-2 px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-bold rounded-lg border border-slate-200 dark:border-slate-700">
+                    <span>GSTIN: 08AAACR9829Q1Z8</span>
+                    <span>•</span>
+                    <span>REGD. MSME / ISO</span>
+                  </div>
                 </div>
               </div>
 

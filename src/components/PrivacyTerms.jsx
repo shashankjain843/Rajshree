@@ -197,7 +197,7 @@ export default function PrivacyTerms() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-45 bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-md text-white p-5 rounded-2xl border border-slate-800 shadow-2xl flex flex-col gap-4 text-left"
+            className="fixed bottom-20 md:bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-45 bg-slate-900/95 dark:bg-slate-950/95 backdrop-blur-md text-white p-5 rounded-2xl border border-slate-800 shadow-2xl flex flex-col gap-4 text-left"
           >
             <div className="flex items-start gap-3">
               <Shield className="w-6 h-6 text-brand-orange shrink-0 mt-0.5" />

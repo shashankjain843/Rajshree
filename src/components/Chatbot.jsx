@@ -172,6 +172,19 @@ export default function Chatbot() {
                   </button>
                 ))}
               </div>
+
+              {/* Direct WhatsApp Action */}
+              <div className="pt-2 border-t border-slate-100 dark:border-slate-800">
+                <a
+                  href="https://wa.me/919829050790?text=Hello%20Rajshree%20Technoplast,%20I%20have%20a%20commercial%20query."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#25D366]/90 text-white font-bold py-2 px-3 rounded-xl text-xs shadow transition-all cursor-pointer"
+                >
+                  <MessageSquare className="w-3.5 h-3.5 fill-white text-[#25D366]" />
+                  <span>{lang === 'HI' ? 'व्हाट्सएप पर प्रतिनिधि से बात करें' : 'Talk to Agent on WhatsApp'}</span>
+                </a>
+              </div>
             </div>
           </motion.div>
         )}

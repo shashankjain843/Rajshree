@@ -10,7 +10,7 @@ export default function ManufacturingProcess() {
       num: '01',
       title: t('step1Title'),
       icon: <Layers className="w-5 h-5" />,
-      image: '/images/manufacturing-production-line.jpg',
+      image: '/images/hero-factory-warehouse.jpg',
       alt: 'Raw polymer resins loaded in hopper feed',
       caption: t('step1Desc')
     },
@@ -50,7 +50,7 @@ export default function ManufacturingProcess() {
       num: '06',
       title: t('step6Title'),
       icon: <Ruler className="w-5 h-5" />,
-      image: '/images/manufacturing-production-line.jpg',
+      image: '/images/quality-testing-lab.jpg',
       alt: 'Finished HDPE pipes dimension audit and quality marking',
       caption: t('step6Desc')
     }

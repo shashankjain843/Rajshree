@@ -68,6 +68,23 @@ export default function QualityControl() {
               <p className="text-slate-400 font-light text-sm sm:text-base leading-relaxed">
                 {t('qcPara2')}
               </p>
+
+              {/* BIS Licence & Testing Badges */}
+              <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 flex flex-wrap items-center justify-between gap-4 mt-2">
+                <div>
+                  <span className="text-[10px] font-black uppercase tracking-wider text-brand-orange bg-brand-orange/10 px-2.5 py-1 rounded-md border border-brand-orange/20">
+                    BIS LICENCE CM/L - 7800045812
+                  </span>
+                  <p className="text-xs text-white font-bold mt-1.5">
+                    BIS IS:4984 | IS:14333 | IS:4985 Certified Manufacturer
+                  </p>
+                </div>
+                <div className="flex gap-2 text-[10px] font-extrabold text-slate-300">
+                  <span className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-800">CIPET Cleared</span>
+                  <span className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-800">RITES Inspected</span>
+                  <span className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-800">NABL Tested</span>
+                </div>
+              </div>
             </div>
 
             {/* Grid of Lab Tests */}
