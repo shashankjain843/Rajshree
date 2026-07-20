@@ -4,13 +4,6 @@ import { useTranslation } from '../context/LanguageContext';
 export default function MobileStatusBar() {
   const { lang, t } = useTranslation();
 
-  const handleScrollToContact = (e) => {
-    e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   const whatsappNumber = '919829050790';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Rajshree%20Technoplast,%20I%20am%20interested%20in%20your%20pipes.`;

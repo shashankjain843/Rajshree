@@ -256,30 +256,20 @@ const translations = {
     compareSubtitle: 'Select and Compare 2-3 Pipe Types Side-by-Side',
 
     // Dealer Locator
-    dealerTitle: 'Find a Dealer Near You',
-    dealerSubtitle: 'Authorized Distributors & Sales Hubs',
-    dealerSearchPlaceholder: 'Search by city or state (e.g. Jaipur, Gujarat...)',
-    dealerPhone: 'Phone:',
+    dealerTitle: 'Authorized Dealer Network',
+    dealerSubtitle: 'Find a Rajshree Distributor Near You',
+    dealerSearchPlaceholder: 'Search by city, state or region…',
+    dealerPhone: 'Contact:',
     dealerLocation: 'Location:',
 
     // Warranty Form
-    warrantyTabQuote: 'Request Quote',
-    warrantyTabReg: 'Register Warranty',
+    warrantyTabQuote: 'Get a Quote',
+    warrantyTabReg: 'Warranty Registration',
     warrantyInvoiceNum: 'Invoice Number',
     warrantyPurchaseDate: 'Purchase Date',
     warrantyProductPurchased: 'Product Category Purchased',
     warrantyDocUpload: 'Invoice File Attachment (Mockup)',
     warrantyBtn: 'Submit Warranty Registration',
-
-    // Contact form tabs
-    warrantyTabQuote: 'Get a Quote',
-    warrantyTabReg: 'Warranty Registration',
-
-    // Dealer Locator
-    dealerTitle: 'Authorized Dealer Network',
-    dealerSubtitle: 'Find a Rajshree Distributor Near You',
-    dealerSearchPlaceholder: 'Search by city, state or region…',
-    dealerPhone: 'Contact:',
 
     botGreeting: 'Namaste! Welcome to Rajshree Technoplast FAQ Portal. How can I help you today?',
     botOnline: 'Online • Responds Instantly',
@@ -547,10 +537,10 @@ const translations = {
     compareSubtitle: '2-3 पाइप प्रकारों का चयन करें और तुलना देखें',
 
     // Dealer Locator
-    dealerTitle: 'अपने निकटतम डीलर को खोजें',
-    dealerSubtitle: 'अधिकृत वितरक और बिक्री केंद्र',
-    dealerSearchPlaceholder: 'शहर या राज्य द्वारा खोजें (जैसे जयपुर, गुजरात...)',
-    dealerPhone: 'फोन:',
+    dealerTitle: 'अधिकृत डीलर नेटवर्क',
+    dealerSubtitle: 'अपने नजदीकी राजश्री वितरक खोजें',
+    dealerSearchPlaceholder: 'शहर, राज्य या क्षेत्र से खोजें…',
+    dealerPhone: 'संपर्क:',
     dealerLocation: 'स्थान:',
 
     // Warranty Form
@@ -561,12 +551,6 @@ const translations = {
     warrantyProductPurchased: 'खरीदे गए उत्पाद की श्रेणी',
     warrantyDocUpload: 'चालान फ़ाइल अनुलग्नक (पंजीकरण मॉक)',
     warrantyBtn: 'वारंटी पंजीकरण जमा करें',
-
-    // Dealer Locator
-    dealerTitle: 'अधिकृत डीलर नेटवर्क',
-    dealerSubtitle: 'अपने नजदीकी राजश्री वितरक खोजें',
-    dealerSearchPlaceholder: 'शहर, राज्य या क्षेत्र से खोजें…',
-    dealerPhone: 'संपर्क:',
 
     // Chatbot
     botGreeting: 'नमस्ते! राजश्री टेक्नोप्लास्ट FAQ पोर्टल में आपका स्वागत है। आज मैं आपकी क्या सहायता कर सकता हूँ?',

@@ -31,7 +31,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Verify SMTP connection config on startup
-transporter.verify((error, success) => {
+transporter.verify((error) => {
   if (error) {
     console.error('[SMTP Connection Error]: Failed to authenticate with Brevo.');
     console.error(error);

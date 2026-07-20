@@ -4,7 +4,7 @@ import { X, Shield, Lock, FileText, Check } from 'lucide-react';
 import { useTranslation } from '../context/LanguageContext';
 
 export default function PrivacyTerms() {
-  const { lang, t } = useTranslation();
+  const { lang } = useTranslation();
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [showCookieBanner, setShowCookieBanner] = useState(false);
