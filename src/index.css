@@ -1,66 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-@variant dark (&:where(.dark, .dark *));
-
-@theme {
-  --font-heading: 'Outfit', sans-serif;
-  --font-body: 'Inter', sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
   
-  --color-brand-blue: #0F52BA;
-  --color-brand-darkblue: #0A2D6C;
-  --color-brand-lightblue: #3b82f6;
-  --color-brand-orange: #EA580C;
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
 }
 
-/* Custom scroll behavior and resets */
-html {
-  scroll-behavior: smooth;
+/* Custom scrollbar for clean industrial finish */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-
-body {
-  font-family: var(--font-body);
-  background-color: #F8FAFC; /* slate-50 */
-  color: #1E293B; /* slate-800 */
-  transition: background-color 0.3s ease, color 0.3s ease;
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
 }
-
-.dark body {
-  background-color: #020617; /* slate-955 */
-  color: #F8FAFC; /* slate-50 */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
-
-/* 360 Viewer Grid Background */
-.bg-grid-pattern {
-  background-image: linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
-  background-size: 20px 20px;
-}
-.dark .bg-grid-pattern {
-  background-image: linear-gradient(#1e293b 1px, transparent 1px), linear-gradient(90deg, #1e293b 1px, transparent 1px);
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-}
-
-/* Custom animation utilities */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Social feed marquee */
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 28s linear infinite;
-  display: inline-flex;
-  width: max-content;
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

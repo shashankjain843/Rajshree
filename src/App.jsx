@@ -1,20 +1,14 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustBar from './components/TrustBar';
+import ClientLogos from './components/ClientLogos';
 import About from './components/About';
-import Team from './components/Team';
+import ProjectsMetrics from './components/ProjectsMetrics';
 import ManufacturingProcess from './components/ManufacturingProcess';
 import Products from './components/Products';
 import QualityControl from './components/QualityControl';
-import Sustainability from './components/Sustainability';
-import Logistics from './components/Logistics';
-import DealerLocator from './components/DealerLocator';
-import Exhibitions from './components/Exhibitions';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Chatbot from './components/Chatbot';
-import MobileStatusBar from './components/MobileStatusBar';
 import PrivacyTerms from './components/PrivacyTerms';
 import RFQModal from './components/RFQModal';
 
@@ -37,25 +31,19 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 antialiased selection:bg-brand-blue selection:text-white overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white overflow-x-hidden">
       <Navbar />
-      <main className="pb-16 lg:pb-0"> {/* padding-bottom to avoid sticky mobile bar overlapping footer on mobile */}
+      <main>
         <Hero />
-        <TrustBar />
+        <ClientLogos />
         <About />
-        <Team />
+        <ProjectsMetrics />
         <ManufacturingProcess />
         <Products />
         <QualityControl />
-        <Sustainability />
-        <Logistics />
-        <DealerLocator />
-        <Exhibitions />
         <Contact />
       </main>
       <Footer />
-      <Chatbot />
-      <MobileStatusBar />
       <PrivacyTerms />
       <RFQModal
         isOpen={isRfqOpen}
@@ -65,4 +53,3 @@ export default function App() {
     </div>
   );
 }
-
