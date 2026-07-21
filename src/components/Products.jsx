@@ -10,9 +10,24 @@ export default function Products() {
   const categories = siteConfig.products.categories;
   const productsList = siteConfig.products.items;
 
-  const filteredProducts = selectedFilter === 'All' 
-    ? productsList 
-    : productsList.filter(p => p.categories.includes(selectedFilter));
+  // When 'All' is selected, show exactly 1 representative pipe for each category
+  const getFilteredProducts = () => {
+    if (selectedFilter === 'All') {
+      const specificCategories = categories.filter(cat => cat !== 'All');
+      const representativeList = [];
+
+      for (const cat of specificCategories) {
+        const item = productsList.find(p => p.categories.includes(cat) && !representativeList.some(r => r.id === p.id));
+        if (item) {
+          representativeList.push(item);
+        }
+      }
+      return representativeList;
+    }
+    return productsList.filter(p => p.categories.includes(selectedFilter));
+  };
+
+  const filteredProducts = getFilteredProducts();
 
   return (
     <section id="products" className="py-10 md:py-16 bg-slate-50 transition-colors duration-300 relative">
