@@ -61,25 +61,25 @@ export default function About() {
 
   const stats = [
     { 
-      icon: <Calendar className="w-6 h-6 text-amber-500" />, 
+      icon: <Calendar className="w-6 h-6 text-sky-500" />, 
       label: 'Years of Experience', 
       value: '15+ Years', 
       desc: 'Over a decade of manufacturing excellence' 
     },
     { 
-      icon: <Factory className="w-6 h-6 text-amber-500" />, 
+      icon: <Factory className="w-6 h-6 text-sky-500" />, 
       label: 'Production Capacity', 
       value: '12,500+ MT', 
       desc: 'Tons produced annually across our units' 
     },
     { 
-      icon: <Award className="w-6 h-6 text-amber-500" />, 
+      icon: <Award className="w-6 h-6 text-sky-500" />, 
       label: 'Active Clients', 
       value: '500+ Clients', 
       desc: 'Government agencies, contractors & dealers' 
     },
     { 
-      icon: <ShieldCheck className="w-6 h-6 text-amber-500" />, 
+      icon: <ShieldCheck className="w-6 h-6 text-sky-500" />, 
       label: 'Plant Size', 
       value: '75,000+ Sq. Ft.', 
       desc: 'State-of-the-art facilities in Rajasthan' 
@@ -108,15 +108,10 @@ export default function About() {
     {
       year: '2015',
       title: 'ISO 9001:2015 & BIS Licensed',
-      desc: 'Acquired formal ISO certifications and BIS ISI marking approval for water supply pipes.'
+      desc: 'Achieved complete BIS (ISI) licencing and ISO Quality Management certifications.'
     },
     {
-      year: '2018',
-      title: 'NABL Lab Commissioned',
-      desc: 'Established a fully equipped NABL-level quality control testing laboratory in-house.'
-    },
-    {
-      year: '2021',
+      year: '2019',
       title: 'Phagi Expansion (Unit II)',
       desc: 'Setup high-speed automated extrusion lines at Unit II, Phagi, to triple monthly output.'
     },
@@ -128,9 +123,9 @@ export default function About() {
   ];
 
   const capacityData = [
-    { category: 'HDPE Pipes', percentage: 60, color: '#0F52BA', value: '750 MT' },
-    { category: 'PVC Pipes', percentage: 25, color: '#F37021', value: '312 MT' },
-    { category: 'MDPE & Sprinklers', percentage: 15, color: '#00A86B', value: '188 MT' }
+    { category: 'HDPE Pipes', percentage: 60, color: '#1e3a8a', value: '750 MT' },
+    { category: 'PVC Pipes', percentage: 25, color: '#0284c7', value: '312 MT' },
+    { category: 'MDPE & Sprinklers', percentage: 15, color: '#06b6d4', value: '188 MT' }
   ];
 
   return (
@@ -139,11 +134,11 @@ export default function About() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-blue-600 font-bold tracking-wide uppercase">About Us</h2>
+          <h2 className="text-base text-blue-700 font-bold tracking-wide uppercase">About Us</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Factory Infrastructure &amp; Technical Standing
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-amber-500 mx-auto rounded-full"></div>
+          <div className="mt-4 h-1.5 w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
         </div>
 
         {/* Two Column Grid */}
@@ -168,15 +163,15 @@ export default function About() {
             
             <ul className="space-y-3 pt-2">
               <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <CheckCircle className="w-5 h-5 text-amber-500 shrink-0" />
+                <CheckCircle className="w-5 h-5 text-sky-500 shrink-0" />
                 <span>100% Virgin High-Grade Polymer Resins</span>
               </li>
               <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <CheckCircle className="w-5 h-5 text-amber-500 shrink-0" />
+                <CheckCircle className="w-5 h-5 text-sky-500 shrink-0" />
                 <span>Rigorous ISI compliance and BIS licensed certification</span>
               </li>
               <li className="flex items-center gap-3 text-slate-700 font-medium">
-                <CheckCircle className="w-5 h-5 text-amber-500 shrink-0" />
+                <CheckCircle className="w-5 h-5 text-sky-500 shrink-0" />
                 <span>Large warehousing capabilities for immediate bulk dispatches</span>
               </li>
             </ul>

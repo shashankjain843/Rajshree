@@ -58,7 +58,7 @@ export default function Navbar() {
                 }`}
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-amber-500 transition-all duration-200 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sky-400 transition-all duration-200 group-hover:w-full"></span>
               </a>
             ))}
           </div>
@@ -75,7 +75,7 @@ export default function Navbar() {
               }`}
               title="Help & FAQs"
             >
-              <HelpCircle className="w-4 h-4 text-blue-500" />
+              <HelpCircle className="w-4 h-4 text-sky-400" />
               <span>FAQ</span>
             </button>
 
@@ -86,16 +86,16 @@ export default function Navbar() {
                 isScrolled ? 'text-slate-800 hover:text-blue-700' : 'text-slate-200 hover:text-white'
               }`}
             >
-              <Phone className="w-3.5 h-3.5 text-amber-500" />
+              <Phone className="w-3.5 h-3.5 text-sky-400" />
               <span>+91-9829050790</span>
             </a>
 
             {/* Request Quote Button */}
             <button
               onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal'))}
-              className="bg-amber-600 hover:bg-amber-700 text-white font-bold px-4 py-2 rounded-lg shadow-xs transition-all text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
+              className="bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold px-4 py-2 rounded-lg shadow-sm transition-all text-xs uppercase tracking-wider flex items-center gap-1.5 cursor-pointer"
             >
-              <FileText className="w-3.5 h-3.5" />
+              <FileText className="w-3.5 h-3.5 text-sky-200" />
               <span>Request Quote</span>
             </button>
           </div>

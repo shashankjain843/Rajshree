@@ -6,7 +6,7 @@ export default function TrustBar() {
       code: 'IS 4984 : 2018',
       title: 'HDPE Water Supply Pipes',
       sub: 'BIS Licence CM/L-7800045812',
-      icon: <ShieldCheck className="w-5 h-5 text-amber-500" />
+      icon: <ShieldCheck className="w-5 h-5 text-sky-400" />
     },
     {
       code: 'IS 14333 : 1996',
@@ -18,7 +18,7 @@ export default function TrustBar() {
       code: 'IS 14151 (Pt 1&2)',
       title: 'Sprinkler Irrigation Pipes',
       sub: 'Govt Agriculture Subsidy Approved',
-      icon: <Award className="w-5 h-5 text-emerald-400" />
+      icon: <Award className="w-5 h-5 text-cyan-400" />
     },
     {
       code: 'ISO 9001 : 2015',
@@ -30,13 +30,13 @@ export default function TrustBar() {
       code: 'JAL JEEVAN MISSION',
       title: 'Jal Jeevan Mission Partner',
       sub: 'PAN-India Rural Water Supply',
-      icon: <Building2 className="w-5 h-5 text-cyan-400" />
+      icon: <Building2 className="w-5 h-5 text-sky-400" />
     },
     {
       code: 'NABL & CIPET TESTED',
       title: 'Third-Party Lab Tested',
       sub: 'RITES & CIPET Cleared Batches',
-      icon: <Factory className="w-5 h-5 text-amber-400" />
+      icon: <Factory className="w-5 h-5 text-sky-400" />
     }
   ];
 
@@ -45,7 +45,7 @@ export default function TrustBar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-4 pb-2 border-b border-slate-800">
           <div className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-slate-400">
-            <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+            <span className="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
             <span>Key Manufacturing Standards &amp; Approvals</span>
           </div>
           <span className="text-[11px] text-slate-400 font-medium hidden sm:inline-block">

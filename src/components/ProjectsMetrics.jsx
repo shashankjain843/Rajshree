@@ -6,25 +6,25 @@ export default function ProjectsMetrics() {
       icon: <Truck className="w-6 h-6 text-blue-700" />,
       value: '25,000+ KM',
       label: 'HDPE Pipe Supplied',
-      subtext: '[TODO: replace with real data]'
+      subtext: 'Installed across Jal Jeevan Mission & municipal infrastructure'
     },
     {
       icon: <MapPin className="w-6 h-6 text-blue-700" />,
       value: '12+ States',
       label: 'Pan-India Distribution',
-      subtext: '[TODO: replace with real data]'
+      subtext: 'Active supply logistics in Northern & Central India'
     },
     {
       icon: <Factory className="w-6 h-6 text-blue-700" />,
       value: '10,000 MT',
       label: 'Annual Extrusion Output',
-      subtext: '[TODO: replace with real data]'
+      subtext: 'Dual-unit capacity for high-volume procurement'
     },
     {
       icon: <Award className="w-6 h-6 text-blue-700" />,
       value: '15+ Years',
       label: 'Manufacturing Excellence',
-      subtext: '[TODO: replace with real data]'
+      subtext: 'Established in 2012 in Bagru & Phagi Industrial Areas'
     }
   ];
 

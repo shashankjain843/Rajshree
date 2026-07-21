@@ -332,7 +332,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-lg shadow-blue-600/20 transition-all cursor-pointer disabled:opacity-50"
+                    className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold py-3 px-6 rounded-xl text-sm shadow-lg shadow-blue-600/30 transition-all cursor-pointer disabled:opacity-50"
                   >
                     <Send className="w-4 h-4" />
                     <span>{isSubmitting ? 'Submitting RFQ...' : 'Submit Commercial RFQ'}</span>

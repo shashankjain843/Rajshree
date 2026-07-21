@@ -177,11 +177,11 @@ export default function Contact() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-blue-600 font-bold tracking-wide uppercase">Contact Us</h2>
+          <h2 className="text-base text-blue-700 font-bold tracking-wide uppercase">Contact Us</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Connect with Rajshree Sales &amp; Plant Units
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-amber-500 mx-auto rounded-full"></div>
+          <div className="mt-4 h-1.5 w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
           <p className="mt-4 text-slate-500 font-light text-sm sm:text-base">
             For dealer pricing, custom flanged layouts, or government project tenders, submit the form below. Our response team will revert within 24 business hours.
           </p>
@@ -221,7 +221,7 @@ export default function Contact() {
                     onClick={() => { setActiveFormTab('quote'); setFormErrors({}); setSubmitError(null); }}
                     className={`flex-1 text-center py-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
                       activeFormTab === 'quote'
-                        ? 'bg-blue-600 text-white shadow-md'
+                        ? 'bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 text-white shadow-md'
                         : 'text-slate-500 hover:text-slate-700'
                     }`}
                   >
@@ -232,7 +232,7 @@ export default function Contact() {
                     onClick={() => { setActiveFormTab('warranty'); setFormErrors({}); setSubmitError(null); }}
                     className={`flex-1 text-center py-3 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer ${
                       activeFormTab === 'warranty'
-                        ? 'bg-blue-600 text-white shadow-md'
+                        ? 'bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 text-white shadow-md'
                         : 'text-slate-500 hover:text-slate-700'
                     }`}
                   >
@@ -344,7 +344,7 @@ export default function Contact() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-blue-600/20 transition-all duration-300 disabled:opacity-50 cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-blue-600/30 transition-all duration-300 disabled:opacity-50 cursor-pointer"
                     >
                       {isSubmitting ? (
                         <span>Sending Inquiry...</span>
