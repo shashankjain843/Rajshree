@@ -260,7 +260,7 @@ export default function Contact() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="e.g. Shashank Jain"
+                          placeholder="Enter your full name"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.name ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
@@ -278,7 +278,7 @@ export default function Contact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="e.g. +91 98290 50790"
+                          placeholder="Enter contact number"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
@@ -298,7 +298,7 @@ export default function Contact() {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="e.g. client@website.com"
+                          placeholder="Enter email address"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.email ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
@@ -376,7 +376,7 @@ export default function Contact() {
                           name="name"
                           value={warrantyData.name}
                           onChange={handleChange}
-                          placeholder="e.g. Shashank Jain"
+                          placeholder="Enter your full name"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.name ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
@@ -394,7 +394,7 @@ export default function Contact() {
                           name="phone"
                           value={warrantyData.phone}
                           onChange={handleChange}
-                          placeholder="e.g. +91 98290 50790"
+                          placeholder="Enter contact number"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.phone ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
@@ -414,7 +414,7 @@ export default function Contact() {
                           name="email"
                           value={warrantyData.email}
                           onChange={handleChange}
-                          placeholder="e.g. client@website.com"
+                          placeholder="Enter email address"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.email ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
@@ -449,7 +449,7 @@ export default function Contact() {
                           name="invoiceNum"
                           value={warrantyData.invoiceNum}
                           onChange={handleChange}
-                          placeholder="e.g. RT-2026-9811"
+                          placeholder="Enter invoice number"
                           className={`w-full px-4 py-3 rounded-xl border font-light text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 transition-all ${
                             formErrors.invoiceNum ? 'border-red-500 bg-red-50' : 'border-slate-200'
                           }`}
