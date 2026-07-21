@@ -1,5 +1,15 @@
-// Rajshree Technoplast - Service Worker v1.0
-// Provides offline fallback caching for static assets
+// Auto-unregister on localhost/dev server to prevent stale Vite dev script caching
+if (self.location.hostname === 'localhost' || self.location.hostname === '127.0.0.1') {
+  self.addEventListener('install', () => {
+    self.skipWaiting();
+  });
+  self.addEventListener('activate', (event) => {
+    event.waitUntil(
+      caches.keys().then((keys) => Promise.all(keys.map((k) => caches.delete(k))))
+        .then(() => self.registration.unregister())
+    );
+  });
+}
 
 const CACHE_NAME = 'rajshree-cache-v1';
 
