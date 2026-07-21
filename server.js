@@ -5,7 +5,6 @@ import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Load environment variables
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -21,16 +20,15 @@ const PORT = process.env.PORT || 5000;
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
   port: parseInt(process.env.SMTP_PORT) || 587,
-  secure: false, // true for port 465, false for other ports
+  secure: false,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },
-  debug: true, // enable SMTP debug output in console logs
-  logger: true // log SMTP traffic to console
+  debug: true,
+  logger: true
 });
 
-// Verify SMTP connection config on startup
 transporter.verify((error) => {
   if (error) {
     console.error('[SMTP Connection Error]: Failed to authenticate with Brevo.');
@@ -40,162 +38,266 @@ transporter.verify((error) => {
   }
 });
 
-// 1. POST API: Handle Contact Form Submission & Email Routing
 app.post('/api/contact', async (req, res) => {
-  const { name, email, phone, product, message } = req.body;
+  const { 
+    name, 
+    email, 
+    phone, 
+    companyName, 
+    product, 
+    diameter, 
+    pressure, 
+    quantity, 
+    deliveryLocation, 
+    notes, 
+    message 
+  } = req.body;
 
-  // Basic Server-Side Validation
-  if (!name || !email || !phone || !message) {
+  if (!name || (!email && !phone)) {
     return res.status(400).json({ success: false, message: 'Please fill out all required fields.' });
   }
 
   const receiverEmail = process.env.RECEIVER_EMAIL || 'realshashankjain@gmail.com';
   const senderEmail = process.env.SENDER_EMAIL || 'realshashankjain@gmail.com';
 
-  // Email template for Rajshree Admin
+  // Fix "PIPES PIPES" Duplicate Bug
+  let rawProduct = product ? product.trim() : 'General Piping';
+  let selectedProduct = rawProduct;
+  if (!rawProduct.toUpperCase().includes('PIPE')) {
+    selectedProduct = `${rawProduct} Pipes`;
+  }
+
+  const cleanCompanyName = companyName && companyName !== 'N/A' ? companyName : null;
+  const cleanNotes = (notes && notes !== 'N/A') ? notes : (message && message !== 'N/A' ? message : null);
+
+  // Exact Admin Inquiry Email Template (Strict Specification Parity)
   const adminMailOptions = {
     from: `"Rajshree Inquiry Portal" <${senderEmail}>`,
     to: receiverEmail,
-    replyTo: email,
-    subject: `New Commercial Pipe Inquiry: ${name} (${product.toUpperCase()})`,
+    replyTo: email || senderEmail,
+    subject: `New RFQ: ${name} - ${selectedProduct}`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #f8fafc;">
-        <h2 style="color: #0F52BA; border-bottom: 2px solid #EA580C; padding-pb: 10px; margin-top: 0;">New inquiry Received</h2>
-        <p style="font-size: 16px; color: #1E293B;">A new lead has been submitted via the Rajshree Technoplast website contact form. Details are listed below:</p>
-        
-        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-          <tr style="background-color: #ffffff; border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px; font-weight: bold; color: #475569; width: 140px;">Client Name:</td>
-            <td style="padding: 12px; color: #1E293B;">${name}</td>
-          </tr>
-          <tr style="background-color: #f1f5f9; border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px; font-weight: bold; color: #475569;">Email Address:</td>
-            <td style="padding: 12px; color: #1E293B;"><a href="mailto:${email}" style="color: #0F52BA;">${email}</a></td>
-          </tr>
-          <tr style="background-color: #ffffff; border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px; font-weight: bold; color: #475569;">Phone Number:</td>
-            <td style="padding: 12px; color: #1E293B;"><a href="tel:${phone}" style="color: #0F52BA;">${phone}</a></td>
-          </tr>
-          <tr style="background-color: #f1f5f9; border-bottom: 1px solid #e2e8f0;">
-            <td style="padding: 12px; font-weight: bold; color: #475569;">Product Interest:</td>
-            <td style="padding: 12px; color: #1E293B; font-weight: bold; text-transform: uppercase;">${product} Pipes</td>
-          </tr>
-          <tr style="background-color: #ffffff;">
-            <td style="padding: 12px; font-weight: bold; color: #475569; vertical-align: top;">Requirement Notes:</td>
-            <td style="padding: 12px; color: #1E293B; line-height: 1.5;">${message}</td>
-          </tr>
-        </table>
-        
-        <div style="margin-top: 30px; padding-top: 15px; border-t: 1px solid #e2e8f0; font-size: 11px; color: #94a3b8; text-align: center;">
-          This inquiry was securely processed and sent via Nodemailer on Rajshree Group Server.
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; border: 1px solid #E7EAEE; overflow: hidden;">
+
+        <!-- 1. HEADER -->
+        <div style="background: linear-gradient(135deg, #0F1E3D 0%, #12294F 100%); padding: 22px 24px; border-top-left-radius: 12px; border-top-right-radius: 12px; text-align: left;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="width: 42px; vertical-align: middle;">
+                <div style="width: 38px; height: 38px; background-color: #ffffff; border-radius: 8px; text-align: center; line-height: 38px; font-weight: bold; font-size: 16px; color: #0F1E3D;">
+                  RT
+                </div>
+              </td>
+              <td style="padding-left: 12px; vertical-align: middle;">
+                <div style="color: #ffffff; font-size: 18px; font-weight: bold; line-height: 1.2;">
+                  Rajshree Technoplast
+                </div>
+                <div style="color: #8FB8E8; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-top: 3px;">
+                  B2B Inquiry Notification
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
+
+        <!-- 2. BODY -->
+        <div style="padding: 24px; text-align: left;">
+
+          <!-- Product Sub-header & Main Heading -->
+          <div style="color: #185FA5; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">
+            ${selectedProduct.toUpperCase()}
+          </div>
+          <h2 style="margin: 0 0 6px 0; font-size: 19px; font-weight: bold; color: #0F172A;">
+            New lead received
+          </h2>
+          <p style="margin: 0 0 24px 0; font-size: 13px; color: #64748B; line-height: 1.5;">
+            A commercial pipe quote request has been submitted via the website. Full requirement details are below.
+          </p>
+
+          <!-- SECTION: CLIENT DETAILS -->
+          <div style="font-size: 11px; font-weight: bold; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+            CLIENT DETAILS
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 13px;">
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 9px 0; color: #64748B; width: 130px;">Name</td>
+              <td style="padding: 9px 0; color: #0F172A; font-weight: bold;">${name}</td>
+            </tr>
+            ${cleanCompanyName ? `
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 9px 0; color: #64748B;">Company</td>
+              <td style="padding: 9px 0; color: #0F172A;">${cleanCompanyName}</td>
+            </tr>` : ''}
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 9px 0; color: #64748B;">Email</td>
+              <td style="padding: 9px 0;">
+                <a href="mailto:${email}" style="color: #185FA5; text-decoration: none;">${email || 'Not provided'}</a>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #F1F5F9;">
+              <td style="padding: 9px 0; color: #64748B;">Phone</td>
+              <td style="padding: 9px 0;">
+                <a href="tel:${phone}" style="color: #185FA5; text-decoration: none;">${phone}</a>
+              </td>
+            </tr>
+          </table>
+
+          <!-- SECTION: ORDER SPECIFICATIONS (2x2 Grid) -->
+          <div style="font-size: 11px; font-weight: bold; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+            ORDER SPECIFICATIONS
+          </div>
+
+          <table style="width: 100%; border-collapse: separate; border-spacing: 8px; margin-left: -8px; margin-right: -8px; margin-bottom: 24px;">
+            <tr>
+              <td style="width: 50%; background-color: #F8FAFC; border-radius: 8px; padding: 12px; vertical-align: top;">
+                <div style="font-size: 11px; color: #94A3B8; margin-bottom: 4px;">Size/OD</div>
+                <div style="font-size: 14px; font-weight: bold; color: #0F172A;">${diameter || 'Standard'}</div>
+              </td>
+              <td style="width: 50%; background-color: #F8FAFC; border-radius: 8px; padding: 12px; vertical-align: top;">
+                <div style="font-size: 11px; color: #94A3B8; margin-bottom: 4px;">Pressure Rating</div>
+                <div style="font-size: 14px; font-weight: bold; color: #0F172A;">${pressure || 'Standard'}</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="width: 50%; background-color: #F8FAFC; border-radius: 8px; padding: 12px; vertical-align: top;">
+                <div style="font-size: 11px; color: #94A3B8; margin-bottom: 4px;">Quantity</div>
+                <div style="font-size: 14px; font-weight: bold; color: #0F172A;">${quantity || 'Custom'}</div>
+              </td>
+              <td style="width: 50%; background-color: #F8FAFC; border-radius: 8px; padding: 12px; vertical-align: top;">
+                <div style="font-size: 11px; color: #94A3B8; margin-bottom: 4px;">Delivery Location</div>
+                <div style="font-size: 14px; font-weight: bold; color: #0F172A;">${deliveryLocation || 'Plant / PAN India'}</div>
+              </td>
+            </tr>
+          </table>
+
+          <!-- SECTION: NOTES -->
+          ${cleanNotes ? `
+          <div style="font-size: 11px; font-weight: bold; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+            NOTES
+          </div>
+          <div style="font-size: 13px; color: #334155; line-height: 1.5; margin-bottom: 24px;">
+            ${cleanNotes}
+          </div>` : ''}
+
+          <!-- ACTION BUTTONS -->
+          <table style="width: 100%; border-collapse: separate; border-spacing: 8px; margin-left: -8px; margin-right: -8px;">
+            <tr>
+              <td style="width: 50%;">
+                <a href="tel:${phone}" style="display: block; background-color: #185FA5; color: #ffffff; font-size: 13px; font-weight: bold; text-align: center; text-decoration: none; padding: 11px 16px; border-radius: 8px;">
+                  Call client
+                </a>
+              </td>
+              <td style="width: 50%;">
+                <a href="mailto:${email}" style="display: block; background-color: #F1F5F9; color: #1E293B; font-size: 13px; font-weight: bold; text-align: center; text-decoration: none; padding: 11px 16px; border-radius: 8px;">
+                  Reply by email
+                </a>
+              </td>
+            </tr>
+          </table>
+
+        </div>
+
+        <!-- 3. FOOTER -->
+        <div style="background-color: #F8FAFC; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; padding: 14px 20px; text-align: center; font-size: 11px; color: #94A3B8; border-top: 1px solid #E7EAEE;">
+          Rajshree Technoplast Pvt Ltd · Ajmer Road, Jaipur, Rajasthan · Processed via secure inquiry portal
+        </div>
+
       </div>
     `
   };
 
-  // Auto-Reply template sent to the Customer
-  const customerMailOptions = {
+  // Customer Auto-Reply Email (Matching Header & Footer Branding)
+  const customerMailOptions = email ? {
     from: `"Rajshree Technoplast" <${senderEmail}>`,
     to: email,
     subject: 'We Have Received Your Inquiry - Rajshree Technoplast Pvt Ltd',
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 25px; border: 1px solid #e2e8f0; border-radius: 12px; background-color: #ffffff;">
-        <div style="text-align: center; margin-bottom: 20px;">
-          <h1 style="color: #0F52BA; margin: 0; font-size: 26px;">RAJSHREE TECHNOPLAST</h1>
-          <p style="color: #EA580C; font-size: 12px; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px;">Empowering Progress Through Liquid Network</p>
-        </div>
-        
-        <p style="font-size: 15px; color: #334155; line-height: 1.5;">Dear <strong>${name}</strong>,</p>
-        <p style="font-size: 15px; color: #334155; line-height: 1.5;">Thank you for contacting Rajshree Technoplast Pvt Ltd. We have successfully received your inquiry regarding our <strong>${product.toUpperCase()} Piping Systems</strong>.</p>
-        <p style="font-size: 15px; color: #334155; line-height: 1.5;">Our engineering estimation and sales department is reviewing your requirements. We will compile the price list and technical catalog and contact you at <strong>${phone}</strong> within the next 24 business hours.</p>
-        
-        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 8px; margin: 20px 0;">
-          <h4 style="margin-top: 0; color: #475569; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px;">Your Inquiry Summary:</h4>
-          <p style="margin: 5px 0; font-size: 13px; color: #475569;"><strong>Interest:</strong> ${product.toUpperCase()} Pipes</p>
-          <p style="margin: 5px 0; font-size: 13px; color: #475569;"><strong>Message:</strong> ${message}</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; border: 1px solid #E7EAEE; overflow: hidden;">
+
+        <!-- HEADER (Matching Dark Navy Gradient) -->
+        <div style="background: linear-gradient(135deg, #0F1E3D 0%, #12294F 100%); padding: 22px 24px; border-top-left-radius: 12px; border-top-right-radius: 12px; text-align: left;">
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="width: 42px; vertical-align: middle;">
+                <div style="width: 38px; height: 38px; background-color: #ffffff; border-radius: 8px; text-align: center; line-height: 38px; font-weight: bold; font-size: 16px; color: #0F1E3D;">
+                  RT
+                </div>
+              </td>
+              <td style="padding-left: 12px; vertical-align: middle;">
+                <div style="color: #ffffff; font-size: 18px; font-weight: bold; line-height: 1.2;">
+                  Rajshree Technoplast
+                </div>
+                <div style="color: #8FB8E8; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; margin-top: 3px;">
+                  Inquiry Acknowledgement
+                </div>
+              </td>
+            </tr>
+          </table>
         </div>
 
-        <p style="font-size: 15px; color: #334155; line-height: 1.5;">If you need urgent assistance, feel free to call our direct customer helpline at <a href="tel:+919829050790" style="color: #0F52BA; font-weight: bold;">+91-9829050790</a> or chat with us on WhatsApp.</p>
-        
-        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0;" />
-        
-        <div style="font-size: 12px; color: #64748b; line-height: 1.5;">
-          <strong>Rajshree Technoplast Pvt Ltd</strong><br />
-          Ajmer Road, Jaipur-302021, Rajasthan, India<br />
-          Email: <a href="mailto:rajshreearun123@gmail.com" style="color: #0F52BA;">rajshreearun123@gmail.com</a>
+        <!-- BODY -->
+        <div style="padding: 24px; text-align: left;">
+          <h2 style="margin: 0 0 10px 0; font-size: 18px; font-weight: bold; color: #0F172A;">
+            Inquiry Received
+          </h2>
+          <p style="font-size: 14px; color: #334155; line-height: 1.5; margin: 0 0 14px 0;">
+            Dear <strong>${name}</strong>,
+          </p>
+          <p style="font-size: 14px; color: #334155; line-height: 1.5; margin: 0 0 14px 0;">
+            Thank you for contacting Rajshree Technoplast Pvt Ltd. We have received your RFQ for <strong>${selectedProduct}</strong>.
+          </p>
+          <p style="font-size: 14px; color: #334155; line-height: 1.5; margin: 0 0 18px 0;">
+            Our commercial sales desk is reviewing your specifications. We will compile your official Proforma Invoice and call you at <strong>${phone}</strong> within 24 business hours.
+          </p>
+
+          <div style="background-color: #F8FAFC; border-radius: 8px; padding: 14px; margin-bottom: 18px;">
+            <div style="font-size: 11px; font-weight: bold; color: #185FA5; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">
+              LOGGED SPECIFICATIONS SUMMARY
+            </div>
+            <div style="font-size: 13px; color: #475569; margin-bottom: 3px;"><strong>Product:</strong> ${selectedProduct}</div>
+            ${diameter ? `<div style="font-size: 13px; color: #475569; margin-bottom: 3px;"><strong>Size/OD:</strong> ${diameter}</div>` : ''}
+            ${pressure ? `<div style="font-size: 13px; color: #475569; margin-bottom: 3px;"><strong>Pressure Rating:</strong> ${pressure}</div>` : ''}
+            ${quantity ? `<div style="font-size: 13px; color: #475569; margin-bottom: 3px;"><strong>Quantity:</strong> ${quantity}</div>` : ''}
+          </div>
+
+          <p style="font-size: 13px; color: #334155; line-height: 1.5; margin: 0;">
+            For immediate assistance, call our helpline at <a href="tel:+919829050790" style="color: #185FA5; font-weight: bold; text-decoration: none;">+91-9829050790</a>.
+          </p>
         </div>
+
+        <!-- FOOTER -->
+        <div style="background-color: #F8FAFC; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; padding: 14px 20px; text-align: center; font-size: 11px; color: #94A3B8; border-top: 1px solid #E7EAEE;">
+          Rajshree Technoplast Pvt Ltd · Ajmer Road, Jaipur, Rajasthan · Processed via secure inquiry portal
+        </div>
+
       </div>
     `
-  };
+  } : null;
 
   try {
-    // 1. Send inquiry to company Admin
-    const infoAdmin = await transporter.sendMail(adminMailOptions);
-    console.log('[SMTP Admin Inquiry Sent]:', infoAdmin.messageId);
+    const promises = [transporter.sendMail(adminMailOptions)];
+    if (customerMailOptions) {
+      promises.push(transporter.sendMail(customerMailOptions));
+    }
 
-    // 2. Send receipt auto-reply to customer
-    const infoCustomer = await transporter.sendMail(customerMailOptions);
-    console.log('[SMTP Customer Auto-Reply Sent]:', infoCustomer.messageId);
+    const results = await Promise.all(promises);
+    console.log('[SMTP Admin Inquiry Sent]:', results[0].messageId);
+    if (results[1]) {
+      console.log('[SMTP Customer Auto-Reply Sent]:', results[1].messageId);
+    }
 
     res.status(200).json({ success: true, message: 'Your inquiry has been successfully sent!' });
   } catch (error) {
-    console.error('[SMTP Sending Error]: Failed to transmit emails.');
-    console.error(error);
-    res.status(500).json({ success: false, message: 'Failed to send inquiry. Please try again later or call support.', error: error.message });
+    console.error('[SMTP Transport Failed]:', error);
+    res.status(500).json({ success: false, message: 'Failed to send email. Please try again later.' });
   }
 });
 
-// 2. GET API: Test SMTP connection and send a test email on demand
-app.get('/api/test-email', async (req, res) => {
-  const senderEmail = process.env.SENDER_EMAIL || 'realshashankjain@gmail.com';
-  const receiverEmail = process.env.RECEIVER_EMAIL || 'realshashankjain@gmail.com';
-
-  const testMailOptions = {
-    from: `"SMTP Test Handshake" <${senderEmail}>`,
-    to: receiverEmail,
-    subject: 'Rajshree Website SMTP Diagnostics - Handshake Successful',
-    text: `Hello, this is a test diagnostics email triggered from the Rajshree Technoplast server to verify that the Brevo SMTP server is authenticating correctly. Connection verified on ${new Date().toISOString()}`,
-    html: `
-      <div style="font-family: monospace; padding: 20px; border: 1px solid #3b82f6; border-radius: 8px; background-color: #eff6ff; max-width: 500px;">
-        <h3 style="color: #1d4ed8; margin-top: 0;">Brevo SMTP Connection Verified!</h3>
-        <p>Your SMTP handshake is working correctly. Emails can now be sent via <strong>Nodemailer</strong>.</p>
-        <ul>
-          <li><strong>Host:</strong> smtp-relay.brevo.com</li>
-          <li><strong>Auth User:</strong> ${senderEmail}</li>
-          <li><strong>Target Destination:</strong> ${receiverEmail}</li>
-          <li><strong>Verified Time:</strong> ${new Date().toLocaleString()}</li>
-        </ul>
-      </div>
-    `
-  };
-
-  try {
-    const info = await transporter.sendMail(testMailOptions);
-    console.log('[SMTP Test Diagnostics Sent]:', info.messageId);
-    res.status(200).json({ success: true, message: 'SMTP test email sent successfully!', messageId: info.messageId });
-  } catch (error) {
-    console.error('[SMTP Test Diagnostics Failure]:');
-    console.error(error);
-    res.status(500).json({ success: false, message: 'SMTP diagnostics handshake failed.', error: error.message });
-  }
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', service: 'Rajshree Technoplast API Server' });
 });
 
-// Serve Frontend Static build in production (only when running locally, Vercel serves static files via its CDN)
-if (!process.env.VERCEL) {
-  app.use(express.static(path.join(__dirname, 'dist')));
-
-  app.get(/.*/, (req, res) => {
-    // If request doesn't match an API route, serve the index.html
-    res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
-  });
-}
-
-// Start Server (only if not running as a Vercel Serverless Function)
-if (!process.env.VERCEL) {
-  app.use(express.static(path.join(__dirname, 'dist')));
-  app.listen(PORT, () => {
-    console.log(`[Full-Stack Server Running]: Express server active on http://localhost:${PORT}`);
-  });
-}
-
-export default app;
+app.listen(PORT, () => {
+  console.log(`[Server Ready]: Rajshree Express server listening on http://localhost:${PORT}`);
+});

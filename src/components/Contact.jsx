@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Phone, Mail, MapPin, Send, CheckCircle2, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, CheckCircle2, MessageCircle, Store } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 export default function Contact() {
@@ -90,65 +90,71 @@ export default function Contact() {
       email: formData.email,
       phone: formData.phone,
       product: formData.product,
-      subject: `RAJSHREE GROUP - Commercial Inquiry: ${formData.product}`,
+      _subject: `RAJSHREE GROUP - Commercial Inquiry: ${formData.product.toUpperCase()}`,
+      subject: `RAJSHREE GROUP - Commercial Inquiry: ${formData.product.toUpperCase()}`,
       message: `====================================\n           RAJSHREE GROUP\n   Official Commercial Inquiry\n====================================\n\nClient Details:\n• Name: ${formData.name}\n• Phone: ${formData.phone}\n• Email: ${formData.email}\n• Product: ${formData.product}\n\nMessage / Requirements:\n${formData.message}\n====================================`
     } : {
       name: warrantyData.name,
       email: warrantyData.email,
       phone: warrantyData.phone,
       product: warrantyData.product,
+      _subject: `RAJSHREE GROUP - Warranty Registration`,
       subject: `RAJSHREE GROUP - Warranty Registration`,
       message: `====================================\n           RAJSHREE GROUP\n   Product Warranty Registration\n====================================\n\nCustomer Details:\n• Name: ${warrantyData.name}\n• Phone: ${warrantyData.phone}\n• Email: ${warrantyData.email}\n• Product: ${warrantyData.product}\n\nInvoice Details:\n• Invoice Number: ${warrantyData.invoiceNum}\n• Purchase Date: ${warrantyData.purchaseDate}\n====================================`
     };
 
-    console.log("[SMTP Submit Payload]:", payload);
-
+    // 1. Direct Email Delivery via FormSubmit AJAX service to realshashankjain@gmail.com
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
+      await fetch('https://formsubmit.co/ajax/realshashankjain@gmail.com', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(payload)
       });
-      
-      const result = await response.json();
-      console.log("[SMTP Response]:", result);
-
-      if (result.success) {
-        setIsSubmitted(true);
-      } else {
-        setIsSubmitted(true);
-      }
-      
-      if (activeFormTab === 'quote') {
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          product: 'hdpe',
-          message: '',
-        });
-      } else {
-        setWarrantyData({
-          name: '',
-          email: '',
-          phone: '',
-          invoiceNum: '',
-          purchaseDate: '',
-          product: 'hdpe',
-          invoiceFile: null
-        });
-      }
-      setTimeout(() => setIsSubmitted(false), 5000);
     } catch (err) {
-      console.warn("[SMTP Backend fallback]: API offline or dev environment, triggering success UI:", err);
-      setIsSubmitted(true);
-      setTimeout(() => setIsSubmitted(false), 5000);
-    } finally {
-      setIsSubmitting(false);
+      console.warn('FormSubmit contact error:', err);
     }
+
+    // 2. Secondary local server API
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.warn('Local API error:', err);
+    }
+
+    // 3. Automatically open WhatsApp chat with details
+    const text = `*RAJSHREE GROUP - ${activeFormTab === 'quote' ? 'Commercial Inquiry' : 'Warranty Registration'}*\n\n• *Name:* ${payload.name}\n• *Phone:* ${payload.phone}\n• *Email:* ${payload.email}\n• *Product:* ${payload.product}`;
+    window.open(`https://wa.me/919829050790?text=${encodeURIComponent(text)}`, '_blank');
+
+    setIsSubmitted(true);
+    setIsSubmitting(false);
+      
+    if (activeFormTab === 'quote') {
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        product: 'hdpe',
+        message: '',
+      });
+    } else {
+      setWarrantyData({
+        name: '',
+        email: '',
+        phone: '',
+        invoiceNum: '',
+        purchaseDate: '',
+        product: 'hdpe',
+        invoiceFile: null
+      });
+    }
+    setTimeout(() => setIsSubmitted(false), 5000);
   };
 
   const handleChange = (e) => {
@@ -228,7 +234,7 @@ export default function Contact() {
                         : 'text-slate-500 hover:text-slate-700'
                     }`}
                   >
-                    Get a Quote
+                    Request Quote
                   </button>
                   <button
                     type="button"

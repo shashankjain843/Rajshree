@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Info, X, Check, Download } from 'lucide-react';
+import { ArrowRight, Info, X, Check, Download, ShieldCheck } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 export default function Products() {
@@ -46,7 +46,7 @@ export default function Products() {
             {siteConfig.products.description}
           </p>
 
-          {/* Download Product Catalogue Button shifted here */}
+          {/* Download Product Catalogue Button */}
           <div className="mt-5 flex justify-center">
             <button
               onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal', { detail: { product: 'Product Catalogue PDF & Technical Specifications' } }))}
@@ -58,7 +58,7 @@ export default function Products() {
           </div>
         </div>
 
-        {/* Filter Navigation */}
+        {/* Filter Navigation Category Tabs */}
         <div className="flex flex-wrap justify-center gap-2 mb-8">
           {categories.map((cat) => (
             <button
@@ -75,7 +75,7 @@ export default function Products() {
           ))}
         </div>
 
-        {/* Product Cards Grid (Clean Outer Card layout) */}
+        {/* Product Cards Grid */}
         <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (
@@ -102,21 +102,31 @@ export default function Products() {
                     </div>
                   </div>
 
-                  {/* Body Info (Clean: Title + Resin Badge + Short Description) */}
-                  <div className="p-5 space-y-2.5">
-                    <span className="text-[10px] sm:text-xs uppercase font-extrabold text-brand-orange bg-brand-orange/10 px-2.5 py-1 rounded-md border border-brand-orange/20 inline-block">
-                      {product.resin}
-                    </span>
+                  {/* Body Info */}
+                  <div className="p-5 space-y-2">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-[10px] sm:text-xs uppercase font-extrabold text-brand-orange bg-brand-orange/10 px-2.5 py-1 rounded-md border border-brand-orange/20">
+                        {product.resin}
+                      </span>
+                    </div>
+
                     <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight leading-snug">
                       {product.name}
                     </h3>
-                    <p className="text-slate-600 font-light text-xs sm:text-sm leading-relaxed">
+                    
+                    {/* Compliance Line on Outer Product Card */}
+                    <div className="inline-flex items-center gap-1.5 text-[11px] font-extrabold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200/80">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span>Manufactured as per {product.standards} (BIS Licensed)</span>
+                    </div>
+
+                    <p className="text-slate-600 font-light text-xs sm:text-sm leading-relaxed pt-1">
                       {product.desc}
                     </p>
                   </div>
                 </div>
 
-                {/* Footer Action Strip ("Details" + "Request Quote") */}
+                {/* Footer Action Strip */}
                 <div className="px-5 py-3.5 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
                   <button
                     onClick={() => setSelectedProduct(product)}
@@ -154,11 +164,12 @@ export default function Products() {
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-y-auto border border-slate-200"
+              className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[85vh] border border-slate-200 text-left flex flex-col overflow-hidden my-auto"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 sticky top-0 z-10">
-                <div className="text-left">
+              {/* Header */}
+              <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 shrink-0">
+                <div>
                   <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
                     {selectedProduct.name}
                   </h3>
@@ -174,7 +185,14 @@ export default function Products() {
                 </button>
               </div>
 
-              <div className="p-6 sm:p-8 space-y-6 text-left">
+              {/* Scrollable Body */}
+              <div className="p-6 sm:p-8 space-y-6 overflow-y-auto flex-1 custom-modal-scrollbar">
+                {/* Prominent Compliance Line inside Modal */}
+                <div className="flex items-center gap-2 p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-950 font-extrabold text-xs sm:text-sm shadow-sm">
+                  <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <span>Certified Compliance: Manufactured as per {selectedProduct.standards} under valid BIS License &amp; ISO 9001:2015 quality standards.</span>
+                </div>
+
                 <p className="text-slate-600 font-light text-sm sm:text-base leading-relaxed">
                   {selectedProduct.desc}
                 </p>
@@ -190,7 +208,7 @@ export default function Products() {
                     <p className="text-sm font-extrabold text-slate-900 mt-1">{selectedProduct.pressure}</p>
                   </div>
                   <div className="sm:col-span-2 pt-2 border-t border-slate-200">
-                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Applicable Standards</p>
+                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider">Applicable BIS / ISO Standards</p>
                     <p className="text-sm font-extrabold text-slate-900 mt-1">{selectedProduct.standards}</p>
                   </div>
                 </div>
@@ -233,7 +251,7 @@ export default function Products() {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-5 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row justify-between items-center gap-3">
+              <div className="p-5 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row justify-between items-center gap-3 shrink-0">
                 <span className="text-xs text-slate-500 font-medium">BIS &amp; ISO 9001 Certified Quality</span>
                 <button
                   onClick={() => {
@@ -242,7 +260,7 @@ export default function Products() {
                   }}
                   className="w-full sm:w-auto bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-center px-6 py-2.5 rounded-xl transition-all duration-200 cursor-pointer text-xs uppercase tracking-wider"
                 >
-                  Request Quote for {selectedProduct.name.split(' ')[0]}
+                  Request Quote
                 </button>
               </div>
             </motion.div>

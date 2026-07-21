@@ -10,11 +10,13 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import PrivacyTerms from './components/PrivacyTerms';
 import RFQModal from './components/RFQModal';
+import DealerModal from './components/DealerModal';
 import { ArrowUp } from 'lucide-react';
 
 export default function App() {
   const [isRfqOpen, setIsRfqOpen] = useState(false);
   const [rfqProduct, setRfqProduct] = useState('');
+  const [isDealerOpen, setIsDealerOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
@@ -27,14 +29,20 @@ export default function App() {
       setIsRfqOpen(true);
     };
 
+    const handleOpenDealer = () => {
+      setIsDealerOpen(true);
+    };
+
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
 
     window.addEventListener('open-rfq-modal', handleOpenRfq);
+    window.addEventListener('open-dealer-modal', handleOpenDealer);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => {
       window.removeEventListener('open-rfq-modal', handleOpenRfq);
+      window.removeEventListener('open-dealer-modal', handleOpenDealer);
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -57,6 +65,10 @@ export default function App() {
         isOpen={isRfqOpen}
         onClose={() => setIsRfqOpen(false)}
         defaultProduct={rfqProduct}
+      />
+      <DealerModal
+        isOpen={isDealerOpen}
+        onClose={() => setIsDealerOpen(false)}
       />
 
       {/* Floating Scroll-to-Top Button */}

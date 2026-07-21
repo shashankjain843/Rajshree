@@ -28,7 +28,7 @@ export const translations = {
     prodDesc: 'Manufactured with 100% virgin resin conforming to Indian and International Standards (IS 4984, IS 14333, IS 4985, IS 14885).',
     specSheet: 'Technical Specification Sheet',
     viewSpecs: 'Technical Specs',
-    reqQuote: 'Get Instant Quote',
+    reqQuote: 'Request Quote',
     closePreview: 'Close Catalog',
     btnPreview: 'Preview Catalog & Technical Tables',
     btnDownload: 'Download Product Catalogue (PDF)',

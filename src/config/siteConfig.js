@@ -98,7 +98,7 @@ export const siteConfig = {
     headingHighlight: 'HDPE & PVC',
     headingSub: 'Piping Solutions',
     description: 'Rajshree Technoplast Pvt. Ltd. operates 75,000+ sq. ft. of automated extrusion infrastructure in Jaipur — producing BIS/ISI-certified HDPE, MDPE & PVC conduits for potable water distribution, sewerage, and agricultural irrigation nationwide.',
-    ctaPrimary: 'Request Wholesale Quote',
+    ctaPrimary: 'Request Quote',
     ctaSecondary: 'Download Product Catalogue (PDF)',
     images: [
       '/images/hero-factory-warehouse-banner-16x9.jpg',

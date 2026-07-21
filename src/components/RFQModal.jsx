@@ -37,43 +37,52 @@ export default function RFQModal({ isOpen, onClose, defaultProduct = '' }) {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const emailMessage = `====================================
-           ${siteConfig.company.name.toUpperCase()}
-  Commercial Pipe Quote Request
-====================================
+    const payload = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      companyName: formData.company || 'N/A',
+      product: formData.product,
+      diameter: formData.diameter,
+      pressure: formData.pressure,
+      quantity: formData.quantity,
+      deliveryLocation: formData.deliveryLocation || 'Plant / PAN India',
+      notes: formData.notes || 'N/A',
+      subject: `New Commercial Pipe Inquiry: ${formData.name} (${formData.product.toUpperCase()})`
+    };
 
-Client Details:
-• Name: ${formData.name}
-• Phone: ${formData.phone}
-• Email: ${formData.email}
-• Company: ${formData.company || 'Direct Buyer'}
-
-Product Specifications:
-• Product: ${formData.product}
-• Size (OD): ${formData.diameter}
-• Rating: ${formData.pressure}
-• Quantity: ${formData.quantity}
-• Delivery Location: ${formData.deliveryLocation || 'Plant / PAN India'}
-
-Notes:
-${formData.notes || 'Standard dispatch requested.'}
-====================================`;
-
+    // 1. Primary fast delivery via local Node Express server (Brevo SMTP - Instant < 0.5s)
     try {
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          subject: `${siteConfig.company.name} Quote Inquiry: ${formData.product}`,
-          message: emailMessage
-        })
+        body: JSON.stringify(payload)
       });
     } catch (err) {
-      console.warn('Backend API submission skipped or failed, fallback to instant trigger:', err);
+      console.warn('Backend API submission error:', err);
     }
+
+    // 2. Secondary backup to FormSubmit (Fired asynchronously in background so user doesn't wait)
+    fetch('https://formsubmit.co/ajax/realshashankjain@gmail.com', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: payload.subject,
+        "Client Name": payload.name,
+        "Company / Firm Name": payload.companyName,
+        "Phone / WhatsApp": payload.phone,
+        "Email Address": payload.email,
+        "Product Category": payload.product,
+        "Size (Outer Dia - OD)": payload.diameter,
+        "Pressure / SDR Rating": payload.pressure,
+        "Required Quantity": payload.quantity,
+        "Delivery Destination": payload.deliveryLocation,
+        "Requirement Notes": payload.notes
+      })
+    }).catch(err => console.warn('FormSubmit async background error:', err));
 
     setIsSubmitting(false);
     setIsSubmitted(true);
@@ -91,10 +100,10 @@ ${formData.notes || 'Standard dispatch requested.'}
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full border border-slate-200 overflow-hidden my-8"
+          className="bg-white rounded-3xl shadow-2xl max-w-2xl w-full border border-slate-200 overflow-hidden flex flex-col max-h-[85vh] my-auto"
         >
           {/* Header */}
-          <div className="bg-slate-900 text-white p-6 relative flex justify-between items-center border-b border-slate-800">
+          <div className="bg-slate-900 text-white p-6 relative flex justify-between items-center border-b border-slate-800 shrink-0">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-blue-500/20 text-blue-400 rounded-2xl border border-blue-400/30">
                 <FileText className="w-6 h-6" />
@@ -104,7 +113,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                   B2B Commercial RFQ
                 </span>
                 <h3 className="text-xl font-extrabold tracking-tight">
-                  Request Wholesale Quote
+                  Request Quote
                 </h3>
               </div>
             </div>
@@ -117,7 +126,7 @@ ${formData.notes || 'Standard dispatch requested.'}
           </div>
 
           {/* Form / Success view */}
-          <div className="p-6 sm:p-8">
+          <div className="p-6 sm:p-8 overflow-y-auto flex-1 custom-modal-scrollbar">
             {isSubmitted ? (
               <div className="text-center py-6 space-y-5">
                 <div className="w-16 h-16 bg-emerald-500/10 text-emerald-500 rounded-full flex items-center justify-center mx-auto border border-emerald-500/20">
@@ -179,7 +188,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="e.g. Rajesh Sharma"
+                      placeholder="Enter your full name"
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                     />
                   </div>
@@ -195,7 +204,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="+91 98290XXXXX"
+                      placeholder="Enter phone number"
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                     />
                   </div>
@@ -212,7 +221,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      placeholder="e.g. Sharma Infra Ltd"
+                      placeholder="Enter company/firm name (optional)"
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                     />
                   </div>
@@ -227,7 +236,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="info@yourcompany.com"
+                      placeholder="Enter email address"
                       className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                     />
                   </div>
@@ -323,7 +332,7 @@ ${formData.notes || 'Standard dispatch requested.'}
                     name="deliveryLocation"
                     value={formData.deliveryLocation}
                     onChange={handleChange}
-                    placeholder="e.g. Jaipur, Rajasthan / PAN India"
+                    placeholder="Enter city / state"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                   />
                 </div>
