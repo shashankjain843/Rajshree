@@ -1,37 +1,34 @@
 import { Phone, Mail, ArrowUp, MapPin } from 'lucide-react';
-import { useTranslation } from '../context/LanguageContext';
 
 export default function Footer() {
-  const { lang, t } = useTranslation();
-
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const socialTiles = [
-    { label: 'Factory Tour', bg: 'bg-brand-blue/15', icon: '🏭' },
-    { label: 'Quality Lab', bg: 'bg-brand-orange/15', icon: '🔬' },
+    { label: 'Factory Tour', bg: 'bg-blue-500/15', icon: '🏭' },
+    { label: 'Quality Lab', bg: 'bg-amber-500/15', icon: '🔬' },
     { label: 'Pipe Extrusion', bg: 'bg-emerald-500/15', icon: '⚙️' },
     { label: 'Team Rajshree', bg: 'bg-purple-500/15', icon: '👷' },
     { label: 'RAJPLASTE Expo', bg: 'bg-amber-500/15', icon: '🏆' },
-    { label: 'HDPE Delivery', bg: 'bg-brand-blue/15', icon: '🚛' },
+    { label: 'HDPE Delivery', bg: 'bg-blue-500/15', icon: '🚛' },
     { label: 'IS Certification', bg: 'bg-emerald-500/15', icon: '📋' },
     { label: 'Water Projects', bg: 'bg-sky-500/15', icon: '💧' },
   ];
 
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-0 pb-8 relative text-left transition-colors duration-300">
+    <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 pt-0 pb-8 relative text-left transition-colors duration-300">
 
       {/* Social Feed Marquee Strip */}
-      <div className="w-full border-b border-slate-900 py-3 overflow-hidden">
-        <p className="text-center text-[10px] font-extrabold uppercase tracking-widest text-slate-600 mb-4">
-          {lang === 'HI' ? '📸 हमारी यात्रा को फॉलो करें' : '📸 FOLLOW OUR JOURNEY'}
+      <div className="w-full border-b border-slate-800 py-3 overflow-hidden">
+        <p className="text-center text-[10px] font-extrabold uppercase tracking-widest text-slate-500 mb-4">
+          📸 FOLLOW OUR JOURNEY
         </p>
         <div className="flex gap-4 animate-marquee whitespace-nowrap">
-          {[...socialTiles, ...socialTiles].map((tile, i) => (
+          {[...socialTiles, ...socialTiles, ...socialTiles, ...socialTiles].map((tile, i) => (
             <div
               key={i}
-              className={`inline-flex items-center gap-2 ${tile.bg} border border-slate-800 rounded-xl px-4 py-2 shrink-0 text-xs font-bold text-slate-300`}
+              className={`inline-flex items-center gap-2 ${tile.bg} border border-slate-800 rounded-xl px-4 py-2 shrink-0 text-xs font-bold text-slate-300 hover:border-amber-500/50 transition-colors`}
             >
               <span className="text-base">{tile.icon}</span>
               <span>{tile.label}</span>
@@ -43,8 +40,8 @@ export default function Footer() {
       <div className="pt-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Grid: Match 3-Column Layout Exactly */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-8 border-b border-slate-900">
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-8 border-b border-slate-800">
           
           {/* Column 1: Brand Info (5 cols) */}
           <div className="lg:col-span-5 space-y-4">
@@ -53,18 +50,18 @@ export default function Footer() {
               alt="Rajshree Group Logo" 
               className="h-14 w-auto object-contain rounded-lg p-1 bg-white shadow-sm" 
             />
-            <p className="text-slate-350 text-sm font-semibold italic mt-3">
-              {t('footTagline')}
+            <p className="text-slate-300 text-sm font-semibold italic mt-3">
+              Leading BIS &amp; ISO Certified HDPE &amp; PVC Pipe Manufacturer in Rajasthan, India
             </p>
-            <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed max-w-sm">
-              {t('footDesc')}
+            <p className="text-xs sm:text-sm text-slate-400 font-light leading-relaxed max-w-sm">
+              Rajshree Group and Rajshree Technoplast specialize in manufacturing premium-grade HDPE pipes, PVC conduits, and MDPE lines for agricultural irrigation and municipal water infrastructure across India.
             </p>
             
-            {/* Social Icons inside small dark square boxes */}
+            {/* Social Icons */}
             <div className="flex space-x-3 pt-3">
               <a 
                 href="#" 
-                className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-brand-blue text-slate-450 hover:text-white transition-all flex items-center justify-center border border-slate-850/60 shadow-inner"
+                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
                 title="Facebook"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -73,17 +70,16 @@ export default function Footer() {
               </a>
               <a 
                 href="#" 
-                className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-brand-blue text-slate-450 hover:text-white transition-all flex items-center justify-center border border-slate-850/60 shadow-inner"
+                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
                 title="Twitter / X"
               >
-                {/* SVG for X Logo */}
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
               <a 
                 href="#" 
-                className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-brand-blue text-slate-455 hover:text-white transition-all flex items-center justify-center border border-slate-850/60 shadow-inner"
+                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
                 title="LinkedIn"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -94,10 +90,9 @@ export default function Footer() {
                 href="https://wa.me/919829050790"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-slate-900 hover:bg-[#25D366] text-slate-455 hover:text-white transition-all flex items-center justify-center border border-slate-850/60 shadow-inner"
+                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-[#25D366] text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
                 title="WhatsApp"
               >
-                {/* SVG for Message bubble / WhatsApp symbol */}
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.324 5.328 0 11.894 0c3.18 0 6.171 1.242 8.423 3.498 2.253 2.256 3.491 5.253 3.488 8.435-.006 6.571-5.33 11.895-11.896 11.895-2.006-.002-3.98-.51-5.729-1.478L0 24zm6.549-3.267c1.615.957 3.2 1.463 4.79 1.466 5.485 0 9.948-4.468 9.953-9.957.002-2.659-1.033-5.161-2.915-7.046C16.556 3.31 14.06 2.275 11.4 2.278c-5.485 0-9.947 4.471-9.952 9.96-.001 1.687.452 3.327 1.314 4.772L1.75 22.252l5.441-1.425z"/>
                 </svg>
@@ -108,42 +103,42 @@ export default function Footer() {
           {/* Column 2: QUICK LINKS (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-white font-extrabold text-sm sm:text-base uppercase tracking-wider">
-              {t('footQuickLinks')}
+              Quick Links
             </h4>
             <ul className="space-y-3 text-sm font-light">
               <li>
-                <a href="#home" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footHomeOverview')}
+                <a href="#home" className="hover:text-white transition-colors block text-slate-400">
+                  Home Overview
                 </a>
               </li>
               <li>
-                <a href="#about" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footAboutRajshree')}
+                <a href="#about" className="hover:text-white transition-colors block text-slate-400">
+                  About Rajshree Group
                 </a>
               </li>
               <li>
-                <a href="#manufacturing" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footMfgProcess')}
+                <a href="#manufacturing" className="hover:text-white transition-colors block text-slate-400">
+                  Manufacturing Process
                 </a>
               </li>
               <li>
-                <a href="#products" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footProductsCatalog')}
+                <a href="#products" className="hover:text-white transition-colors block text-slate-400">
+                  Products Catalog
                 </a>
               </li>
               <li>
-                <a href="#quality" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footQualityCerts')}
+                <a href="#quality" className="hover:text-white transition-colors block text-slate-400">
+                  Quality Control Lab
                 </a>
               </li>
               <li>
-                <a href="#logistics" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footLogisticsDispatch')}
+                <a href="#logistics" className="hover:text-white transition-colors block text-slate-400">
+                  Logistics &amp; Delivery
                 </a>
               </li>
               <li>
-                <a href="#exhibitions" className="hover:text-white transition-colors block text-slate-450">
-                  {t('footExhibitionsEvents')}
+                <a href="#exhibitions" className="hover:text-white transition-colors block text-slate-400">
+                  Trade Shows &amp; Exhibitions
                 </a>
               </li>
             </ul>
@@ -153,33 +148,32 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-6">
             <div className="space-y-4">
               <h4 className="text-white font-extrabold text-sm sm:text-base uppercase tracking-wider">
-                {t('footGetInTouch')}
+                Get In Touch
               </h4>
               <div className="space-y-3 text-sm font-light">
                 <div className="flex items-center gap-3">
-                  <Mail className="w-4 h-4 text-brand-orange shrink-0" />
-                  <a href="mailto:rajshreearun123@gmail.com" className="hover:text-white text-slate-450 transition-colors">
+                  <Mail className="w-4 h-4 text-amber-500 shrink-0" />
+                  <a href="mailto:rajshreearun123@gmail.com" className="hover:text-white text-slate-400 transition-colors">
                     rajshreearun123@gmail.com
                   </a>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Phone className="w-4 h-4 text-brand-lightblue shrink-0 mt-0.5" />
+                  <Phone className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
                   <div className="flex flex-col space-y-1">
-                    <a href="tel:+919829050790" className="hover:text-white text-slate-450 transition-colors">+91-9829050790</a>
-                    <a href="tel:+919829054690" className="hover:text-white text-slate-450 transition-colors">+91-9829054690</a>
+                    <a href="tel:+919829050790" className="hover:text-white text-slate-400 transition-colors">+91-9829050790</a>
+                    <a href="tel:+919829054690" className="hover:text-white text-slate-400 transition-colors">+91-9829054690</a>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Divider line as seen in screenshot */}
-            <div className="border-t border-slate-900 pt-4">
-              <h5 className="text-slate-400 font-extrabold text-xs uppercase tracking-wider block mb-2">
-                {t('footRegdOffice')}
+            <div className="border-t border-slate-800 pt-4">
+              <h5 className="text-slate-300 font-extrabold text-xs uppercase tracking-wider block mb-2">
+                Registered Office
               </h5>
-              <div className="flex items-start gap-2.5 text-xs text-slate-500 font-light leading-relaxed">
-                <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
-                <p>{t('footRegdOfficeAddr')}</p>
+              <div className="flex items-start gap-2.5 text-xs text-slate-400 font-light leading-relaxed">
+                <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <p>Plot No.51 Maliram Kheradi Marg, Hanuman Vatika-I, Near 200FT Chauraha, Ajmer Road, Jaipur-302021</p>
               </div>
             </div>
           </div>
@@ -188,25 +182,25 @@ export default function Footer() {
 
         {/* Bottom copyright & meta row */}
         <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-          <p className="font-light text-slate-600">
-            &copy; 2026 Rajshree Technoplast Pvt Ltd. {t('footRights')}
+          <p className="font-light text-slate-400">
+            &copy; 2026 Rajshree Technoplast Pvt Ltd. All Rights Reserved.
           </p>
           <div className="flex items-center gap-6">
             <button
               onClick={() => window.dispatchEvent(new Event('open-privacy-modal'))}
-              className="hover:text-white text-slate-500 transition-colors cursor-pointer bg-transparent border-0 p-0 text-xs"
+              className="hover:text-white text-slate-400 transition-colors cursor-pointer bg-transparent border-0 p-0 text-xs"
             >
-              {lang === 'HI' ? 'गोपनीयता नीति' : 'Privacy Policy'}
+              Privacy Policy
             </button>
             <button
               onClick={() => window.dispatchEvent(new Event('open-terms-modal'))}
-              className="hover:text-white text-slate-500 transition-colors cursor-pointer bg-transparent border-0 p-0 text-xs"
+              className="hover:text-white text-slate-400 transition-colors cursor-pointer bg-transparent border-0 p-0 text-xs"
             >
-              {lang === 'HI' ? 'सेवा की शर्तें' : 'Terms of Service'}
+              Terms of Service
             </button>
             <button 
               onClick={handleScrollToTop}
-              className="p-2.5 rounded-full bg-slate-900 hover:bg-brand-blue text-white shadow-md transition-all duration-200 cursor-pointer"
+              className="p-2.5 rounded-full bg-slate-800 hover:bg-blue-600 text-white shadow-md transition-all duration-200 cursor-pointer"
               title="Scroll to Top"
             >
               <ArrowUp className="w-4 h-4" />

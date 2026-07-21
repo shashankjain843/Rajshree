@@ -1,39 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, HelpCircle } from 'lucide-react';
-import { useTranslation } from '../context/LanguageContext';
 
 export default function FaqDropdown({ isOpen, onClose }) {
-  const { lang, t } = useTranslation();
   const dropdownRef = useRef(null);
 
   const [messages, setMessages] = useState([
     {
       id: 1,
       sender: 'system',
-      text: t('botGreeting'),
+      text: 'Welcome to Rajshree Technoplast FAQ Assistant. Select a question below for instant specs & commercial details:',
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
   const [isTyping, setIsTyping] = useState(false);
   const messagesEndRef = useRef(null);
-
-  // Sync initial message on language changes
-  useEffect(() => {
-    setMessages((prev) => {
-      if (prev.length === 1) {
-        return [
-          {
-            id: 1,
-            sender: 'system',
-            text: t('botGreeting'),
-            time: prev[0].time
-          }
-        ];
-      }
-      return prev;
-    });
-  }, [lang, t]);
 
   // Click outside listener to close dropdown
   useEffect(() => {
@@ -51,17 +32,17 @@ export default function FaqDropdown({ isOpen, onClose }) {
   }, [isOpen, onClose]);
 
   const faqTriggers = [
-    { q: t('botSizesQ'), id: 'sizes' },
-    { q: t('botCertsQ'), id: 'certs' },
-    { q: t('botLocQ'), id: 'location' },
-    { q: t('botPriceQ'), id: 'price' }
+    { q: 'What pipe sizes do you manufacture?', id: 'sizes' },
+    { q: 'Are your pipes ISI/BIS certified?', id: 'certs' },
+    { q: 'Where are your factories located?', id: 'location' },
+    { q: 'How do I request a bulk price list?', id: 'price' }
   ];
 
   const faqAnswers = {
-    sizes: t('botSizesA'),
-    certs: t('botCertsA'),
-    location: t('botLocA'),
-    price: t('botPriceA')
+    sizes: '• HDPE Pipes: 20mm – 1200mm OD (Pressure ratings PN 2.5 to PN 16, SDR 41 to SDR 9).\n• MDPE Lines: Blue service conduits for water & gas networks.\n• PVC Pipes: 50mm – 315mm OD.',
+    certs: 'Yes. BIS and ISO 9001:2015 accredited:\n• HDPE Water: IS 4984:2018\n• HDPE Sewerage: IS 14333\n• PVC Pipes: IS 4985',
+    location: 'Dual Extrusion Units in Jaipur, Rajasthan:\n• Unit I: RIICO Industrial Area, Bagru.\n• Unit II: Ratan Industrial Area, Harsuliya, Phagi.',
+    price: 'Submit the RFQ form on this site or call sales directly at +91-9829050790 for instant commercial price lists & dealer quotes.'
   };
 
   useEffect(() => {
@@ -89,7 +70,7 @@ export default function FaqDropdown({ isOpen, onClose }) {
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages((prev) => [...prev, answerMsg]);
-    }, 800);
+    }, 600);
   };
 
   if (!isOpen) return null;
@@ -103,13 +84,13 @@ export default function FaqDropdown({ isOpen, onClose }) {
         exit={{ opacity: 0, scale: 0.95, y: -10 }}
         className="absolute top-16 right-4 sm:right-16 z-50 bg-white border border-slate-200 rounded-2xl shadow-2xl w-80 sm:w-96 overflow-hidden flex flex-col my-2 text-left"
       >
-        {/* Header - Simple Help & FAQs Panel */}
+        {/* Header */}
         <div className="bg-slate-900 px-4 py-3.5 text-white flex justify-between items-center border-b border-slate-800">
           <div className="flex items-center gap-2">
             <HelpCircle className="w-5 h-5 text-amber-500" />
             <div>
               <p className="text-xs font-extrabold uppercase tracking-wider">
-                {lang === 'HI' ? 'अक्सर पूछे जाने वाले प्रश्न' : 'Help & Frequently Asked Questions'}
+                Help &amp; Technical FAQs
               </p>
               <p className="text-[10px] text-slate-400 font-medium">Rajshree Technical Knowledge Base</p>
             </div>
@@ -130,10 +111,10 @@ export default function FaqDropdown({ isOpen, onClose }) {
               className={`flex gap-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
-                className={`max-w-[82%] p-3 rounded-xl text-xs text-left shadow-xs ${
+                className={`max-w-[85%] p-3 rounded-xl text-xs text-left shadow-xs ${
                   msg.sender === 'user'
                     ? 'bg-blue-700 text-white rounded-tr-none font-medium'
-                    : 'bg-white text-slate-800 rounded-tl-none border border-slate-200 font-light'
+                    : 'bg-white text-slate-800 rounded-tl-none border border-slate-200 font-normal whitespace-pre-line'
                 }`}
               >
                 <p className="leading-relaxed">{msg.text}</p>
@@ -159,7 +140,7 @@ export default function FaqDropdown({ isOpen, onClose }) {
         {/* FAQ Quick Buttons */}
         <div className="p-3 border-t border-slate-200 bg-white space-y-2">
           <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-            {t('botFaqsLabel')}
+            Frequently Asked Questions:
           </div>
           <div className="flex flex-col gap-1.5">
             {faqTriggers.map((faq) => (
@@ -167,7 +148,7 @@ export default function FaqDropdown({ isOpen, onClose }) {
                 key={faq.id}
                 onClick={() => handleQuestionClick(faq)}
                 disabled={isTyping}
-                className="w-full text-left p-2 rounded-lg border border-slate-200 hover:border-blue-400 hover:bg-blue-50 text-xs text-slate-700 font-medium transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full text-left p-2 rounded-lg border border-slate-200 hover:border-blue-400 bg-slate-50 hover:bg-blue-50 text-xs text-slate-700 font-medium transition-colors cursor-pointer disabled:opacity-50"
               >
                 {faq.q}
               </button>

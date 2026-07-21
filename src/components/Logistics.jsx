@@ -1,39 +1,36 @@
 import { motion } from 'framer-motion';
 import { Truck, Clock, Globe } from 'lucide-react';
-import { useTranslation } from '../context/LanguageContext';
 
 export default function Logistics() {
-  const { lang, t } = useTranslation();
-
   const cards = [
     {
-      icon: <Globe className="w-6 h-6 text-brand-orange" />,
-      title: lang === 'HI' ? 'अखिल भारतीय वितरण' : 'Pan-India Distribution',
-      desc: lang === 'HI' ? 'सभी भारतीय राज्यों में निर्माण यार्डों, सिंचाई परियोजनाओं और जल आपूर्ति साइटों पर निर्बाध शिपिंग।' : 'Seamless shipping to construction yards, irrigation projects, and municipal worksites across all Indian states.'
+      icon: <Globe className="w-6 h-6 text-amber-500" />,
+      title: 'Pan-India Distribution',
+      desc: 'Seamless shipping to construction yards, irrigation projects, and municipal worksites across all Indian states.'
     },
     {
-      icon: <Clock className="w-6 h-6 text-brand-orange" />,
-      title: lang === 'HI' ? 'समय पर प्रेषण गारंटी' : 'Timely Dispatch Guarantee',
-      desc: lang === 'HI' ? 'समर्पित लोडिंग बे यह सुनिश्चित करते हैं कि गुणवत्ता मंजूरी के तुरंत बाद सामग्री प्रेषित हो।' : 'Dedicated 24/7 loading bays ensure bulk shipments are dispatched within hours of quality approval clearance.'
+      icon: <Clock className="w-6 h-6 text-amber-500" />,
+      title: 'Timely Dispatch Guarantee',
+      desc: 'Dedicated 24/7 loading bays ensure bulk shipments are dispatched within hours of quality approval clearance.'
     },
     {
-      icon: <Truck className="w-6 h-6 text-brand-orange" />,
-      title: lang === 'HI' ? 'मजबूत परिवहन नेटवर्क' : 'Logistics Fleet Network',
-      desc: lang === 'HI' ? 'प्रमुख रसद भागीदारों के साथ वास्तविक समय शिपमेंट ट्रैकिंग और लचीले लोडिंग विकल्प।' : 'Collaborations with major logistics partners provide real-time shipment tracking and flexible cargo loading options.'
+      icon: <Truck className="w-6 h-6 text-amber-500" />,
+      title: 'Logistics Fleet Network',
+      desc: 'Collaborations with major logistics partners provide real-time shipment tracking and flexible cargo loading options.'
     }
   ];
 
   return (
-    <section id="logistics" className="py-12 bg-white dark:bg-slate-900 overflow-hidden border-t border-slate-150 dark:border-slate-805 transition-colors duration-300">
+    <section id="logistics" className="py-12 bg-white overflow-hidden border-t border-slate-200 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">{t('logTitle')}</h2>
-          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            {lang === 'HI' ? 'सुव्यवस्थित राष्ट्रव्यापी वितरण क्षमता' : 'Streamlined Nationwide Delivery Capability'}
+          <h2 className="text-base text-blue-600 font-bold tracking-wide uppercase">Logistics &amp; Dispatch</h2>
+          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Streamlined Nationwide Delivery Capability
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-brand-orange mx-auto rounded-full"></div>
+          <div className="mt-4 h-1.5 w-24 bg-amber-500 mx-auto rounded-full"></div>
         </div>
 
         {/* Content Layout Grid */}
@@ -48,30 +45,26 @@ export default function Logistics() {
             className="lg:col-span-6 text-left space-y-8"
           >
             <div className="space-y-4">
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-855 dark:text-white tracking-tight">
-                {lang === 'HI' ? 'थोक प्रेषण प्रसंस्करण और उच्च बेड़ा उपलब्धता' : 'Bulk Dispatch Processing & High Fleet Availability'}
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-tight">
+                Bulk Dispatch Processing &amp; High Fleet Availability
               </h3>
-              <p className="text-slate-655 dark:text-slate-400 font-light text-base leading-relaxed">
-                {lang === 'HI' 
-                  ? 'राजश्री टेक्नोप्लास्ट में, हम समझते हैं कि पाइपलाइन बिछाने का काम सख्त समय सीमा पर चलता है। प्रसव में देरी से खुदाई का काम ठप हो सकता है। यही कारण है कि हमारा लॉजिस्टिक्स कार्यालय थोक प्रेषण को सहजता से संसाधित करता है।' 
-                  : 'At Rajshree Technoplast, we understand that pipeline laying runs on strict schedules. Any delivery delay can stall excavation work. That is why our logistics office works in close sync with the production floor to process bulk dispatches seamlessly.'}
+              <p className="text-slate-600 font-light text-base leading-relaxed">
+                At Rajshree Technoplast, we understand that pipeline laying runs on strict schedules. Any delivery delay can stall excavation work. That is why our logistics office works in close sync with the production floor to process bulk dispatches seamlessly.
               </p>
-              <p className="text-slate-655 dark:text-slate-400 font-light text-base leading-relaxed">
-                {lang === 'HI' 
-                  ? 'जयपुर, राजस्थान में हमारे मुख्य संयंत्रों से संचालित होने के कारण, हमारे पास राष्ट्रीय राजमार्गों तक आसान पहुंच है, जिससे उत्तरी, पश्चिमी और दक्षिणी क्षेत्रों में तेजी से ट्रक प्रेषण संभव हो पाता है।' 
-                  : 'Operating directly from our main plants in Jaipur, Rajasthan, we have easy transit access to national highways, enabling rapid truck dispatches to northern, western, and southern regions alike.'}
+              <p className="text-slate-600 font-light text-base leading-relaxed">
+                Operating directly from our main plants in Jaipur, Rajasthan, we have easy transit access to national highways, enabling rapid truck dispatches to northern, western, and southern regions alike.
               </p>
             </div>
 
             {/* Logistics Pillars */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-100 dark:border-slate-800">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-slate-200">
               {cards.map((card, idx) => (
                 <div key={idx} className="space-y-2">
-                  <div className="p-3 bg-brand-orange/10 text-brand-orange rounded-xl w-fit">
+                  <div className="p-3 bg-amber-500/10 text-amber-500 rounded-xl w-fit">
                     {card.icon}
                   </div>
-                  <h4 className="text-sm sm:text-base font-extrabold text-slate-800 dark:text-white tracking-tight">{card.title}</h4>
-                  <p className="text-xs text-slate-400 dark:text-slate-500 font-light leading-relaxed">{card.desc}</p>
+                  <h4 className="text-sm sm:text-base font-extrabold text-slate-800 tracking-tight">{card.title}</h4>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed">{card.desc}</p>
                 </div>
               ))}
             </div>
@@ -86,9 +79,9 @@ export default function Logistics() {
             className="lg:col-span-6 relative"
           >
             {/* Background frame */}
-            <div className="absolute inset-0 bg-brand-blue rounded-3xl -rotate-2 scale-95 opacity-10 z-0"></div>
+            <div className="absolute inset-0 bg-blue-600/10 rounded-3xl -rotate-2 scale-95 z-0"></div>
             
-            <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-white dark:border-slate-800">
+            <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-slate-100 bg-slate-900">
               <img
                 src="/images/dispatch-loading-truck.jpg"
                 alt="A commercial cargo truck being loaded with coiled HDPE pipes at Rajshree factory yard"
@@ -96,8 +89,8 @@ export default function Logistics() {
                 loading="lazy"
               />
               {/* Overlay caption */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950/80 to-transparent p-6 text-left">
-                <p className="text-white text-sm font-bold">{lang === 'HI' ? 'अखिल भारतीय शिपिंग टर्मिनल, जयपुर प्लांट' : 'Nationwide Shipping Terminal, Jaipur Plant'}</p>
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-900/90 to-transparent p-6 text-left">
+                <p className="text-white text-sm font-bold">Nationwide Shipping Terminal, Jaipur Plant</p>
               </div>
             </div>
           </motion.div>

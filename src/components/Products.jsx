@@ -8,21 +8,33 @@ export default function Products() {
 
   const productsList = [
     {
-      id: 'hdpe-water',
-      name: 'Black HDPE Water Supply Pipes (IS 4984:2018)',
+      id: 'hdpe-water-black',
+      name: 'Black HDPE High-Pressure Pipes (IS 4984)',
       image: '/images/products-black-hdpe-pipes.jpg',
       category: 'HDPE Water Pipes',
       standard: 'IS 4984 : 2018',
       sizes: '20mm to 1200mm OD',
       pressure: 'PN 2.5 to PN 16 (SDR 41 to SDR 9)',
       resin: '100% Virgin PE100 / PE80 Polymer',
-      desc: 'High-density polyethylene pipes manufactured for municipal potable water supply, industrial effluent lines, and rural water schemes under Jal Jeevan Mission.',
+      desc: 'High-density polyethylene pressure pipes for municipal water distribution, industrial mains, and Jal Jeevan Mission projects.',
       features: ['50+ Year Operational Lifespan', 'Leak-proof Butt Fusion Jointing', 'Zero Scaling & High Flow Capacity']
+    },
+    {
+      id: 'hdpe-water-blue',
+      name: 'Blue Line HDPE Potable Water Pipes (IS 4984)',
+      image: '/images/products-blue-pipes.jpg',
+      category: 'HDPE Water Pipes',
+      standard: 'IS 4984 : 2018',
+      sizes: '20mm to 630mm OD',
+      pressure: 'PN 6 to PN 16',
+      resin: 'Food-Grade PE100 Resin',
+      desc: 'Blue co-extruded stripe HDPE conduits for drinking water supply networks and urban utility distribution.',
+      features: ['Food Grade Hygienic Inner Surface', 'UV Resistance Coating', 'High Tensile Strength']
     },
     {
       id: 'hdpe-sewerage',
       name: 'HDPE Sewerage & Industrial Conduits (IS 14333)',
-      image: '/images/products-blue-pipes.jpg',
+      image: '/images/products-grey-pipes-stacked.jpg',
       category: 'Sewerage & Drainage',
       standard: 'IS 14333 : 1996',
       sizes: '63mm to 1000mm OD',
@@ -32,21 +44,9 @@ export default function Products() {
       features: ['Immune to Chemical Corrosion', 'Flexible Ground Shift Shock Absorption', 'Abrasion Resistant Interior']
     },
     {
-      id: 'sprinkler-pipes',
-      name: 'HDPE Sprinkler Irrigation Systems (IS 14151)',
-      image: '/images/hero-hdpe-pipes-closeup.jpg',
-      category: 'Sprinkler Irrigation',
-      standard: 'IS 14151 (Part 1 & 2)',
-      sizes: '63mm to 110mm OD',
-      pressure: 'PN 2.5 to PN 6 (Class I & II)',
-      resin: 'UV-Stabilized Virgin Polyethylene',
-      desc: 'Quick-latch metal/plastic coupler sprinkler pipe runs for agricultural water distribution and farm irrigation.',
-      features: ['Quick-Latch Metal Latch Couplers', 'Lightweight & Portable Field Handling', 'UV Resistant Masterbatch']
-    },
-    {
       id: 'pvc-rigid',
       name: 'PVC Rigid Agricultural & Drain Pipes (IS 4985)',
-      image: '/images/products-grey-pipes-stacked.jpg',
+      image: '/images/pipe-fittings-endcap.jpg',
       category: 'PVC Pipes',
       standard: 'IS 4985 : 2021',
       sizes: '40mm to 315mm OD',
@@ -56,9 +56,21 @@ export default function Products() {
       features: ['High Tensile Ring Stiffness', 'Smooth Frictionless Internal Bore', 'Termite & UV Resistant']
     },
     {
+      id: 'sprinkler-pipes',
+      name: 'HDPE Sprinkler Irrigation Systems (IS 14151)',
+      image: '/images/pipe-fitting-endcap-2.jpg',
+      category: 'Sprinkler Irrigation',
+      standard: 'IS 14151 (Part 1 & 2)',
+      sizes: '63mm to 110mm OD',
+      pressure: 'PN 2.5 to PN 6 (Class I & II)',
+      resin: 'UV-Stabilized Virgin Polyethylene',
+      desc: 'Quick-latch metal/plastic coupler sprinkler pipe runs for agricultural water distribution and farm irrigation.',
+      features: ['Quick-Latch Metal Latch Couplers', 'Lightweight & Portable Field Handling', 'UV Resistant Masterbatch']
+    },
+    {
       id: 'hdpe-fittings',
       name: 'Electrofusion & Molded HDPE Fittings',
-      image: '/images/products-hdpe-fittings-display.jpg',
+      image: '/images/products-pipe-couplers-bulk.jpg',
       category: 'Fittings & Endcaps',
       standard: 'IS 8360 / IS 7634',
       sizes: '20mm to 630mm OD',

@@ -1,106 +1,140 @@
-import { ArrowRight, ShieldCheck, Download } from 'lucide-react';
-import { useTranslation } from '../context/LanguageContext';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ShieldCheck, Download, Award, Factory } from 'lucide-react';
+
+const heroImages = [
+  '/images/hero-factory-warehouse-banner-16x9.jpg',
+  '/images/hero-hdpe-pipes-closeup.jpg'
+];
 
 export default function Hero() {
-  const { lang } = useTranslation();
+  const [currentImageIdx, setCurrentImageIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIdx((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <section id="home" className="relative pt-28 pb-20 bg-slate-900 text-white overflow-hidden border-b border-slate-800">
-      {/* Background Graphic Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-slate-950 opacity-90 z-0"></div>
+    <section id="home" className="relative min-h-[85vh] md:min-h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950 pt-24 pb-16 border-b border-slate-800">
+      {/* Background Image Slider with Fade & Zoom Animation */}
+      <div className="absolute inset-0 z-0">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImageIdx}
+            initial={{ opacity: 0, scale: 1.08 }}
+            animate={{ opacity: 0.45, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ 
+              backgroundImage: `url(${heroImages[currentImageIdx]})`,
+            }}
+          />
+        </AnimatePresence>
+        
+        {/* Gradient Overlay for high text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-950/60 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 z-10" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Column: Heading, Badges, CTAs */}
-          <div className="lg:col-span-7 space-y-6">
-            
-            {/* BIS & ISO Certification Pill */}
-            <div className="inline-flex items-center gap-2 bg-slate-800/90 border border-slate-700 px-3.5 py-1.5 rounded-full shadow-xs">
-              <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
-              <span className="text-xs font-bold text-slate-200 uppercase tracking-wider">
-                BIS IS:4984 | IS:14333 | IS:4985 Certified Manufacturer
-              </span>
+      {/* Industrial Tech Grid Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-20 z-10" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="space-y-8 max-w-4xl mx-auto"
+        >
+          {/* Main Title */}
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-tight"
+          >
+            High-Density <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-orange-500">HDPE &amp; PVC</span> Piping Systems
+          </motion.h1>
+
+          {/* Subheading */}
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-slate-300 text-base sm:text-xl font-light leading-relaxed max-w-3xl mx-auto"
+          >
+            Rajshree Technoplast operates 75,000+ sq. ft. automated extrusion facilities in Jaipur, producing 100% virgin polymer conduits for potable water distribution, sewerage, and agricultural irrigation.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal'))}
+              className="group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-amber-600/25 transition-all duration-300 flex items-center justify-center gap-2 text-sm uppercase tracking-wider cursor-pointer transform hover:-translate-y-0.5"
+            >
+              <span>Request Wholesale Quote</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <a
+              href="/docs/Rajshree-Product-Catalogue.pdf"
+              download="Rajshree-Product-Catalogue.pdf"
+              onClick={(e) => {
+                e.preventDefault();
+                alert("Rajshree Product Catalogue PDF download started.");
+              }}
+              className="bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 font-bold py-4 px-7 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 text-sm cursor-pointer backdrop-blur-md transform hover:-translate-y-0.5"
+            >
+              <Download className="w-4 h-4 text-blue-400" />
+              <span>Download Product Catalogue (PDF)</span>
+            </a>
+          </motion.div>
+
+          {/* Credentials Row */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="pt-8 border-t border-slate-800/90 grid grid-cols-3 gap-6 text-center max-w-2xl mx-auto"
+          >
+            <div>
+              <p className="text-2xl sm:text-3xl font-black text-white">75,000+</p>
+              <p className="text-xs text-slate-400 font-medium mt-1">Sq. Ft. Dual Plants</p>
             </div>
-
-            {/* Main Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
-              {lang === 'HI' ? (
-                <>उच्च-घनत्व वाले <span className="text-amber-500">HDPE और PVC</span> पाइपों के अग्रणी निर्माता</>
-              ) : (
-                <>High-Density <span className="text-amber-500">HDPE &amp; PVC</span> Piping Systems</>
-              )}
-            </h1>
-
-            {/* Subheading */}
-            <p className="text-slate-300 text-base sm:text-lg font-light leading-relaxed max-w-2xl">
-              {lang === 'HI' 
-                ? 'राजश्री टेक्नोपलास्ट राजस्थान की प्रमुख निर्माण इकाई है, जो जल जीवन मिशन, कृषि सिंचाई, पेयजल आपूर्ति और औद्योगिक जल निकासी के लिए शत-प्रतिशत वर्जिन पॉलीमर पाइप प्रदान करती है।'
-                : 'Rajshree Technoplast Pvt. Ltd. operates 75,000+ sq. ft. automated extrusion facilities in Jaipur, producing 100% virgin polymer conduits for potable water distribution, sewerage, and agricultural irrigation.'}
-            </p>
-
-            {/* CTAs */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-              <button
-                onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal'))}
-                className="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wider cursor-pointer"
-              >
-                <span>Request Wholesale Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <a
-                href="/docs/Rajshree-Product-Catalogue.pdf"
-                download="Rajshree-Product-Catalogue.pdf"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert("Rajshree Product Catalogue PDF download started. (Replace /docs/Rajshree-Product-Catalogue.pdf with actual file)");
-                }}
-                className="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-bold py-3.5 px-6 rounded-xl transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
-              >
-                <Download className="w-4 h-4 text-blue-400" />
-                <span>Download Product Catalogue (PDF)</span>
-              </a>
+            <div>
+              <p className="text-2xl sm:text-3xl font-black text-amber-400">100%</p>
+              <p className="text-xs text-slate-400 font-medium mt-1">Virgin Polymer Resins</p>
             </div>
-
-            {/* Credentials Row */}
-            <div className="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-4 text-left">
-              <div>
-                <p className="text-xl font-extrabold text-white">75,000+ SQ. FT.</p>
-                <p className="text-xs text-slate-400 font-light">Dual Extrusion Plants</p>
-              </div>
-              <div>
-                <p className="text-xl font-extrabold text-white">PE100 / PE80</p>
-                <p className="text-xs text-slate-400 font-light">100% Virgin Resins</p>
-              </div>
-              <div>
-                <p className="text-xl font-extrabold text-white">10,000+ MT</p>
-                <p className="text-xs text-slate-400 font-light">Annual Capacity</p>
-              </div>
+            <div>
+              <p className="text-2xl sm:text-3xl font-black text-white">1,250+ MT</p>
+              <p className="text-xs text-slate-400 font-medium mt-1">Monthly Capacity</p>
             </div>
+          </motion.div>
+        </motion.div>
+      </div>
 
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 hidden md:block">
+        <motion.div 
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8 }}
+          className="flex flex-col items-center gap-1.5 cursor-pointer opacity-75 hover:opacity-100 transition-opacity"
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        >
+          <span className="text-[10px] text-slate-400 tracking-widest font-semibold uppercase">Scroll Down</span>
+          <div className="w-5 h-8 border-2 border-slate-500 rounded-full flex justify-center p-1">
+            <div className="w-1 h-2 bg-amber-500 rounded-full"></div>
           </div>
-
-          {/* Right Column: High Quality Factory Image Showcase */}
-          <div className="lg:col-span-5 relative">
-            <div className="rounded-3xl overflow-hidden border-4 border-slate-800 bg-slate-900 shadow-2xl">
-              <img
-                src="/images/hero-hdpe-pipes-closeup.jpg"
-                alt="Rajshree Black HDPE Pipe Coils & Extrusions"
-                className="w-full h-auto object-cover aspect-[4/3]"
-              />
-              <div className="p-4 bg-slate-950 text-left border-t border-slate-800">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                  FLAGSHIP EXTRUSION
-                </span>
-                <p className="text-xs text-slate-200 font-bold mt-1">
-                  Black HDPE Pressure Pipe (SDR 11 / PN 16) - IS 4984 Standard
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );

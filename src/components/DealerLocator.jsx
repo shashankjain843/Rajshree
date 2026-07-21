@@ -1,39 +1,37 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, MapPin, Phone, ShieldCheck } from 'lucide-react';
-import { useTranslation } from '../context/LanguageContext';
 
 export default function DealerLocator() {
-  const { lang, t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 
   const dealers = [
     {
-      name: lang === 'HI' ? 'राजश्री पाइपिंग हब (जयपुर)' : 'Rajshree Piping Hub (Jaipur)',
-      city: lang === 'HI' ? 'जयपुर' : 'Jaipur',
-      state: lang === 'HI' ? 'राजस्थान' : 'Rajasthan',
-      address: lang === 'HI' ? 'वीकेआई एरिया, रोड नंबर 9, जयपुर - 302013' : 'VKI Area, Road No. 9, Jaipur - 302013, Rajasthan',
+      name: 'Rajshree Piping Hub (Jaipur)',
+      city: 'Jaipur',
+      state: 'Rajasthan',
+      address: 'VKI Area, Road No. 9, Jaipur - 302013, Rajasthan',
       phone: '+91-9829050790'
     },
     {
-      name: lang === 'HI' ? 'मरुधर सिंचाई एजेंसी (जोधपुर)' : 'Marudhar Irrigation Agency (Jodhpur)',
-      city: lang === 'HI' ? 'जोधपुर' : 'Jodhpur',
-      state: lang === 'HI' ? 'राजस्थान' : 'Rajasthan',
-      address: lang === 'HI' ? 'बासनी औद्योगिक क्षेत्र, द्वितीय चरण, जोधपुर - 342005' : 'Basni Industrial Area, Phase II, Jodhpur - 342005, Rajasthan',
+      name: 'Marudhar Irrigation Agency (Jodhpur)',
+      city: 'Jodhpur',
+      state: 'Rajasthan',
+      address: 'Basni Industrial Area, Phase II, Jodhpur - 342005, Rajasthan',
       phone: '+91-291-2445678'
     },
     {
-      name: lang === 'HI' ? 'गुजरात पॉलीमर वितरक (अहमदाबाद)' : 'Gujarat Polymer Distributors (Ahmedabad)',
-      city: lang === 'HI' ? 'अहमदाबाद' : 'Ahmedabad',
-      state: lang === 'HI' ? 'गुजरात' : 'Gujarat',
-      address: lang === 'HI' ? 'जीआईडीसी औद्योगिक क्षेत्र, वटवा, अहमदाबाद - 382445' : 'GIDC Industrial Estate, Vatva, Ahmedabad - 382445, Gujarat',
+      name: 'Gujarat Polymer Distributors (Ahmedabad)',
+      city: 'Ahmedabad',
+      state: 'Gujarat',
+      address: 'GIDC Industrial Estate, Vatva, Ahmedabad - 382445, Gujarat',
       phone: '+91-9426011234'
     },
     {
-      name: lang === 'HI' ? 'भारत इन्फ्रास्ट्रक्चर सेल्स (दिल्ली एनसीआर)' : 'Bharat Infrastructure Sales (Delhi NCR)',
-      city: lang === 'HI' ? 'नोएडा' : 'Noida',
-      state: lang === 'HI' ? 'उत्तर प्रदेश' : 'Uttar Pradesh',
-      address: lang === 'HI' ? 'सेक्टर 63, ब्लॉक एच, नोएडा - 201301' : 'Sector 63, Block H, Noida - 201301, Uttar Pradesh',
+      name: 'Bharat Infrastructure Sales (Delhi NCR)',
+      city: 'Noida',
+      state: 'Uttar Pradesh',
+      address: 'Sector 63, Block H, Noida - 201301, Uttar Pradesh',
       phone: '+91-9811022334'
     }
   ];
@@ -49,31 +47,31 @@ export default function DealerLocator() {
   });
 
   return (
-    <section id="dealers" className="py-12 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-950 transition-colors duration-300 text-left">
+    <section id="dealers" className="py-12 bg-white border-t border-slate-200 transition-colors duration-300 text-left">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <h2 className="text-base text-brand-blue dark:text-brand-lightblue font-bold tracking-wide uppercase">
-            {t('dealerTitle')}
+          <h2 className="text-base text-blue-600 font-bold tracking-wide uppercase">
+            Dealer Network
           </h2>
-          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            {t('dealerSubtitle')}
+          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Locate Authorized Distributors Near You
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-brand-orange mx-auto rounded-full"></div>
+          <div className="mt-4 h-1.5 w-24 bg-amber-500 mx-auto rounded-full"></div>
         </div>
 
         {/* Search Bar */}
         <div className="max-w-md mx-auto mb-8 relative">
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-            <Search className="w-5 h-5 text-slate-400 dark:text-slate-500" />
+            <Search className="w-5 h-5 text-slate-400" />
           </div>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 focus:border-brand-blue rounded-2xl pl-12 pr-4 py-4 text-sm font-semibold focus:outline-none shadow-inner text-slate-800 dark:text-white"
-            placeholder={t('dealerSearchPlaceholder')}
+            className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 rounded-2xl pl-12 pr-4 py-4 text-sm font-semibold focus:outline-none shadow-inner text-slate-800"
+            placeholder="Search by City, State, or Area..."
           />
         </div>
 
@@ -87,34 +85,34 @@ export default function DealerLocator() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className="bg-slate-50 dark:bg-slate-950 p-6 rounded-2xl border border-slate-150 dark:border-slate-850 hover:shadow-md transition-shadow flex flex-col justify-between"
+                className="bg-slate-50 p-6 rounded-2xl border border-slate-200 hover:shadow-md transition-shadow flex flex-col justify-between"
               >
                 <div>
                   <div className="flex justify-between items-start mb-4">
-                    <span className="text-[10px] font-extrabold text-brand-blue dark:text-brand-lightblue bg-brand-blue/5 dark:bg-brand-blue/15 px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-extrabold text-blue-600 bg-blue-500/10 px-2 py-0.5 rounded">
                       {dealer.state}
                     </span>
-                    <ShieldCheck className="w-5 h-5 text-brand-orange" />
+                    <ShieldCheck className="w-5 h-5 text-amber-500" />
                   </div>
-                  <h4 className="font-extrabold text-slate-850 dark:text-white text-base">
+                  <h4 className="font-extrabold text-slate-800 text-base">
                     {dealer.name}
                   </h4>
-                  <div className="flex items-start gap-2 text-slate-500 dark:text-slate-400 mt-4 text-xs font-light leading-relaxed">
-                    <MapPin className="w-4 h-4 text-brand-orange shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-2 text-slate-500 mt-4 text-xs font-light leading-relaxed">
+                    <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                     <p>{dealer.address}</p>
                   </div>
                 </div>
                 
-                <div className="mt-6 pt-4 border-t border-slate-150 dark:border-slate-850 flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+                <div className="mt-6 pt-4 border-t border-slate-200 flex items-center gap-2 text-xs font-bold text-slate-700">
                   <Phone className="w-4 h-4 text-[#00A86B]" />
-                  <span>{t('dealerPhone')}</span>
-                  <a href={`tel:${dealer.phone}`} className="hover:text-brand-blue transition-colors text-slate-800 dark:text-white font-black">{dealer.phone}</a>
+                  <span>Call:</span>
+                  <a href={`tel:${dealer.phone}`} className="hover:text-blue-600 transition-colors text-slate-800 font-black">{dealer.phone}</a>
                 </div>
               </motion.div>
             ))
           ) : (
-            <div className="col-span-full text-center py-12 text-slate-400 dark:text-slate-500 text-sm font-light">
-              {lang === 'HI' ? 'कोई डीलर नहीं मिला। कृपया जयपुर या राजस्थान खोजें।' : 'No authorized dealers found matching your query. Search for Jaipur or Rajasthan.'}
+            <div className="col-span-full text-center py-12 text-slate-400 text-sm font-light">
+              No authorized dealers found matching your query. Search for Jaipur or Rajasthan.
             </div>
           )}
         </div>

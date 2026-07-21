@@ -7,7 +7,7 @@
   }
   
   body {
-    @apply bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white;
+    @apply bg-slate-50 text-slate-900 antialiased selection:bg-amber-500 selection:text-white transition-colors duration-200;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -29,4 +29,24 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+/* Marquee Scrolling Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
