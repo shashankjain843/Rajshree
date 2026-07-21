@@ -131,7 +131,7 @@ export default function PrivacyTerms() {
               {/* Header */}
               <div className="p-6 border-b border-slate-200 flex justify-between items-center sticky top-0 bg-white z-10">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-amber-500/10 text-amber-500 rounded-xl">
+                  <div className="p-2 bg-blue-500/10 text-blue-600 rounded-xl">
                     <FileText className="w-5 h-5" />
                   </div>
                   <div>
@@ -176,7 +176,7 @@ export default function PrivacyTerms() {
               <div className="p-4 bg-slate-50 border-t border-slate-200 flex justify-end">
                 <button
                   onClick={() => setIsTermsOpen(false)}
-                  className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer transition-colors"
+                  className="bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold py-2.5 px-6 rounded-xl text-xs cursor-pointer transition-colors"
                 >
                   Close
                 </button>
@@ -197,7 +197,7 @@ export default function PrivacyTerms() {
             className="fixed bottom-20 md:bottom-4 left-4 right-4 md:left-auto md:right-4 md:max-w-md z-45 bg-slate-900/95 text-white p-5 rounded-2xl border border-slate-800 shadow-2xl flex flex-col gap-4 text-left"
           >
             <div className="flex items-start gap-3">
-              <Shield className="w-6 h-6 text-amber-500 shrink-0 mt-0.5" />
+              <Shield className="w-6 h-6 text-sky-400 shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-extrabold text-sm tracking-tight">
                   Cookie Consent
@@ -219,7 +219,7 @@ export default function PrivacyTerms() {
               </button>
               <button
                 onClick={acceptCookies}
-                className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-1.5 shadow transition-all cursor-pointer"
+                className="bg-gradient-to-r from-blue-600 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-1.5 shadow transition-all cursor-pointer"
               >
                 <Check className="w-3.5 h-3.5" />
                 <span>Accept</span>

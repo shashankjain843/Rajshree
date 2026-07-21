@@ -4,41 +4,41 @@ import { Factory, Cpu, ShieldCheck, Layers } from 'lucide-react';
 export default function Strengths() {
   const strengths = [
     {
-      icon: <Factory className="w-8 h-8 text-brand-blue" />,
+      icon: <Factory className="w-8 h-8 text-sky-500" />,
       title: 'State-of-the-Art Plants',
       description: 'Our advanced manufacturing units located at Jaipur, Rajasthan, feature high-capacity layouts, optimized material flows, and uninterrupted production capabilities.',
     },
     {
-      icon: <Cpu className="w-8 h-8 text-brand-blue" />,
+      icon: <Cpu className="w-8 h-8 text-sky-500" />,
       title: 'Advanced Extrusion Technology',
       description: 'We utilize state-of-the-art extrusion lines equipped with automatic gravity feeders and thickness controllers to guarantee perfect structural integrity in every pipe.',
     },
     {
-      icon: <ShieldCheck className="w-8 h-8 text-brand-blue" />,
+      icon: <ShieldCheck className="w-8 h-8 text-sky-500" />,
       title: 'Stringent Quality Control',
       description: 'Our advanced testing laboratories perform rigorous hydrostatic pressure, impact resistance, tensile strength, and carbon black dispersion tests to ensure IS-compliance.',
     },
     {
-      icon: <Layers className="w-8 h-8 text-brand-blue" />,
+      icon: <Layers className="w-8 h-8 text-sky-500" />,
       title: 'Premium Raw Materials',
       description: 'We source high-grade polymer resins (PE 100, PE 80, Virgin PVC compounds) exclusively from industry-leading suppliers like Reliance, GAIL, and IOCL.',
     },
   ];
 
   return (
-    <section id="manufacturing" className="py-12 bg-white relative overflow-hidden">
+    <section className="py-12 bg-white relative overflow-hidden border-t border-slate-200">
       {/* Decorative background shape */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-blue/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-brand-orange/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-sky-500/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-brand-blue font-bold tracking-wide uppercase">Manufacturing Might</h2>
+          <h2 className="text-base text-blue-700 font-bold tracking-wide uppercase">Manufacturing Might</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Built on Advanced Engineering &amp; Unmatched Capacity
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-brand-orange mx-auto rounded-full"></div>
+          <div className="mt-4 h-1.5 w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
           <p className="mt-4 text-slate-500 font-light max-w-2xl mx-auto text-sm sm:text-base">
             As one of Northern India’s largest HDPE and PVC piping system manufacturers, we combine technical excellence with robust infrastructure.
           </p>
@@ -53,21 +53,21 @@ export default function Strengths() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
-              className="group relative bg-slate-50 p-6 rounded-3xl border border-slate-100 hover:border-brand-blue/20 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col sm:flex-row gap-5 text-left hover:-translate-y-1"
+              className="group relative bg-slate-50 p-6 rounded-3xl border border-slate-100 hover:border-sky-500/20 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col sm:flex-row gap-5 text-left hover:-translate-y-1"
             >
               {/* Accent slider at the bottom */}
-              <div className="absolute bottom-0 left-0 h-1.5 bg-gradient-to-r from-brand-blue to-brand-orange w-0 group-hover:w-full transition-all duration-500"></div>
+              <div className="absolute bottom-0 left-0 h-1.5 bg-gradient-to-r from-blue-600 to-sky-500 w-0 group-hover:w-full transition-all duration-500"></div>
 
               {/* Icon Container */}
               <div className="shrink-0">
-                <div className="p-4 rounded-2xl bg-white text-brand-blue shadow-md group-hover:bg-brand-blue group-hover:text-white transition-all duration-300 w-16 h-16 flex items-center justify-center">
+                <div className="p-4 rounded-2xl bg-white text-sky-500 shadow-md group-hover:bg-gradient-to-r group-hover:from-blue-700 group-hover:to-sky-600 group-hover:text-white transition-all duration-300 w-16 h-16 flex items-center justify-center">
                   {item.icon}
                 </div>
               </div>
 
               {/* Content Container */}
               <div className="space-y-2">
-                <h3 className="text-xl font-extrabold text-slate-800 tracking-tight group-hover:text-brand-blue transition-colors">
+                <h3 className="text-xl font-extrabold text-slate-800 tracking-tight group-hover:text-blue-700 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-slate-600 leading-relaxed font-light text-sm sm:text-base">
@@ -84,13 +84,13 @@ export default function Strengths() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-10 bg-gradient-to-r from-brand-darkblue to-brand-blue p-6 sm:p-10 rounded-3xl text-white shadow-xl flex flex-col lg:flex-row justify-between items-center gap-6 relative overflow-hidden"
+          className="mt-10 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 border border-slate-800 p-6 sm:p-10 rounded-3xl text-white shadow-xl flex flex-col lg:flex-row justify-between items-center gap-6 relative overflow-hidden"
         >
           {/* Subtle logo background glow */}
-          <div className="absolute right-0 bottom-0 translate-x-10 translate-y-10 w-96 h-96 bg-white/5 rounded-full pointer-events-none"></div>
+          <div className="absolute right-0 bottom-0 translate-x-10 translate-y-10 w-96 h-96 bg-sky-500/10 rounded-full pointer-events-none"></div>
           
           <div className="text-left space-y-3 relative z-10 max-w-2xl">
-            <span className="text-xs uppercase font-bold tracking-widest text-brand-lightblue bg-white/10 px-3 py-1 rounded-full">
+            <span className="text-xs uppercase font-bold tracking-widest text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">
               Industrial Scale
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -104,7 +104,7 @@ export default function Strengths() {
           <div className="shrink-0 relative z-10 flex gap-4 w-full sm:w-auto">
             <a
               href="#contact"
-              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-brand-orange/30 transition-all duration-300 w-full sm:w-auto text-center hover:-translate-y-0.5"
+              className="bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all duration-300 w-full sm:w-auto text-center hover:-translate-y-0.5"
             >
               Get Factory Pricing
             </a>

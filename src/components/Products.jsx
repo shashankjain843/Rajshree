@@ -96,34 +96,29 @@ export default function Products() {
     : productsList.filter(p => p.category === selectedCategory);
 
   return (
-    <section id="products" className="py-20 bg-slate-50 border-b border-slate-200">
+    <section id="products" className="py-10 sm:py-20 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-3 py-1 rounded border border-blue-100">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-16">
+          <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-3 py-1 rounded border border-blue-100">
             Product Portfolio &amp; Technical Specifications
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-2.5 sm:mt-3 tracking-tight">
             BIS Certified Piping Range (20mm to 1200mm OD)
           </h2>
-          <p className="mt-3 text-slate-600 font-light text-sm sm:text-base">
+          <p className="mt-2.5 sm:mt-3 text-slate-600 font-light text-xs sm:text-base">
             Manufactured in strict compliance with Bureau of Indian Standards using 100% virgin PE100 &amp; PE80 resins.
           </p>
 
           <div className="mt-6">
-            <a
-              href="/docs/Rajshree-Product-Catalogue.pdf"
-              download="Rajshree-Product-Catalogue.pdf"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Rajshree Product Catalogue PDF download started.");
-              }}
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('open-rfq-modal', { detail: { product: 'Product Catalogue PDF & Specifications' } }))}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition-all text-xs uppercase tracking-wider cursor-pointer"
             >
               <Download className="w-4 h-4 text-sky-200" />
               <span>Download Product Catalogue (PDF)</span>
-            </a>
+            </button>
           </div>
         </div>
 

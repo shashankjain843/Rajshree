@@ -172,23 +172,23 @@ export default function Contact() {
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hello%20Rajshree%2520Technoplast,%2520I%2520am%2520interested%2520in%252520your%252520pipes.`;
 
   return (
-    <section id="contact" className="py-12 bg-slate-50 transition-colors duration-300 relative overflow-hidden">
+    <section id="contact" className="py-10 sm:py-16 bg-slate-50 transition-colors duration-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-blue-700 font-bold tracking-wide uppercase">Contact Us</h2>
-          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+          <h2 className="text-xs sm:text-base text-blue-700 font-bold tracking-wide uppercase">Contact Us</h2>
+          <p className="mt-1.5 sm:mt-2 text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Connect with Rajshree Sales &amp; Plant Units
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
-          <p className="mt-4 text-slate-500 font-light text-sm sm:text-base">
+          <div className="mt-3 sm:mt-4 h-1.5 w-20 sm:w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
+          <p className="mt-3 sm:mt-4 text-slate-500 font-light text-xs sm:text-base">
             For dealer pricing, custom flanged layouts, or government project tenders, submit the form below. Our response team will revert within 24 business hours.
           </p>
         </div>
 
         {/* Split Layout Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
           
           {/* Left Column: Form (7cols) */}
           <motion.div
@@ -196,7 +196,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl relative"
+            className="lg:col-span-7 bg-white p-5 sm:p-10 rounded-3xl border border-slate-200 shadow-xl relative"
           >
             {isSubmitted ? (
               <motion.div

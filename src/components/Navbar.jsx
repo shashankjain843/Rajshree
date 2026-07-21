@@ -150,7 +150,7 @@ export default function Navbar() {
               href="tel:+919829050790"
               className="flex items-center justify-center gap-2 border border-slate-300 bg-slate-50 text-slate-800 font-bold py-2.5 rounded-lg text-xs"
             >
-              <Phone className="w-4 h-4 text-amber-600" />
+              <Phone className="w-4 h-4 text-sky-500" />
               <span>Call +91-9829050790</span>
             </a>
             <button
@@ -158,9 +158,9 @@ export default function Navbar() {
                 setIsMobileMenuOpen(false);
                 window.dispatchEvent(new CustomEvent('open-rfq-modal'));
               }}
-              className="flex items-center justify-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-lg shadow-xs text-xs uppercase tracking-wider cursor-pointer"
+              className="flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 via-blue-700 to-sky-600 hover:from-blue-700 hover:to-sky-700 text-white font-bold py-2.5 rounded-lg shadow-sm text-xs uppercase tracking-wider cursor-pointer"
             >
-              <FileText className="w-4 h-4" />
+              <FileText className="w-4 h-4 text-sky-200" />
               <span>Request Quote</span>
             </button>
           </div>

@@ -129,16 +129,16 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-12 bg-slate-50 overflow-hidden transition-colors duration-300">
+    <section id="about" className="py-10 sm:py-16 bg-slate-50 overflow-hidden transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-blue-700 font-bold tracking-wide uppercase">About Us</h2>
-          <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+          <h2 className="text-xs sm:text-base text-blue-700 font-bold tracking-wide uppercase">About Us</h2>
+          <p className="mt-1.5 sm:mt-2 text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
             Factory Infrastructure &amp; Technical Standing
           </p>
-          <div className="mt-4 h-1.5 w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
+          <div className="mt-3 sm:mt-4 h-1.5 w-20 sm:w-24 bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 mx-auto rounded-full"></div>
         </div>
 
         {/* Two Column Grid */}
