@@ -64,12 +64,12 @@ export default function Certifications() {
   ];
 
   return (
-    <section id="certifications" className="py-20 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
+    <section id="certifications" className="py-12 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-950/40 via-slate-900 to-slate-950 z-0"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <h2 className="text-base text-sky-400 font-bold tracking-wide uppercase">Accredited Standards</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
             Certified Quality You Can Build On
@@ -81,7 +81,7 @@ export default function Certifications() {
         </div>
 
         {/* Badges Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {certs.map((c, idx) => (
             <motion.div
               key={c.id}
@@ -89,10 +89,10 @@ export default function Certifications() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="bg-slate-800/40 border border-slate-800 hover:border-sky-500/30 rounded-3xl p-6 sm:p-8 flex flex-col justify-between items-center text-center transition-all duration-300 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-1 group"
+              className="bg-slate-800/40 border border-slate-800 hover:border-sky-500/30 rounded-2xl p-5 sm:p-6 flex flex-col justify-between items-center text-center transition-all duration-300 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-1 group"
             >
               {/* Badge Visual */}
-              <div className="bg-white p-5 rounded-2xl shadow-lg w-32 h-32 flex items-center justify-center mb-6 group-hover:scale-105 transition-all duration-300">
+              <div className="bg-white p-4 rounded-2xl shadow-lg w-24 h-24 flex items-center justify-center mb-4 group-hover:scale-105 transition-all duration-300">
                 {c.svg}
               </div>
 
@@ -118,7 +118,7 @@ export default function Certifications() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="mt-16 p-6 sm:p-8 bg-slate-800/60 rounded-2xl border border-slate-800 flex flex-col md:flex-row items-center gap-4 max-w-4xl mx-auto"
+          className="mt-10 p-5 sm:p-6 bg-slate-800/60 rounded-2xl border border-slate-800 flex flex-col md:flex-row items-center gap-4 max-w-4xl mx-auto"
         >
           <div className="p-3 bg-sky-500/10 rounded-full text-sky-400 shrink-0">
             <ShieldCheck className="w-10 h-10" />

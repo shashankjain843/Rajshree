@@ -1,29 +1,19 @@
 import { motion } from 'framer-motion';
 import { ShieldAlert, Cpu, Settings, Ruler } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function QualityControl() {
-  const labTests = [
-    {
-      icon: <Cpu className="w-5 h-5 text-amber-500" />,
-      title: 'Oxidation Induction Test',
-      desc: 'Conducted in our lab to test thermodynamic stability and polymer aging characteristics, ensuring a 50+ year lifespan.'
-    },
-    {
-      icon: <Settings className="w-5 h-5 text-amber-500" />,
-      title: 'Tensile & Elongation Audits',
-      desc: 'Verifies the physical yield stress, elasticity, and elongation break points under high-pressure conditions.'
-    },
-    {
-      icon: <ShieldAlert className="w-5 h-5 text-amber-500" />,
-      title: 'Hydrostatic Pressure Test',
-      desc: 'Pipes are subjected to high internal pressures for extended durations to verify hoop stress resistance.'
-    },
-    {
-      icon: <Ruler className="w-5 h-5 text-amber-500" />,
-      title: 'Dimensional & Ovality Check',
-      desc: 'Continuous caliper audits on wall thickness, concentricity, and outer diameter metrics at regular extrusion intervals.'
-    }
-  ];
+  const iconMap = {
+    Cpu: <Cpu className="w-5 h-5 text-amber-500" />,
+    Settings: <Settings className="w-5 h-5 text-amber-500" />,
+    ShieldAlert: <ShieldAlert className="w-5 h-5 text-amber-500" />,
+    Ruler: <Ruler className="w-5 h-5 text-amber-500" />
+  };
+
+  const labTests = siteConfig.quality.tests.map(test => ({
+    ...test,
+    icon: iconMap[test.iconName] || <Cpu className="w-5 h-5 text-amber-500" />
+  }));
 
   return (
     <section id="quality" className="py-12 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800 transition-colors duration-300">
@@ -34,13 +24,13 @@ export default function QualityControl() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10">
-          <h2 className="text-base text-blue-400 font-bold tracking-wide uppercase">Quality Control</h2>
+          <h2 className="text-base text-blue-400 font-bold tracking-wide uppercase">{siteConfig.quality.sectionTag}</h2>
           <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-            NABL-Accredited Lab &amp; Multi-Stage Auditing
+            {siteConfig.quality.title}
           </p>
           <div className="mt-4 h-1.5 w-24 bg-amber-500 mx-auto rounded-full"></div>
           <p className="mt-4 text-slate-400 font-light text-sm sm:text-base">
-            We enforce strict quality control at every phase — from auditing raw polymer resins to conducting hydrostatic stress tests on finished pipes.
+            {siteConfig.quality.description}
           </p>
         </div>
 
@@ -57,29 +47,28 @@ export default function QualityControl() {
           >
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-white tracking-tight leading-snug">
-                Third-Party Approved In-House Quality Assurance
+                {siteConfig.quality.heading}
               </h3>
-              <p className="text-slate-300 font-light text-sm sm:text-base leading-relaxed">
-                Rajshree Group / Technoplast operates a fully equipped, modern testing laboratory complying with National Accreditation Board for Testing and Calibration Laboratories (NABL) guidelines.
-              </p>
-              <p className="text-slate-300 font-light text-sm sm:text-base leading-relaxed">
-                Our pipes are regularly audited and cleared by leading third-party inspection agencies including RITES, SHRI RAM Institute, and CIPET, satisfying strict government project mandates.
-              </p>
+              {siteConfig.quality.paragraphs.map((p, idx) => (
+                <p key={idx} className="text-slate-300 font-light text-sm sm:text-base leading-relaxed">
+                  {p}
+                </p>
+              ))}
 
               {/* BIS Licence & Testing Badges */}
               <div className="bg-slate-800/90 p-4 rounded-2xl border border-slate-700 flex flex-wrap items-center justify-between gap-4 mt-2">
                 <div>
                   <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 bg-amber-500/10 px-2.5 py-1 rounded-md border border-amber-500/20">
-                    BIS LICENCE CM/L - 7800045812
+                    {siteConfig.quality.bisLicence}
                   </span>
                   <p className="text-xs text-white font-bold mt-1.5">
-                    BIS IS:4984 | IS:14333 | IS:4985 Certified Manufacturer
+                    {siteConfig.quality.standardsText}
                   </p>
                 </div>
                 <div className="flex gap-2 text-[10px] font-extrabold text-slate-300">
-                  <span className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-700">CIPET Cleared</span>
-                  <span className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-700">RITES Inspected</span>
-                  <span className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-700">NABL Tested</span>
+                  {siteConfig.quality.clearances.map((c, idx) => (
+                    <span key={idx} className="px-2.5 py-1 bg-slate-900 rounded-lg border border-slate-700">{c}</span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -111,8 +100,8 @@ export default function QualityControl() {
             
             <div className="relative z-10 overflow-hidden rounded-3xl shadow-2xl border-4 border-slate-800 bg-slate-900">
               <img
-                src="/images/quality-testing-lab.jpg"
-                alt="NABL quality control testing laboratory with Oxidation Induction Tester equipment"
+                src={siteConfig.quality.image}
+                alt={siteConfig.quality.imageAlt}
                 className="w-full h-auto object-cover aspect-[4/3] hover:scale-[1.02] transition-transform duration-500"
                 loading="lazy"
               />
@@ -122,7 +111,7 @@ export default function QualityControl() {
                   In-House Testing Facility Unit I
                 </span>
                 <p className="text-slate-300 text-xs font-light mt-2">
-                  Oxidation Induction Tester verifying thermal endurance.
+                  {siteConfig.quality.imageCaption}
                 </p>
               </div>
             </div>

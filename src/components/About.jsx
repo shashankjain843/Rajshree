@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Award, ShieldCheck, Factory, Calendar, CheckCircle, Trophy, Medal, Play, X, TrendingUp } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 function AnimatedCounter({ value, duration = 1500 }) {
   const [count, setCount] = useState(0);
@@ -59,74 +60,20 @@ export default function About() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [activeCapacityHover, setActiveCapacityHover] = useState(null);
 
-  const stats = [
-    { 
-      icon: <Calendar className="w-6 h-6 text-sky-500" />, 
-      label: 'Years of Experience', 
-      value: '15+ Years', 
-      desc: 'Over a decade of manufacturing excellence' 
-    },
-    { 
-      icon: <Factory className="w-6 h-6 text-sky-500" />, 
-      label: 'Production Capacity', 
-      value: '12,500+ MT', 
-      desc: 'Tons produced annually across our units' 
-    },
-    { 
-      icon: <Award className="w-6 h-6 text-sky-500" />, 
-      label: 'Active Clients', 
-      value: '500+ Clients', 
-      desc: 'Government agencies, contractors & dealers' 
-    },
-    { 
-      icon: <ShieldCheck className="w-6 h-6 text-sky-500" />, 
-      label: 'Plant Size', 
-      value: '75,000+ Sq. Ft.', 
-      desc: 'State-of-the-art facilities in Rajasthan' 
-    },
+  const statIcons = [
+    <Calendar className="w-6 h-6 text-sky-500" />,
+    <Factory className="w-6 h-6 text-sky-500" />,
+    <Award className="w-6 h-6 text-sky-500" />,
+    <ShieldCheck className="w-6 h-6 text-sky-500" />
   ];
 
-  const galleryImages = [
-    {
-      src: '/images/hero-factory-warehouse.jpg',
-      alt: 'Rajshree Group state-of-the-art plant warehouse',
-      label: '75,000+ Sq. Ft. Factory Plant'
-    },
-    {
-      src: '/images/products-display-board.jpg',
-      alt: 'Rajshree product display showcase',
-      label: 'Certified Polymer Range'
-    }
-  ];
+  const stats = siteConfig.about.stats.map((s, i) => ({
+    ...s,
+    icon: statIcons[i % statIcons.length]
+  }));
 
-  const milestones = [
-    {
-      year: '2012',
-      title: 'Company Founded (Unit I)',
-      desc: 'Commenced operations at the first extrusion plant in RIICO Area, Bagru (Jaipur).'
-    },
-    {
-      year: '2015',
-      title: 'ISO 9001:2015 & BIS Licensed',
-      desc: 'Achieved complete BIS (ISI) licencing and ISO Quality Management certifications.'
-    },
-    {
-      year: '2019',
-      title: 'Phagi Expansion (Unit II)',
-      desc: 'Setup high-speed automated extrusion lines at Unit II, Phagi, to triple monthly output.'
-    },
-    {
-      year: '2024',
-      title: '500+ Clients & 12,000+ MT',
-      desc: 'Supplied high-density piping networks to major national grids, water boards, and corporate layouts.'
-    }
-  ];
-
-  const capacityData = [
-    { category: 'HDPE Pipes', percentage: 60, color: '#1e3a8a', value: '750 MT' },
-    { category: 'PVC Pipes', percentage: 25, color: '#0284c7', value: '312 MT' },
-    { category: 'MDPE & Sprinklers', percentage: 15, color: '#06b6d4', value: '188 MT' }
-  ];
+  const milestones = siteConfig.about.milestones;
+  const capacityData = siteConfig.about.capacityData;
 
   return (
     <section id="about" className="py-10 sm:py-16 bg-slate-50 overflow-hidden transition-colors duration-300">
@@ -142,7 +89,7 @@ export default function About() {
         </div>
 
         {/* Two Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 gap-10">
           {/* Left Text Column */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -183,48 +130,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Right Image Grid describing Manufacturing Facility */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="space-y-4"
-          >
-            {/* Main Plant Image */}
-            <div className="relative group overflow-hidden rounded-3xl shadow-lg border border-slate-200">
-              <img
-                src={galleryImages[0].src}
-                alt={galleryImages[0].alt}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-                width="640"
-                height="360"
-              />
-              <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <span className="text-white text-xs font-bold uppercase tracking-wider bg-blue-700/90 px-3 py-1 rounded-md">
-                  {galleryImages[0].label}
-                </span>
-              </div>
-            </div>
-            
-            {/* Product Range Image */}
-            <div className="relative group overflow-hidden rounded-3xl shadow-lg border border-slate-200">
-              <img
-                src={galleryImages[1].src}
-                alt={galleryImages[1].alt}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-                width="640"
-                height="200"
-              />
-              <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <span className="text-white text-xs font-bold uppercase tracking-wider bg-blue-700/90 px-3 py-1 rounded-md">
-                  {galleryImages[1].label}
-                </span>
-              </div>
-            </div>
-          </motion.div>
         </div>
 
         {/* Founder Message & Walkthrough Video */}

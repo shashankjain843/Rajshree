@@ -1,20 +1,12 @@
 import { Phone, Mail, ArrowUp, MapPin } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function Footer() {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const socialTiles = [
-    { label: 'Factory Tour', bg: 'bg-blue-500/15', icon: '🏭' },
-    { label: 'Quality Lab', bg: 'bg-amber-500/15', icon: '🔬' },
-    { label: 'Pipe Extrusion', bg: 'bg-emerald-500/15', icon: '⚙️' },
-    { label: 'Team Rajshree', bg: 'bg-purple-500/15', icon: '👷' },
-    { label: 'Jaipur Extrusion Plant', bg: 'bg-amber-500/15', icon: '🏢' },
-    { label: 'PE100 Virgin Polymer', bg: 'bg-blue-500/15', icon: '🧪' },
-    { label: 'IS Certification', bg: 'bg-emerald-500/15', icon: '📋' },
-    { label: 'Water Projects', bg: 'bg-sky-500/15', icon: '💧' },
-  ];
+  const socialTiles = siteConfig.footerSocialTiles;
 
   return (
     <footer className="bg-slate-900 text-slate-400 border-t border-slate-800 pt-0 pb-5 relative text-left transition-colors duration-300">
@@ -46,58 +38,17 @@ export default function Footer() {
           {/* Column 1: Brand Info (5 cols) */}
           <div className="lg:col-span-5 space-y-2.5">
             <img 
-              src="/images/rajshree logo.png" 
-              alt="Rajshree Group Logo" 
+              src={siteConfig.company.logo} 
+              alt={siteConfig.company.logoAlt} 
               className="h-11 w-auto object-contain rounded-lg p-1 bg-white shadow-sm" 
             />
             <p className="text-slate-300 text-xs font-semibold italic mt-1">
               Leading BIS &amp; ISO Certified HDPE &amp; PVC Pipe Manufacturer in Rajasthan, India
             </p>
             <p className="text-xs text-slate-400 font-light leading-relaxed max-w-sm">
-              Rajshree Group and Rajshree Technoplast specialize in manufacturing premium-grade HDPE pipes, PVC conduits, and MDPE lines for agricultural irrigation and municipal water infrastructure across India.
+              {siteConfig.company.name} and {siteConfig.company.legalName} specialize in manufacturing premium-grade HDPE pipes, PVC conduits, and MDPE lines for agricultural irrigation and municipal water infrastructure across India.
             </p>
             
-            {/* Social Icons */}
-            <div className="flex space-x-2.5 pt-1">
-              <a 
-                href="#" 
-                className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
-                title="Facebook"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
-                </svg>
-              </a>
-              <a 
-                href="#" 
-                className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
-                title="Twitter / X"
-              >
-                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-              <a 
-                href="#" 
-                className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
-                title="LinkedIn"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-              </a>
-              <a 
-                href="https://wa.me/919829050790"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-slate-800 hover:bg-[#25D366] text-slate-300 hover:text-white transition-all flex items-center justify-center border border-slate-700 shadow-inner"
-                title="WhatsApp"
-              >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.324 5.328 0 11.894 0c3.18 0 6.171 1.242 8.423 3.498 2.253 2.256 3.491 5.253 3.488 8.435-.006 6.571-5.33 11.895-11.896 11.895-2.006-.002-3.98-.51-5.729-1.478L0 24zm6.549-3.267c1.615.957 3.2 1.463 4.79 1.466 5.485 0 9.948-4.468 9.953-9.957.002-2.659-1.033-5.161-2.915-7.046C16.556 3.31 14.06 2.275 11.4 2.278c-5.485 0-9.947 4.471-9.952 9.96-.001 1.687.452 3.327 1.314 4.772L1.75 22.252l5.441-1.425z"/>
-                </svg>
-              </a>
-            </div>
           </div>
 
           {/* Column 2: QUICK LINKS (3 cols) */}
@@ -106,36 +57,13 @@ export default function Footer() {
               Quick Links
             </h4>
             <ul className="space-y-1.5 text-xs font-light">
-              <li>
-                <a href="#home" className="hover:text-white transition-colors block text-slate-400">
-                  Home Overview
-                </a>
-              </li>
-              <li>
-                <a href="#about" className="hover:text-white transition-colors block text-slate-400">
-                  About Rajshree Group
-                </a>
-              </li>
-              <li>
-                <a href="#manufacturing" className="hover:text-white transition-colors block text-slate-400">
-                  Manufacturing Process
-                </a>
-              </li>
-              <li>
-                <a href="#products" className="hover:text-white transition-colors block text-slate-400">
-                  Products Catalog
-                </a>
-              </li>
-              <li>
-                <a href="#quality" className="hover:text-white transition-colors block text-slate-400">
-                  Quality Control Lab
-                </a>
-              </li>
-              <li>
-                <a href="#contact" className="hover:text-white transition-colors block text-slate-400">
-                  Contact &amp; Inquiry
-                </a>
-              </li>
+              {siteConfig.navigation.map((nav, idx) => (
+                <li key={idx}>
+                  <a href={nav.href} className="hover:text-white transition-colors block text-slate-400">
+                    {nav.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -148,15 +76,18 @@ export default function Footer() {
               <div className="space-y-1.5 text-xs font-light">
                 <div className="flex items-center gap-2.5">
                   <Mail className="w-3.5 h-3.5 text-sky-400 shrink-0" />
-                  <a href="mailto:rajshreearun123@gmail.com" className="hover:text-white text-slate-400 transition-colors">
-                    rajshreearun123@gmail.com
+                  <a href={`mailto:${siteConfig.contact.primaryEmail}`} className="hover:text-white text-slate-400 transition-colors">
+                    {siteConfig.contact.primaryEmail}
                   </a>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <Phone className="w-3.5 h-3.5 text-blue-400 shrink-0 mt-0.5" />
                   <div className="flex flex-col space-y-0.5">
-                    <a href="tel:+919829050790" className="hover:text-white text-slate-400 transition-colors">+91-9829050790</a>
-                    <a href="tel:+919829054690" className="hover:text-white text-slate-400 transition-colors">+91-9829054690</a>
+                    {siteConfig.contact.phoneNumbers.slice(0, 2).map((ph, idx) => (
+                      <a key={idx} href={`tel:${ph.number}`} className="hover:text-white text-slate-400 transition-colors">
+                        {ph.number}
+                      </a>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -168,7 +99,7 @@ export default function Footer() {
               </h5>
               <div className="flex items-start gap-2 text-xs text-slate-400 font-light leading-relaxed">
                 <MapPin className="w-3.5 h-3.5 text-sky-400 shrink-0 mt-0.5" />
-                <p>Plot No.51 Maliram Kheradi Marg, Hanuman Vatika-I, Near 200FT Chauraha, Ajmer Road, Jaipur-302021</p>
+                <p>{siteConfig.contact.corporateOffice.address}</p>
               </div>
             </div>
           </div>
@@ -178,7 +109,7 @@ export default function Footer() {
         {/* Bottom copyright & meta row */}
         <div className="mt-4 flex flex-col sm:flex-row justify-between items-center gap-3 text-xs">
           <p className="font-light text-slate-400 text-[11px]">
-            &copy; 2026 Rajshree Technoplast Pvt Ltd. All Rights Reserved.
+            &copy; 2026 {siteConfig.company.legalName}. All Rights Reserved.
           </p>
           <div className="flex items-center gap-4">
             <button

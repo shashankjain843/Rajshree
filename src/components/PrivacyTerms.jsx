@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Shield, Lock, FileText, Check } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function PrivacyTerms() {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
@@ -63,7 +64,7 @@ export default function PrivacyTerms() {
                     <h3 className="text-lg font-black text-slate-800">
                       Privacy Policy
                     </h3>
-                    <p className="text-[10px] text-slate-400 font-medium">Rajshree Technoplast Pvt. Ltd.</p>
+                    <p className="text-[10px] text-slate-400 font-medium">{siteConfig.company.legalName}</p>
                   </div>
                 </div>
                 <button
@@ -78,7 +79,7 @@ export default function PrivacyTerms() {
               <div className="p-6 space-y-4 text-slate-600 text-xs sm:text-sm font-light leading-relaxed">
                 <p className="font-bold text-slate-800">Last Updated: July 2026</p>
                 <p>
-                  At Rajshree Technoplast, we prioritize the protection of your commercial and personal data. This policy details how we handle information received via our website forms, direct phone connections, and email integrations.
+                  At {siteConfig.company.name}, we prioritize the protection of your commercial and personal data. This policy details how we handle information received via our website forms, direct phone connections, and email integrations.
                 </p>
 
                 <h4 className="font-bold text-slate-800 pt-2 text-sm uppercase">1. Information Collection</h4>
@@ -88,7 +89,7 @@ export default function PrivacyTerms() {
 
                 <h4 className="font-bold text-slate-800 pt-2 text-sm uppercase">2. Email &amp; Lead Routing</h4>
                 <p>
-                  Lead inquiries are securely routed using SMTP protocols directly to our Jaipur sales office at <strong>rajshreearun123@gmail.com</strong>. We do not license, sell, or rent your database info to third-party telemarketing networks.
+                  Lead inquiries are securely routed using SMTP protocols directly to our sales office at <strong>{siteConfig.contact.primaryEmail}</strong>. We do not license, sell, or rent your database info to third-party telemarketing networks.
                 </p>
 
                 <h4 className="font-bold text-slate-800 pt-2 text-sm uppercase">3. Data Durability &amp; Retention</h4>
@@ -138,7 +139,7 @@ export default function PrivacyTerms() {
                     <h3 className="text-lg font-black text-slate-800">
                       Terms &amp; Conditions
                     </h3>
-                    <p className="text-[10px] text-slate-400 font-medium">Rajshree Technoplast Pvt. Ltd.</p>
+                    <p className="text-[10px] text-slate-400 font-medium">{siteConfig.company.legalName}</p>
                   </div>
                 </div>
                 <button
@@ -168,7 +169,7 @@ export default function PrivacyTerms() {
 
                 <h4 className="font-bold text-slate-800 pt-2 text-sm uppercase">3. Governing Law</h4>
                 <p>
-                  Any commercial disputes, compliance requirements, or claims arising from transactions with Rajshree Technoplast Pvt Ltd shall be governed by the courts located in Jaipur, Rajasthan, India.
+                  Any commercial disputes, compliance requirements, or claims arising from transactions with {siteConfig.company.legalName} shall be governed by the courts located in Jaipur, Rajasthan, India.
                 </p>
               </div>
 

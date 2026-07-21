@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, FileText, CheckCircle2, MessageCircle } from 'lucide-react';
+import { siteConfig } from '../config/siteConfig';
 
 export default function RFQModal({ isOpen, onClose, defaultProduct = '' }) {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ export default function RFQModal({ isOpen, onClose, defaultProduct = '' }) {
     setIsSubmitting(true);
 
     const emailMessage = `====================================
-           RAJSHREE GROUP
+           ${siteConfig.company.name.toUpperCase()}
   Commercial Pipe Quote Request
 ====================================
 
@@ -52,7 +53,7 @@ Product Specifications:
 • Size (OD): ${formData.diameter}
 • Rating: ${formData.pressure}
 • Quantity: ${formData.quantity}
-• Delivery Location: ${formData.deliveryLocation || 'Jaipur Plant / PAN India'}
+• Delivery Location: ${formData.deliveryLocation || 'Plant / PAN India'}
 
 Notes:
 ${formData.notes || 'Standard dispatch requested.'}
@@ -66,7 +67,7 @@ ${formData.notes || 'Standard dispatch requested.'}
           name: formData.name,
           phone: formData.phone,
           email: formData.email,
-          subject: `RAJSHREE GROUP Quote Inquiry: ${formData.product}`,
+          subject: `${siteConfig.company.name} Quote Inquiry: ${formData.product}`,
           message: emailMessage
         })
       });
@@ -79,8 +80,8 @@ ${formData.notes || 'Standard dispatch requested.'}
   };
 
   const generateWhatsAppUrl = () => {
-    const text = `*RAJSHREE GROUP - Pipe Quote Request*\n\n• *Name:* ${formData.name}\n• *Phone:* ${formData.phone}\n• *Product:* ${formData.product}\n• *Size:* ${formData.diameter}\n• *Pressure:* ${formData.pressure}\n• *Quantity:* ${formData.quantity}\n• *Location:* ${formData.deliveryLocation || 'PAN India'}`;
-    return `https://wa.me/919829050790?text=${encodeURIComponent(text)}`;
+    const text = `*${siteConfig.company.name} - Pipe Quote Request*\n\n• *Name:* ${formData.name}\n• *Phone:* ${formData.phone}\n• *Product:* ${formData.product}\n• *Size:* ${formData.diameter}\n• *Pressure:* ${formData.pressure}\n• *Quantity:* ${formData.quantity}\n• *Location:* ${formData.deliveryLocation || 'PAN India'}`;
+    return `https://wa.me/${siteConfig.contact.whatsappNumber}?text=${encodeURIComponent(text)}`;
   };
 
   return (
