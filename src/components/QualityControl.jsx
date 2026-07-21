@@ -74,7 +74,7 @@ export default function QualityControl() {
             </div>
 
             {/* Grid of Lab Tests */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 border-t border-slate-800">
+            <div className="grid grid-cols-2 gap-3 sm:gap-6 pt-6 border-t border-slate-800">
               {labTests.map((test, idx) => (
                 <div key={idx} className="space-y-2">
                   <div className="p-2 bg-amber-500/15 text-amber-500 rounded-xl w-fit">

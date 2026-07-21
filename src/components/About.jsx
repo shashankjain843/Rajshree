@@ -209,7 +209,7 @@ export default function About() {
         </div>
 
         {/* Stats Grid with Animated Counters */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="mt-10 sm:mt-12 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {stats.map((stat, idx) => (
             <motion.div
               key={idx}
@@ -217,7 +217,7 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="bg-white p-6 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col text-left group hover:-translate-y-1"
+              className="bg-white p-4 sm:p-6 rounded-2xl shadow-md border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col text-left group hover:-translate-y-1"
             >
               <div className="p-3 rounded-xl bg-amber-500/10 w-fit mb-4 group-hover:bg-amber-500/20 transition-colors">
                 {stat.icon}
