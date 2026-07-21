@@ -121,21 +121,6 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* Scroll Down Indicator */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 hidden md:block">
-        <motion.div 
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 1.8 }}
-          className="flex flex-col items-center gap-1.5 cursor-pointer opacity-75 hover:opacity-100 transition-opacity"
-          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-        >
-          <span className="text-[10px] text-slate-400 tracking-widest font-semibold uppercase">Scroll Down</span>
-          <div className="w-5 h-8 border-2 border-slate-500 rounded-full flex justify-center p-1">
-            <div className="w-1 h-2 bg-amber-500 rounded-full"></div>
-          </div>
-        </motion.div>
-      </div>
     </section>
   );
 }
